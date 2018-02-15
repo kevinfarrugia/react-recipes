@@ -8,6 +8,8 @@
 	* [The best `setState` style for the job](#the-best-setstate-style-for-the-job)
 	* [Ways to use `defaultProps`](#ways-to-use-defaultprops)
 	* [The `property` pattern for callbacks](#the-property-pattern-for-callbacks)
+	* [Ways to define components](#ways-to-define-components)
+	* [`React.PureComponent` caveats](#react-purecomponent-caveats)
 * [Further reading](#further-reading)
 
 ## Recipes
@@ -283,7 +285,62 @@ When you apply this pattern across several components, it makes it easy to bind 
 	}
 ```
 
+### Ways to define components
+
+In the most basic sense, all React components do one thing: take some input (via props) and return a piece of UI. A component can be:
+
+* a simple function
+* a class that extends `React.Component` or `React.PureComponent`
+
+__Simple functions__ take the props as input and return the UI:
+
+```jsx
+const Button = props => <button>{ props.label }</button>
+```
+
+__Classes__ that extend either `React.Component` or `React.PureComponent` take the props as input and return the UI via the `render()` function:
+
+```jsx
+class Button extends React.Component {
+	render() {
+		return <button>{ this.props.label }</button>
+	}
+}
+```
+
+In terms of performance, we need to be mindful of how React decides to re-render components:
+
+* simple functions are re-rendered every time 
+* classes extending `React.PureComponent` only re-render when their props or state change
+* classes extending `React.Component` re-render every time by default, but this can be controlled by implementing the `shouldComponentUpdate` method.
+
+(Under the hood, `React.PureComponent` is just `React.Component` with a predefined `shouldComponentUpdate` method that does a _shallow comparison_ of the props and state to decide whether the component needs to be re-rendered.)
+
+With that in mind:
+
+__Use simple functions__ for _simple components that are not used extensively_; just because they're stateless, it doesn't mean they're pure components, or that you benefit from the performance enhancements of `React.PureComponent`.
+
+__Extend `React.PureComponent`__ when your component depends on simple props, and has a simple state, and you need better performance.
+
+__Extend `React.Component`__ in all other cases. Consider implementing a `shouldComponentUpdate` method to avoid re-rendering each time the props or state changes.
+
+See also [this response from Stack Overflow](https://stackoverflow.com/questions/40703675/react-functional-stateless-component-purecomponent-component-what-are-the-dif#40704083) and read below for some caveats around `React.PureComponent`.
+
+### `React.PureComponent` caveats
+
+When used appropriately, pure components can boost your application's performance by avoiding unnecessary re-renders. It performs a _shallow comparison_ of props and state against their previous values and skips the re-render if nothing (shallowly) changed.
+
+This comparison is reasonably fast (in any case, faster than re-rendering), but be mindful of some situation where you get the worst of both worlds: you perform the comparison, but the component always re-renders anyways. Don't let this happen to you.
+
+__Are you sending functions (callbacks)__ to your component? Make sure you're not always sending a new function, as with `bind`-ing functions in-place (see [The `property` pattern for callbacks](#the-property-pattern-for-callbacks)).
+
+__Are you sending children__ to your component? Remember that `children` is still a prop, and one _which unfortunately always changes_. 
+
+* If you're piggybacking on `this.props.children` to send a simple value to your component (such as a label string), move it to another property (e.g. 'label'), and keep using `React.PureComponent`.
+* If you send React components via `this.props.children`, drop `React.PureComponent` — when it's render time, `children` will always contain a new value.
+
 ## Further reading
 
 * [reactpatterns.com](http://reactpatterns.com/)
 * [react-in-patterns](https://github.com/krasimir/react-in-patterns)
+* [react-playbook](https://github.com/kylpo/react-playbook)
