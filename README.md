@@ -1,18 +1,18 @@
 # react-recipes
 
-React Recipes & Patterns. This project is [AWL](https://github.com/danburzo/as-we-learn).
+This repository contains some tried-and-testes ways to work with React, documented [as I figure them out](https://github.com/danburzo/as-we-learn).
 
 ## Table of contents
 
-* [The best `setState` style for the job](#the-best--setstate--style-for-the-job)
+* [The best `setState` style for the job](#the-best-setstate-style-for-the-job)
 
 ## Recipes
 
 ### The best `setState` style for the job
 
-[`setState`](https://reactjs.org/docs/react-component.html#setstate) can be invoked in many ways, and the decision boils down to two questions:
+[`setState`](https://reactjs.org/docs/react-component.html#setstate) can be invoked in many ways, and the decision to choose one over the other boils down to two questions:
 
-* _Does my new state depend on the previous state?_
+* _Does the new state depend on the previous state?_
 * _Do I need to know I've set the state?_
 
 Here's a cheatsheet below to help you decide:
@@ -29,29 +29,33 @@ __When your new state does not depend on the previous state,__ you can call `set
 this.setState({ myvalue: 5 })
 ```
 
-__If the new state builds upon the previous state,__ always call `setState` with a function. The example below simulates a counter that gets incremented with each call to setState.
+__If the new state depends on the previous state,__ always call `setState` with a function. The function gets the previous state as its first parameter, so you can build opon it. The example below simulates a counter that gets incremented with each call to `increment`.
 
 ```js
-this.setState(
-	previous_state => {
-		return {
-			myvalue: previous_state.myvalue + 1
+increment() {
+	this.setState(
+		previous_state => {
+			return {
+				myvalue: previous_state.myvalue + 1
+			}
 		}
-	}
-);
+	);
+}
 ```
 
 What if it turns out __your new value coincides with your old value__? Starting with React 16, you can `return null` from the updater function to prevent the state from updating unnecessarily. In the example below, our counter is capped at 100:
 
 ```js
-this.setState(
-	previous_state => {
-		let new_value = Math.min(previous_state.myvalue + 1, 100);
-		return new_value !== previous_state.myvalue ? {
-			myvalue: new_value
-		} : null;
-	}
-)
+increment() {
+	this.setState(
+		previous_state => {
+			let new_value = Math.min(previous_state.myvalue + 1, 100);
+			return new_value !== previous_state.myvalue ? {
+				myvalue: new_value
+			} : null;
+		}
+	)
+}
 ```
 
 __If you want to know when you've updated the state,__ you have (at least) two options:
@@ -101,10 +105,10 @@ componentDidUpdate(previous_props, previous_state) {
 __Pros:__
 
 * Know when the state has been changed from several places in the component;
-* Get a reasonable amount of updats.
+* Get a reasonable amount of updates.
 
 __Cons:__
 
 * The inability to distinguish between the _sources_ of the update, if you only want to react to a _certain_ `setState` call.
 
-(In regards to the con above, it may be that you need to rethink your state so that you don't need to distinguish between the _sources_ of the update.)
+(In regards to the above, it may be that you need to rethink your state so that you don't need to distinguish between the _sources_ of the update.)
