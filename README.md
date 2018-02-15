@@ -1,4 +1,4 @@
-# react-recipes
+# react-recipes ([repo](https://danburzo.github.io/react-recipes/))
 
 This repository contains some tried-and-testes ways to work with React, documented [as I figure them out](https://github.com/danburzo/as-we-learn).
 
