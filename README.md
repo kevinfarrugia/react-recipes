@@ -330,14 +330,13 @@ See also [this response from Stack Overflow](https://stackoverflow.com/questions
 
 When used appropriately, pure components can boost your application's performance by avoiding unnecessary re-renders. It performs a _shallow comparison_ of props and state against their previous values and skips the re-render if nothing (shallowly) changed.
 
-This comparison is reasonably fast (in any case, faster than re-rendering), but be mindful of some situation where you get the worst of both worlds: you perform the comparison, but the component always re-renders anyways. Don't let this happen to you.
+This comparison is reasonably fast (in any case, faster than re-rendering), but be mindful of some situations where you get the worst of both worlds: you perform the comparison, but the component always re-renders anyways. Don't let this happen to you.
 
 __Are you sending functions (callbacks)__ to your component? Make sure you're not always sending a new function, as with `bind`-ing functions in-place (see [The `property` pattern for callbacks](#the-property-pattern-for-callbacks)).
 
-__Are you sending children__ to your component? Remember that `children` is still a prop, and one _which unfortunately always changes_. 
+__Are you sending children__ to your component? Remember that `children` is still a prop. Unless you're sending a string as the only child for the component, this property _will always change_. Drop `React.PureComponent` in this case.
 
-* If you're piggybacking on `this.props.children` to send a simple value to your component (such as a label string), move it to another property (e.g. 'label'), and keep using `React.PureComponent`.
-* If you send React components via `this.props.children`, drop `React.PureComponent` — when it's render time, `children` will always contain a new value.
+__Are you sending React components__ on any props? These props will always change, so you're better off dropping `React.PureComponent`.
 
 ## Further reading
 
