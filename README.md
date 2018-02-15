@@ -4,18 +4,73 @@
 
 ## Table of contents
 
-* [Recipes](#recipes)
-	* [The best `setState` style for the job](#the-best-setstate-style-for-the-job)
-	* [Ways to use `defaultProps`](#ways-to-use-defaultprops)
-	* [The `property` pattern for callbacks](#the-property-pattern-for-callbacks)
+* [Component basics](#component-basics)
 	* [Ways to define components](#ways-to-define-components)
+	* [Use the best `setState` style for the job](#use-the-best-setstate-style-for-the-job)
+	* [Ways to use `defaultProps`](#ways-to-use-defaultprops)
 	* [`React.PureComponent` caveats](#react-purecomponent-caveats)
+* [Events](#events)
+	* [The `property` pattern for callbacks](#the-property-pattern-for-callbacks)
+	* [Event handling outside the component](#event-handling-outside-the-component)
+* [Composition](#composition)
 	* [Passing React components via props](#passing-react-components-via-props)
 	* [Passing props to `this.props.children`](#passing-props-to-this-props-children)
-	* [Event handling outside the component](#event-handling-outside-the-component)
 * [Further reading](#further-reading)
 
-## Recipes
+## Component Basics
+
+### Ways to define components
+
+In the most basic sense, all React components do one thing: take some input (via props) and return a piece of UI. A component can be:
+
+* a simple function
+* a class that extends `React.Component` or `React.PureComponent`
+
+__Simple functions__ take the props as input and return the UI:
+
+```jsx
+const Button = props => <button>{ props.label }</button>
+```
+
+__Classes__ that extend either `React.Component` or `React.PureComponent` take the props as input and return the UI via the `render()` function:
+
+```jsx
+class Button extends React.Component {
+	render() {
+		return <button>{ this.props.label }</button>
+	}
+}
+```
+
+In terms of performance, we need to be mindful of how React decides to re-render components:
+
+* simple functions are re-rendered every time 
+* classes extending `React.PureComponent` only re-render when their props or state change
+* classes extending `React.Component` re-render every time by default, but this can be controlled by implementing the `shouldComponentUpdate` method.
+
+(Under the hood, `React.PureComponent` is just `React.Component` with a predefined `shouldComponentUpdate` method that does a _shallow comparison_ of the props and state to decide whether the component needs to be re-rendered.)
+
+With that in mind:
+
+__Use simple functions__ for _simple components that are not used extensively_; just because they're stateless, it doesn't mean they're pure components, or that you benefit from the performance enhancements of `React.PureComponent`.
+
+__Extend `React.PureComponent`__ when your component depends on simple props, and has a simple state, and you need better performance.
+
+__Extend `React.Component`__ in all other cases. Consider implementing a `shouldComponentUpdate` method to avoid re-rendering each time the props or state changes.
+
+See also [this response from Stack Overflow](https://stackoverflow.com/questions/40703675/react-functional-stateless-component-purecomponent-component-what-are-the-dif#40704083) and read below for some caveats around `React.PureComponent`.
+
+### `React.PureComponent` caveats
+
+When used appropriately, pure components can boost your application's performance by avoiding unnecessary re-renders. It performs a _shallow comparison_ of props and state against their previous values and skips the re-render if nothing (shallowly) changed.
+
+This comparison is reasonably fast (in any case, faster than re-rendering), but be mindful of some situations where you get the worst of both worlds: you perform the comparison, but the component always re-renders anyways. Don't let this happen to you.
+
+__Are you sending functions (callbacks)__ to your component? Make sure you're not always sending a new function, as with `bind`-ing functions in-place (see [The `property` pattern for callbacks](#the-property-pattern-for-callbacks)).
+
+__Are you sending children__ to your component? Remember that `children` is still a prop. Unless you're sending a string as the only child for the component, this property _will always change_. Drop `React.PureComponent` in this case.
+
+__Are you sending React components__ on any props? These props will always change, so you're better off dropping `React.PureComponent`.
 
 ### The best `setState` style for the job
 
@@ -173,6 +228,8 @@ Slider.defaultProps = {
 };
 ```
 
+## Events
+
 ### The `property` pattern for callbacks
 
 When you need to react to actions from each child component, you'll quickly find yourself in a bind (te-hee). Technically, you'll need to pass a separate callback function to each child, to tell which child is the source of the event.
@@ -288,58 +345,7 @@ When you apply this pattern across several components, it makes it easy to bind 
 	}
 ```
 
-### Ways to define components
-
-In the most basic sense, all React components do one thing: take some input (via props) and return a piece of UI. A component can be:
-
-* a simple function
-* a class that extends `React.Component` or `React.PureComponent`
-
-__Simple functions__ take the props as input and return the UI:
-
-```jsx
-const Button = props => <button>{ props.label }</button>
-```
-
-__Classes__ that extend either `React.Component` or `React.PureComponent` take the props as input and return the UI via the `render()` function:
-
-```jsx
-class Button extends React.Component {
-	render() {
-		return <button>{ this.props.label }</button>
-	}
-}
-```
-
-In terms of performance, we need to be mindful of how React decides to re-render components:
-
-* simple functions are re-rendered every time 
-* classes extending `React.PureComponent` only re-render when their props or state change
-* classes extending `React.Component` re-render every time by default, but this can be controlled by implementing the `shouldComponentUpdate` method.
-
-(Under the hood, `React.PureComponent` is just `React.Component` with a predefined `shouldComponentUpdate` method that does a _shallow comparison_ of the props and state to decide whether the component needs to be re-rendered.)
-
-With that in mind:
-
-__Use simple functions__ for _simple components that are not used extensively_; just because they're stateless, it doesn't mean they're pure components, or that you benefit from the performance enhancements of `React.PureComponent`.
-
-__Extend `React.PureComponent`__ when your component depends on simple props, and has a simple state, and you need better performance.
-
-__Extend `React.Component`__ in all other cases. Consider implementing a `shouldComponentUpdate` method to avoid re-rendering each time the props or state changes.
-
-See also [this response from Stack Overflow](https://stackoverflow.com/questions/40703675/react-functional-stateless-component-purecomponent-component-what-are-the-dif#40704083) and read below for some caveats around `React.PureComponent`.
-
-### `React.PureComponent` caveats
-
-When used appropriately, pure components can boost your application's performance by avoiding unnecessary re-renders. It performs a _shallow comparison_ of props and state against their previous values and skips the re-render if nothing (shallowly) changed.
-
-This comparison is reasonably fast (in any case, faster than re-rendering), but be mindful of some situations where you get the worst of both worlds: you perform the comparison, but the component always re-renders anyways. Don't let this happen to you.
-
-__Are you sending functions (callbacks)__ to your component? Make sure you're not always sending a new function, as with `bind`-ing functions in-place (see [The `property` pattern for callbacks](#the-property-pattern-for-callbacks)).
-
-__Are you sending children__ to your component? Remember that `children` is still a prop. Unless you're sending a string as the only child for the component, this property _will always change_. Drop `React.PureComponent` in this case.
-
-__Are you sending React components__ on any props? These props will always change, so you're better off dropping `React.PureComponent`.
+## Composition
 
 ### Passing React components via props
 
