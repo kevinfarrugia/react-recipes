@@ -121,7 +121,7 @@ __Cons:__
 
 So the main purpose of `defaultProps` is to plug any hole in your properties. One thing I like to do is provide empty functions to any callbacks my component supports, so that I don't need to check whether they exist when I invoke them:
 
-```
+```js
 class Slider extends React.Component {
 	onChange() {
 		// no need to check that this.props.onChange exists
@@ -152,7 +152,7 @@ Slider.defaultProps = {
 
 You may even go further and document _optional_ properties, whose default value is `undefined`:
 
-```js
+```jsx
 class Slider extends React.Component {
 	onChange() {
 		this.props.onChange(this.state.value, this.props.property);
@@ -172,7 +172,7 @@ When you need to react to actions from each child component, you'll quickly find
 
 [The recommendation from the React docs](https://reactjs.org/docs/handling-events.html) is to `bind` the callback function to each child:
 
-```js
+```jsx
 render() {
 	let { items } = this.props;
 	return (
@@ -204,7 +204,7 @@ In case of simple DOM elements, we don't have too many alternatives to this. But
 
 With this pattern we can simply write:
 
-```js
+```jsx
 render() {
 	let { items } = this.props;
 	return (
@@ -231,7 +231,7 @@ removeItem(id) {
 
 Our `Item` component will gladly accept a `property` prop to pass along to callbacks:
 
-```js
+```jsx
 class Item extends React.PureComponent {
 	constructor(props) {
 		super(props);
@@ -252,7 +252,7 @@ class Item extends React.PureComponent {
 
 When you apply this pattern across several components, it makes it easy to bind each of them to different parts of the state:
 
-```js
+```jsx
 	render() {
 		return (
 			<div className='editor'>
