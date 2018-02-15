@@ -2,22 +2,26 @@
 
 React Recipes & Patterns. This project is [AWL](https://github.com/danburzo/as-we-learn).
 
-## `setState`
+## Table of contents
+
+* [The best `setState` style for the job](#the-best--setstate--style-for-the-job)
+
+## Recipes
+
+### The best `setState` style for the job
 
 [`setState`](https://reactjs.org/docs/react-component.html#setstate) can be invoked in many ways, and the decision boils down to two questions:
 
 * _Does my new state depend on the previous state?_
 * _Do I need to know I've set the state?_
 
-### `setState` cheatsheet
+Here's a cheatsheet below to help you decide:
 
 Depends on previous state ? | No | Yes
 --------------------------- | -- | ---
 No notification of change | `setState(object)` | `setState(function)`
 Notified of _each_ change | `setState(object, callback)` | `setState(function, callback)`
 Notified of _batched_ changes | use `componentDidUpdate` | use `componentDidUpdate`
-
-### How to decide on the style
 
 __When your new state does not depend on the previous state,__ you can call `setState` with a simple object that will be _shallowly merged_ into the existing state:
 
