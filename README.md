@@ -2,18 +2,22 @@
 
 React Recipes & Patterns. This project is [AWL](https://github.com/danburzo/as-we-learn).
 
-## `setState()`
+## `setState`
 
-[`setState()`](https://reactjs.org/docs/react-component.html#setstate) can be invoked in many ways, and the decision boils down to two questions:
+[`setState`](https://reactjs.org/docs/react-component.html#setstate) can be invoked in many ways, and the decision boils down to two questions:
 
 * _Does my new state depend on the previous state?_
 * _Do I need to know I've set the state?_
+
+### `setState` cheatsheet
 
 Depends on previous state ? | No | Yes
 --------------------------- | -- | ---
 No notification of change | `setState(object)` | `setState(function)`
 Notified of _each_ change | `setState(object, callback)` | `setState(function, callback)`
 Notified of _batched_ changes | use `componentDidUpdate` | use `componentDidUpdate`
+
+### How to decide on the style
 
 __When your new state does not depend on the previous state,__ you can call `setState` with a simple object that will be _shallowly merged_ into the existing state:
 
@@ -33,7 +37,7 @@ this.setState(
 );
 ```
 
-What if it turns out your new value coincides with your old value? Starting with React 16, you can `return null` from the updater function to prevent the state from updating unnecessarily. In the example below, our counter is capped at 100:
+What if it turns out __your new value coincides with your old value__? Starting with React 16, you can `return null` from the updater function to prevent the state from updating unnecessarily. In the example below, our counter is capped at 100:
 
 ```js
 this.setState(
@@ -46,9 +50,9 @@ this.setState(
 )
 ```
 
-__If you want to know when you've updated the state,__ you have two options:
+__If you want to know when you've updated the state,__ you have (at least) two options:
 
-* supply a callback to `setState`
+* either supply a callback to `setState`, or
 * implement the `componentDidUpdate` method in your component
 
 `setState` is an asynchronous method, in that it tells React to update the state _eventually_, so reading `this.state` immediately after `setState` will not give you the updated values. Instead, you pass a _callback function_ to the `setState` method, that gets called immediately after your new state is applied:
@@ -63,21 +67,21 @@ this.setState(
 )
 ```
 
-In addition to being asynchronous, setState also gets _batched_, in that React will take a set of setState() calls and merge them together, if these calls happen in very quick succession (such as when you set the state in response to mouse movement). That prevents your component from being overwhelmed with frequent state updates — you might call `setState()` a hundred times and the component gets re-rendered only a handful of times.
+In addition to being asynchronous, setState also gets _batched_, in that React will take a set of `setState` calls and merge them together, if these calls happen in very quick succession (such as when you set the state in response to mouse movement). That prevents your component from being overwhelmed with frequent state updates — you might call `setState` a hundred times and the component gets re-rendered only a handful of times.
 
-When you want to want to be informed of changes in the state, depending on your needs, you need to decide whether to strap onto the setState() firehose and be informed a hundred times, or just get informed as often as your component gets re-rendered. 
+When you want to want to be informed of changes in the state, you need to decide whether to strap onto the `setState` firehose and be informed a hundred times, or just get informed as often as your component gets re-rendered. 
 
 The firehose option is setting a callback to the `setState` function. 
 
 __Pros:__
 
 * Potentially know of _each time_ you set the state, if you need to do so;
-* Ability to listen to only the `setState` calls you want to.
+* Listen to only the `setState` calls you want to.
 
 __Cons:__
 
 * You need to provide a callback to all the places that call `setState` in your component.
-* Receive a potentially overwhelming amount of updates.
+* You may receive a potentially overwhelming amount of updates.
 
 
 The "debounced" option is implementing the `componentDidUpdate` method in your component:
@@ -97,6 +101,6 @@ __Pros:__
 
 __Cons:__
 
-* The inability to distinguish between the _sources_ of the update, if you only want to react to a _certain_ setState() call.
+* The inability to distinguish between the _sources_ of the update, if you only want to react to a _certain_ `setState` call.
 
 (In regards to the con above, it may be that you need to rethink your state so that you don't need to distinguish between the _sources_ of the update.)
