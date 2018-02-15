@@ -12,6 +12,7 @@
 	* [`React.PureComponent` caveats](#react-purecomponent-caveats)
 	* [Passing React components via props](#passing-react-components-via-props)
 	* [Passing props to `this.props.children`](#passing-props-to-this-props-children)
+	* [Event handling outside the component](#event-handling-outside-the-component)
 * [Further reading](#further-reading)
 
 ## Recipes
@@ -367,7 +368,7 @@ class Reader extends React.Component {
 />
 ```
 
-__Using `children` as the single slot to be filled__
+__Use `children` as the single slot to be filled__
 
 ```jsx
 class Modal extends React.Component {
@@ -414,6 +415,69 @@ child => React.cloneElement(child, {
 ```
 
 ...in which we put back any of the child props we might have overwritten.
+
+### Event handling outside the component
+
+Sometimes, a component needs to listen to events on DOM nodes outside its scope, most frequently on either `document` or `window`. Instead of manually managing the events via `addEventListener` and `removeEventListener`, you can use the small [`react-event-listener`](https://github.com/oliviertassinari/react-event-listener) library to add them "the React way", as with this simple component that you can move with your mouse:
+
+```jsx
+import EventListener from `react-event-listener`;
+
+component Movable extends React.Component {
+
+	constructor(props) {
+		super(props);
+		this.state({
+			x: 0,
+			y: 0,
+			moving: false
+		})
+	}
+
+	startMove() {
+		this.setState({ moving: true });
+	}
+
+	doMove(e) {
+		this.setState({
+			x: e.clientX,
+			y: e.clientY
+		});
+	}
+
+	endMove() {
+		this.setState({ moving: false });
+	}
+
+	render() {
+
+		let {
+			moving,
+			x,
+			y
+		} = this.state;
+
+		let style = {
+			left: `${x}px`,
+			top: `${y}px`
+		};
+
+		return (
+			<div onMouseDown={this.startMove} style={style}>
+				{ 
+					this.state.moving && 
+						<EventListener 
+							target='document' 
+							onMouseMove={this.doMove}
+							onMouseUp={this.endMove}
+						/>
+				}
+			</div>
+		);
+	}
+}
+
+```
 
 ## Further reading
 
