@@ -1,6 +1,6 @@
 # react-recipes
 
-[This repository](https://danburzo.github.io/react-recipes/) contains some tried-and-testes ways to work with React, documented [as I figure them out](https://github.com/danburzo/as-we-learn).
+[This repository](https://github.com/danburzo/react-recipes/) contains some tried-and-testes ways to work with React, documented [as I figure them out](https://github.com/danburzo/as-we-learn).
 
 ## Table of contents
 
@@ -11,6 +11,7 @@
 	* [Ways to define components](#ways-to-define-components)
 	* [`React.PureComponent` caveats](#react-purecomponent-caveats)
 	* [Passing React components via props](#passing-react-components-via-props)
+	* [Passing props to `this.props.children`](#passing-props-to-this-props-children)
 * [Further reading](#further-reading)
 
 ## Recipes
@@ -379,6 +380,40 @@ class Modal extends React.Component {
 	)
 }
 ```
+
+### Passing props to `this.props.children`
+
+You want your component to augment all its children with some properties. To do so you can use `React.Children.map` and `React.cloneElement`, like so:
+
+```jsx
+
+render() {
+	<div>
+		{
+			React.Children.map(
+				this.props.children,
+				child => 
+					React.cloneElement(child, {
+						value: '5'
+					})
+			)
+		}
+	</div>
+}
+```
+
+When a child gets passed to our component, its `value` prop will be overwritten with `5`.
+
+What if instead we want the component to provide fallbacks if some properties are missing from the child? We can do so with a small tweak to our mapping function:
+
+```js
+child => React.cloneElement(child, {
+	value: '5',
+	...child.props
+})
+```
+
+...in which we put back any of the child props we might have overwritten.
 
 ## Further reading
 
