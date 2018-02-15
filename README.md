@@ -1,12 +1,14 @@
-# react-recipes ([repo](https://danburzo.github.io/react-recipes/))
+# react-recipes
 
-This repository contains some tried-and-testes ways to work with React, documented [as I figure them out](https://github.com/danburzo/as-we-learn).
+[This repository](https://danburzo.github.io/react-recipes/) contains some tried-and-testes ways to work with React, documented [as I figure them out](https://github.com/danburzo/as-we-learn).
 
 ## Table of contents
 
-* [The best `setState` style for the job](#the-best-setstate-style-for-the-job)
-* [Ways to use `defaultProps`](#ways-to-use-defaultprops)
-* [The `property` pattern for callbacks](#the-property-pattern-for-callbacks)
+* [Recipes](#recipes)
+	* [The best `setState` style for the job](#the-best-setstate-style-for-the-job)
+	* [Ways to use `defaultProps`](#ways-to-use-defaultprops)
+	* [The `property` pattern for callbacks](#the-property-pattern-for-callbacks)
+* [Further reading](#further-reading)
 
 ## Recipes
 
