@@ -37,4 +37,6 @@ __Extend `React.PureComponent`__ when your component depends on simple props, an
 
 __Extend `React.Component`__ in all other cases. Consider implementing a `shouldComponentUpdate` method to avoid re-rendering each time the props or state changes.
 
+__Note__ that when using `PureComponent` or `shouldComponentUpdate` you'll benefit from using [immutable objects](./immutability.md).
+
 See also [this response from Stack Overflow](https://stackoverflow.com/questions/40703675/react-functional-stateless-component-purecomponent-component-what-are-the-dif#40704083) and be aware of [some caveats around `React.PureComponent`](./purecomponent-caveats.md).

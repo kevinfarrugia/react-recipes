@@ -132,4 +132,8 @@ In the example above, we `map()` our way to a new array that contains:
 
 ## Performance
 
-You might be concerned that embracing the immutable way of dealing with data comes with a performance penalty. Reader, you are right. Creating new objects and arrays all the time is more expensive than plain-old mutation. The popular [Immutable.js](https://facebook.github.io/immutable-js/) library tries to bring immutable structures closer to their mutable counterparts in terms of efficiency — consider using it if you're concerned about speed. But otherwise revel in this much cleaner way of dealing with data, and in the fact that by using immutable structures and [smartly-deployed `PureComponent`s](../components.md), you may actually be boosting your app's performace. 
+You might be concerned that embracing the immutable way of dealing with data comes with a performance penalty. Reader, you are right. 
+
+Creating new objects and arrays all the time is more expensive than plain-old mutation. The popular [Immutable.js](https://facebook.github.io/immutable-js/) library tries to bring immutable structures closer to their mutable counterparts in terms of efficiency — consider using it if you're concerned about speed. 
+
+But otherwise revel in this much cleaner way of dealing with data, and in the fact that by using immutable structures and [smartly-deployed `PureComponent`s](./components.md), you may actually be boosting your app's performace. 
