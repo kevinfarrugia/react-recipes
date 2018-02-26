@@ -2,9 +2,9 @@
 
 [This repository](https://github.com/danburzo/react-recipes/) contains some tried-and-testes ways to work with React, documented [as I figure them out](https://github.com/danburzo/as-we-learn).
 
-## Prerequisites
+These articles assume _some_ prior knowledge of React, and that you use [JSX](https://reactjs.org/docs/introducing-jsx.html) and ES6 features (such as classes and modules), for which you'll need a tool like [Babel](https://babeljs.io) to transform your code into something that browsers can understand — a bit more tooling around, but it makes the examples clearer.
 
-These articles assume _some_ prior knowledge of React, and that you use [JSX](https://reactjs.org/docs/introducing-jsx.html) and ES6 syntax, for which you'll need a tool like [Babel](https://babeljs.io) to transform your code into something that browsers can understand. 
+It doesn't touch libraries you sometimes find in the same sentence with React, such as [Redux](https://redux.js.org), because you can built lots of things [without it](https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367).
 
 ## Table of contents
 
@@ -13,6 +13,8 @@ These articles assume _some_ prior knowledge of React, and that you use [JSX](ht
 [__Ways to define components__](./recipes/components.md) walks you through the pros and cons of functional vs. class-based React components.
 
 [__`React.PureComponent` caveats__](./recipes/purecomponent-caveats.md) shows you some scenarios where you're better off not using `PureComponent`.
+
+[__Why immutability is important__](./recipes/immutability.md) clarifies why you want to keep your data immutable when working with React.
 
 [__The Component lifecycle__](./recipes/lifecycle.md) describes the methods available on a component, when they're called and what to do with each of them.
 
