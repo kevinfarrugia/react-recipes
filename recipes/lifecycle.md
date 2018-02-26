@@ -3,50 +3,52 @@
 The life of a component has three phases:
 
 * __Mounting__ is when the component gets added to the DOM;
-* __Updating__ is the component reacting to changes in its props or state;
+* __Updating__ is the component re-rendering in response to changes in its props or state;
 * __Unmounting__ is when the component is removed from the DOM.
 
-React implements a handful of so-called _lifecycle methods_ that allow you to observe and control how the component behaves in each of these phases.
+React implements a handful of so-called _lifecycle methods_ that allow you to observe and control how the component behaves in each of these phases. 
 
-## The mounting phase
+## The Mounting phase
 
 When a component is added to the DOM, the following methods are called in succession:
 
 * [`constructor`](https://reactjs.org/docs/react-component.html#constructor)
-* [`componentWillMount`](https://reactjs.org/docs/react-component.html#componentWillMount)
+* [`componentWillMount`](https://reactjs.org/docs/react-component.html#componentwillmount)
 * [`render`](https://reactjs.org/docs/react-component.html#render)
-* [`componentDidMount`](https://reactjs.org/docs/react-component.html#componentDidMount)
+* [`componentDidMount`](https://reactjs.org/docs/react-component.html#componentdidmount)
 
-## The unmounting phase
+## The Unmounting phase
 
 A single method is called before the component is removed from the DOM:
 
-* [`componentWillUnmount`](https://reactjs.org/docs/react-component.html#componentWillUnmount)
+* [`componentWillUnmount`](https://reactjs.org/docs/react-component.html#componentwillunmount)
 
-## The updating phase
+There is no `componentDidUnmount` equivalent yet, although [there seems to be some utility to it](https://github.com/facebook/react/issues/6424).
 
-The __mounted__ component will re-render when its state is changed or when it receives new props from a parent component. 
+## The Updating phase
+
+The mounted component will re-render when its state is changed or when it receives new props from a parent component. 
 
 ### The state changes
 
 As the result of calling `setState` on a component, the following methods are invoked in succession:
 
-* [`shouldComponentUpdate`](https://reactjs.org/docs/react-component.html#shouldComponentUpdate)
-* [`componentWillUpdate`](https://reactjs.org/docs/react-component.html#componentWillUpdate)
+* [`shouldComponentUpdate`](https://reactjs.org/docs/react-component.html#shouldcomponentupdate)
+* [`componentWillUpdate`](https://reactjs.org/docs/react-component.html#componentwillupdate)
 * [`render`](https://reactjs.org/docs/react-component.html#render)
-* [`componentDidUpdate`](https://reactjs.org/docs/react-component.html#componentDidUpdate)
+* [`componentDidUpdate`](https://reactjs.org/docs/react-component.html#componentdidupdate)
 
-This succession happens with any `setState` call, regardless of whether the state has actually changed or not. It's the responsibility of the `shouldComponentUpdate` method to dictate whether such a "change" warrants a re-render.
+This succession is invoked with any `setState` call, regardless of whether the state has actually changed or not. It's the responsibility of the `shouldComponentUpdate` method to dictate whether a re-render is warranted.
 
 ### The props change
 
 When the component receives its props from a parent component, the `componentWillReceiveProps` method is invoked, followed by the same succession of methods that a change in state would incur:
 
-* [`componentWillReceiveProps`](https://reactjs.org/docs/react-component.html#componentWillReceiveProps)
-* [`shouldComponentUpdate`](https://reactjs.org/docs/react-component.html#shouldComponentUpdate)
-* [`componentWillUpdate`](https://reactjs.org/docs/react-component.html#componentWillUpdate)
+* [`componentWillReceiveProps`](https://reactjs.org/docs/react-component.html#componentwillreceiveprops)
+* [`shouldComponentUpdate`](https://reactjs.org/docs/react-component.html#shouldcomponentupdate)
+* [`componentWillUpdate`](https://reactjs.org/docs/react-component.html#componentwillupdate)
 * [`render`](https://reactjs.org/docs/react-component.html#render)
-* [`componentDidUpdate`](https://reactjs.org/docs/react-component.html#componentDidUpdate)
+* [`componentDidUpdate`](https://reactjs.org/docs/react-component.html#componentdidupdate)
 
 This succession happens any time a mounted component receives props, regardless of whether they have changed or not — so each time a parent re-renders, the component will go through these methods and also re-render, unless the `shouldComponentUpdate` method dictates otherwise.
 
