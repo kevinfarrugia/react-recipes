@@ -12,6 +12,8 @@ These articles assume _some_ prior knowledge of React, and that you use [JSX](ht
 
 [__Ways to define components__](./recipes/components.md) walks you through the pros and cons of functional vs. class-based React components.
 
+[__The Component lifecycle__](./recipes/lifecycle.md) describes the methods available on a component, when they're called and what to do with each of them.
+
 [__`React.PureComponent` caveats__](./recipes/purecomponent-caveats.md) shows you some scenarios where you're better off not using `PureComponent`.
 
 [__Use the best `setState` style for the job__](./recipes/set-state.md) when updating your component's state. 
