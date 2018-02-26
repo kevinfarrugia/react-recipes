@@ -6,6 +6,8 @@ These articles assume _some_ prior knowledge of React, and that you use [JSX](ht
 
 It doesn't touch libraries you sometimes find in the same sentence with React, such as [Redux](https://redux.js.org), because you can built lots of things [without it](https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367).
 
+It also doesn't cover React style (naming, indentation, et cetera). If that is your thing, feel free to peruse the [Airbnb React/JSX Style Guide](https://github.com/airbnb/javascript/tree/master/react).
+
 ## Table of contents
 
 ### Component basics
@@ -45,3 +47,4 @@ Other React pattern repositories:
 * [reactpatterns.com](http://reactpatterns.com/)
 * [react-in-patterns](https://github.com/krasimir/react-in-patterns)
 * [react-playbook](https://github.com/kylpo/react-playbook)
+* [react-bits](https://github.com/vasanthk/react-bits)
