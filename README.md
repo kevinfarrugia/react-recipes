@@ -4,17 +4,27 @@
 
 ## Table of contents
 
-* Component basics
-	* [Ways to define components](./recipes/components.md)
-	* [Use the best `setState` style for the job](./recipes/set-state.md)
-	* [`React.PureComponent` caveats](./recipes/purecomponent-caveats.md)
-	* [Ways to use `defaultProps`](./recipes/defaultprops.md)
-* Events
-	* [The `property` pattern for callbacks](./recipes/property-pattern.md)
-	* [Event handling outside the component](./recipes/outside-events.md)
-* Composition
-	* [Passing React components via props](./recipes/passing-components.md)
-	* [Passing props to `this.props.children`](./recipes/children-props.md)
+### Component basics
+
+[__Ways to define components__](./recipes/components.md) walks you through the pros and cons of functional vs. class-based React components.
+
+[__`React.PureComponent` caveats__](./recipes/purecomponent-caveats.md) shows you some scenarios where you're better off not using `PureComponent`.
+
+[__Use the best `setState` style for the job__](./recipes/set-state.md) when updating your component's state. 
+
+[__Ways to use `defaultProps`__](./recipes/defaultprops.md) to make your code clearer. 
+
+### Events
+
+[__The `property` pattern for callbacks__](./recipes/property-pattern.md) helps you handle events more elegantly. 
+
+[__Handling events outside the component__](./recipes/outside-events.md), React-style.
+
+### Composition
+
+[__Passing React components via props__](./recipes/passing-components.md) outlines some component composition strategies.
+
+[__Passing props to `this.props.children`__](./recipes/children-props.md) using `React.Children.map` and `React.cloneElement`.
 
 ## Further reading
 
