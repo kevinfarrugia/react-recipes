@@ -1,6 +1,10 @@
-# react-recipes
+# React Recipes
 
 [This repository](https://github.com/danburzo/react-recipes/) contains some tried-and-testes ways to work with React, documented [as I figure them out](https://github.com/danburzo/as-we-learn).
+
+## Prerequisites
+
+These articles assume _some_ prior knowledge of React, and that you use [JSX](https://reactjs.org/docs/introducing-jsx.html) and ES6 syntax, for which you'll need a tool like [Babel](https://babeljs.io) to transform your code into something that browsers can understand. 
 
 ## Table of contents
 
@@ -27,6 +31,10 @@
 [__Passing props to `this.props.children`__](./recipes/children-props.md) using `React.Children.map` and `React.cloneElement`.
 
 ## Further reading
+
+[The official React website](https://reactjs.org/) has comprehensive guides, tutorials, and links to useful tools. Spend an afternoon reading the guides cover to cover and you'll get a much firmer grasp on how to use React efficiently.
+
+Other React pattern repositories:
 
 * [reactpatterns.com](http://reactpatterns.com/)
 * [react-in-patterns](https://github.com/krasimir/react-in-patterns)
