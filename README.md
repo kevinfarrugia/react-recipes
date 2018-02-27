@@ -10,7 +10,9 @@ It also doesn't cover React style (naming, indentation, et cetera). If that is y
 
 ## Table of contents
 
-### Component basics
+### Life inside a component
+
+This section is about how to build React components.
 
 [__Ways to define components__](./recipes/components.md) walks you through the pros and cons of functional vs. class-based React components.
 
@@ -26,13 +28,13 @@ It also doesn't cover React style (naming, indentation, et cetera). If that is y
 
 [__Ways to use `defaultProps`__](./recipes/defaultprops.md) to make your code clearer. 
 
-### Events
-
-[__The `property` pattern for callbacks__](./recipes/property-pattern.md) helps you handle events more elegantly. 
-
 [__Handling events outside the component__](./recipes/outside-events.md), React-style.
 
-### Composition
+### How components talk to each other
+
+In this section we explore some patterns of communication between components, and how to combine them like perfectly-fitting LEGO bricks.
+
+[__The `property` pattern for callbacks__](./recipes/property-pattern.md) helps you handle events more elegantly. 
 
 [__Passing React components via props__](./recipes/passing-components.md) outlines some component composition strategies.
 

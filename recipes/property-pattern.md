@@ -1,38 +1,49 @@
 # The `property` pattern for callbacks
 
-When you need to react to actions from each child component, you'll quickly find yourself in a bind (te-hee). Technically, you'll need to pass a separate callback function to each child, to tell which child is the source of the event.
+When each item in a set of components emits some event, use the `property` pattern to know from which item the event originates, all the while passing a common callback function, instead of creating several separate, item-bound callbacks.
 
-[The recommendation from the React docs](https://reactjs.org/docs/handling-events.html) is to `bind` the callback function to each child:
+## Motivation
+
+A common scenario is to have lists of items with actions associated to each item. A typical example is the infamous _To Do List_, where you have a checkbox next to each item to mark it as _done_.
+
+When you need to change the state in response to an action triggered by an item, you'll quickly find yourself in a bind (te-hee) — technically, you'll need to pass a separate callback function to each item so that you can later tell which item is the source of the action. 
+
+In fact, [the recommendation from the React docs](https://reactjs.org/docs/handling-events.html) is to `bind` the callback function to each item separately. It's a bit like Oprah going [_you get a callback! you get a callback!_](https://www.youtube.com/watch?v=hcJAWKdawuM):
 
 ```jsx
-render() {
-	let { items } = this.props;
-	return (
-		<ul>
-			{ 
-				items.map(item => 
-					<li 
-						key={item.id}
-						onClick={this.removeItem.bind(this, item.id)}
-					>
-						{item.label}
-					</li>
-				)
-			}
-		</ul>
-	);
-}
+class List extends React.Component {
 
-removeItem(id) {
-	// remove item with the passed id
+	render() {
+		let { todos } = this.props;
+		return (
+			<ul>
+				{ 
+					todos.map(todo => 
+						<li 
+							key={ todo.id }
+							onClick={ this.markAsDone.bind(this, todo.id) }
+						>
+							{ todo.label }
+						</li>
+					)
+				}
+			</ul>
+		);
+	}
+
+	markAsDone(id) {
+		// Mark the item with the passed id as "done".
+	}
 }
 ```
 
-This solution comes with the drawback that each time you render the component, the children always get _different functions_ as their `onClick` callback, causing unnecessary DOM operations.
+This solution, while straightforward, comes with the drawback that every time the parent re-renders, the children always get _different functions_ as their `onClick` callback. In turn, this will cause unnecessary DOM operations (React needs to constantly remove the old callbacks and add in the new ones). 
 
-In case of simple DOM elements, we don't have too many alternatives to this. But for custom components, don't be tempted to use callbacks this way. Instead, I like to use the `property` pattern:
+Depending on your app's complexity, this may or may not matter. And in the case of simple DOM elements, there isn't much of an alternative to this method.
 
-> Make your components accept an optional `property` prop that gets sent along with all callbacks originating from the component.
+But for custom components that you write yourself, using callbacks this way comes with [drawbacks of its own](./purecomponent-caveats.md). To address them, I like to use what I call the `property` pattern:
+
+> Make your components accept an optional `property` prop that gets passed back with all callbacks originating from the component.
 
 With this pattern we can simply write:
 
@@ -61,7 +72,7 @@ removeItem(id) {
 }
 ```
 
-Our `Item` component will gladly accept a `property` prop to pass along to callbacks:
+For it to work, our `Item` component will need to accept a `property` prop to pass along to callbacks:
 
 ```jsx
 class Item extends React.PureComponent {
@@ -82,7 +93,7 @@ class Item extends React.PureComponent {
 }
 ```
 
-When you apply this pattern across several components, it makes it easy to bind each of them to different parts of the state:
+When you apply this pattern across several components, it makes it easy to bind each of them to different parts of the state, such as in the example below, which maps different types of UI controls to values in the state:
 
 ```jsx
 	render() {
