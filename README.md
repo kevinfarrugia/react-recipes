@@ -14,39 +14,29 @@ It also doesn't cover React style (naming, indentation, et cetera). If that is y
 
 This section is about how to build React components.
 
-[__Ways to define components__](./recipes/components.md) walks you through the pros and cons of functional vs. class-based React components.
-
-[__`React.PureComponent` caveats__](./recipes/purecomponent-caveats.md) shows you some scenarios where you're better off not using `PureComponent`.
-
-[__Why immutability is important__](./recipes/immutability.md) clarifies why you want to keep your data immutable when working with React.
-
-[__The Component lifecycle__](./recipes/lifecycle.md) describes the methods available on a component, when they're called and what to do with each of them.
-
-[__Use the best `setState` style for the job__](./recipes/set-state.md) when updating your component's state. 
-
-[__Storing derived data__](./recipes/derived-data.md) shows you how to store additional data on your component.
-
-[__Ways to use `defaultProps`__](./recipes/defaultprops.md) to make your code clearer. 
+* [__Ways to define components__](./recipes/components.md) walks you through the pros and cons of functional vs. class-based React components.
+* [__`React.PureComponent` caveats__](./recipes/purecomponent-caveats.md) shows you some scenarios where you're better off not using `PureComponent`.
+* [__Why immutability is important__](./recipes/immutability.md) clarifies why you want to keep your data immutable when working with React.
+* [__The Component lifecycle__](./recipes/lifecycle.md) describes the methods available on a component, when they're called and what to do with each of them.
+* [__Use the best `setState` style for the job__](./recipes/set-state.md) when updating your component's state. 
+* [__Storing derived data__](./recipes/derived-data.md) shows you how to store additional data on your component.
+* [__Ways to use `defaultProps`__](./recipes/defaultprops.md) to make your code clearer. 
 
 ### The component and the outside world
 
 This section discusses how our component can interact outside its boundaries.
 
-[__Handling events outside the component__](./recipes/outside-events.md) the React way with the help of a small library.
-
-[__Rendering things outside the component__](./recipes/portals.md) with React's concept of Portals.
-
-[__Embedding React components in an existing app__](./recipes/inserting-components.md) shows how to turn some parts of your app over to React.
+* [__Handling events outside the component__](./recipes/outside-events.md) the React way with the help of a small library.
+* [__Rendering things outside the component__](./recipes/portals.md) with React's concept of Portals.
+* [__Embedding React components in an existing app__](./recipes/inserting-components.md) shows how to turn some parts of your app over to React.
 
 ### How components talk to each other
 
-In this section we explore some patterns of communication between components, and how to combine them like perfectly-fitting LEGO bricks.
+In this section we explore some patterns of communication between components, and how to combine them like Lego bricks to build up our app.
 
-[__The `property` pattern for callbacks__](./recipes/property-pattern.md) helps you handle events more elegantly. 
-
-[__Passing React components via props__](./recipes/passing-components.md) outlines some component composition strategies.
-
-[__Passing props to `this.props.children`__](./recipes/children-props.md) using `React.Children.map` and `React.cloneElement`.
+* [__The `property` pattern for callbacks__](./recipes/property-pattern.md) helps you handle events more elegantly. 
+* [__Passing React components via props__](./recipes/passing-components.md) outlines some component composition strategies.
+* [__Passing props to `this.props.children`__](./recipes/children-props.md) using `React.Children.map` and `React.cloneElement`.
 
 ## Further reading
 

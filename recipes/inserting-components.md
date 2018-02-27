@@ -48,7 +48,7 @@ ReactDOM.unmountComponentAtNode(wrapper);
 
 ## Updating the component
 
-Our React component receives data from the outside via its `props`. Whenever we need to update the component with new props — and this is the part that feels magic in its simplicity — we just render it again using the new props, and React knows how to do this efficiently:
+The way our React component receives data from the outside world is via its `props`. Whenever we need to update the component with new data — and this is the part that feels magic in its simplicity — we just render it again using the new props, and React knows how to do it efficiently:
 
 ```jsx
 import ReactDOM from 'react-dom';
