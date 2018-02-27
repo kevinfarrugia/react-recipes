@@ -1,14 +1,16 @@
 # The `property` pattern for callbacks
 
+## The gist
+
 When each item in a set of components emits some event, use the `property` pattern to know from which item the event originates, all the while passing a common callback function, instead of creating several separate, item-bound callbacks.
 
-## Motivation
+## The motivation
 
 A common scenario is to have lists of items with actions associated to each item. A typical example is the infamous _To Do List_, where you have a checkbox next to each item to mark it as _done_.
 
-When you need to change the state in response to an action triggered by an item, you'll quickly find yourself in a bind (te-hee) — technically, you'll need to pass a separate callback function to each item so that you can later tell which item is the source of the action. 
+When you need to change the state in the parent component in response to an action triggered by one of its children, you'll quickly find yourself in a bind (te-hee) — technically, you'll need to pass a separate callback function to each item so that you can later tell which item is the source of the action. 
 
-In fact, [the recommendation from the React docs](https://reactjs.org/docs/handling-events.html) is to `bind` the callback function to each item separately. It's a bit like Oprah going [_you get a callback! you get a callback!_](https://www.youtube.com/watch?v=hcJAWKdawuM):
+In fact, [the React docs recommend](https://reactjs.org/docs/handling-events.html) `bind`-ing the callback function to each item separately. It's a bit like Oprah going [_you get a callback! you get a callback!_](https://www.youtube.com/watch?v=hcJAWKdawuM):
 
 ```jsx
 class List extends React.Component {
@@ -41,7 +43,11 @@ This solution, while straightforward, comes with the drawback that every time th
 
 Depending on your app's complexity, this may or may not matter. And in the case of simple DOM elements, there isn't much of an alternative to this method.
 
-But for custom components that you write yourself, using callbacks this way comes with [drawbacks of its own](./purecomponent-caveats.md). To address them, I like to use what I call the `property` pattern:
+But for custom components that you write yourself, using callbacks this way comes with [drawbacks of its own](./purecomponent-caveats.md). 
+
+### The approach
+
+To address the drawbacks of the `bind` method, I like to use what I call the `property` pattern.
 
 > Make your components accept an optional `property` prop that gets passed back with all callbacks originating from the component.
 
