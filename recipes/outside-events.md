@@ -1,11 +1,11 @@
 # Event handling outside the component
 
-Sometimes, a component needs to listen to events on DOM nodes outside its scope, most frequently on either `document` or `window`. Instead of manually managing the events via `addEventListener` and `removeEventListener`, you can use the small [`react-event-listener`](https://github.com/oliviertassinari/react-event-listener) library to add them "the React way", which is much more succint and less error-prone. 
+A component sometimes needs to listen to events on DOM nodes outside its scope, most frequently on either `document` or `window`. Instead of managing the events manually, via `addEventListener` and `removeEventListener`, we can use the small [`react-event-listener`](https://github.com/oliviertassinari/react-event-listener) library to handle them in a way that feels more natural to React, clearer, and less error-prone. 
 
-For an example implementation, look at this simple component that you can move with your mouse:
+Take this simple component which you can move with your mouse:
 
 ```jsx
-import EventListener from `react-event-listener`;
+import EventListener from 'react-event-listener';
 
 const initial_state = {
 	x: 0,
@@ -13,7 +13,7 @@ const initial_state = {
 	moving: false
 };
 
-component Movable extends React.Component {
+class Movable extends React.Component {
 
 	constructor(props) {
 
@@ -55,7 +55,7 @@ component Movable extends React.Component {
 		} = this.state;
 
 		let style = {
-			position: absolute,
+			position: 'absolute',
 			width: '100px',
 			height: '100px',
 			background: 'red',
@@ -78,3 +78,5 @@ component Movable extends React.Component {
 	}
 }
 ```
+
+`EventListener` will add and remove the `mousemove` and `mouseup` callbacks to `document` as the component is mounted and unmounted.

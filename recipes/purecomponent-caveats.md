@@ -1,6 +1,6 @@
 # `React.PureComponent` caveats
 
-When used appropriately, pure components can boost your application's performance by avoiding unnecessary re-renders. It performs a _shallow comparison_ of props and state against their previous values and skips the re-render if nothing (shallowly) changed.
+When used appropriately, pure components can boost your application's performance by avoiding useless re-renders. It performs a _shallow comparison_ of props and state against their previous values and skips the re-render if nothing (shallowly) changed.
 
 This comparison is reasonably fast (in any case, faster than re-rendering), but be mindful of some situations where you get the worst of both worlds: you perform the comparison, but the component always re-renders anyways. Don't let this happen to you.
 

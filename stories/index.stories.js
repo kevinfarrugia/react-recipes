@@ -1,4 +1,5 @@
 import React from 'react';
+import EventListener from 'react-event-listener';
 
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
@@ -72,7 +73,77 @@ class LifecycleWrapper extends React.Component {
 	}
 }
 
+class Movable extends React.Component {
+
+	constructor(props) {
+
+		super(props);
+
+		// setup the component's initial state 
+		this.state = {
+			x: 0,
+			y: 0,
+			moving: false
+		};
+
+		// bind the event listeners
+		this.startMove = this.startMove.bind(this);
+		this.doMove = this.doMove.bind(this);
+		this.endMove = this.endMove.bind(this);
+
+	}
+
+	startMove() {
+		// setting this on the state will render <EventListener/>
+		this.setState({ moving: true });
+	}
+
+	doMove(e) {
+		this.setState({
+			x: e.clientX,
+			y: e.clientY
+		});
+	}
+
+	endMove() {
+		// setting this on the state will unrender <EventListener/>
+		this.setState({ moving: false });
+	}
+
+	render() {
+
+		let {
+			moving,
+			x,
+			y
+		} = this.state;
+
+		let style = {
+			position: 'absolute',
+			width: '100px',
+			height: '100px',
+			background: 'red',
+			left: `${x}px`,
+			top: `${y}px`
+		};
+
+		return (
+			<div onMouseDown={this.startMove} style={style}>
+				{ 
+					moving && 
+						<EventListener 
+							target='document' 
+							onMouseMove={this.doMove}
+							onMouseUp={this.endMove}
+						/>
+				}
+			</div>
+		);
+	}
+}
+
 storiesOf('Lifecycle', module)
-  .add('Lifecycle methods', () => {
-  	return <LifecycleWrapper/>;
-  });
+	.add('Lifecycle methods', () => <LifecycleWrapper/>);
+
+storiesOf('EventListener', module)
+	.add('Movable div', () => <Movable/>);

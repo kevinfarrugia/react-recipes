@@ -39,7 +39,7 @@ But there's a more subtle reason why you want to favor immutability, especially 
 
 It's faster to tell that `obj !== new_obj` than figuring out if anything inside the object has been altered.
 
-This is how `React.PureComponent` tells that it needs to re-render: it looks wether any of its props have _shallowly_ changed by comparing the stored values with the newly-received values, which is a fast way of avoiding unnecessary renders.
+This is how `React.PureComponent` tells that it needs to re-render: it looks wether any of its props have _shallowly_ changed by comparing the stored values with the newly-received values, which is a fast way of avoiding useless renders.
 
 ## Thinking immutably
 

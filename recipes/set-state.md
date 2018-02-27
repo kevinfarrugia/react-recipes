@@ -33,7 +33,7 @@ increment() {
 }
 ```
 
-What if it turns out __your new value coincides with your old value__? Starting with React 16, you can `return null` from the updater function to prevent the state from updating unnecessarily. In the example below, our counter is capped at 100:
+What if it turns out __your new value coincides with your old value__? Starting with React 16, you can `return null` from the updater function to prevent the state from updating pointlessly. In the example below, our counter is capped at 100:
 
 ```js
 increment() {
