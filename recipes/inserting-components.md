@@ -1,12 +1,12 @@
 # Embedding React components in an existing app
 
-Your app may be built using plain JavaScript, or some library or framework, and you want to have some portions of it in React; or maybe you're slowly refactoring your app to use React, but you can't rewrite it all at once. In such cases, there's no reason you can't embed little bits of React throughout the app.
+Your app may be built using plain JavaScript, or some library or framework, and you want to have some portions of it in React; or maybe you're slowly refactoring your app to use React, but you can't rewrite it all at once. In such cases, there's no reason you can't embed little bits of React throughout the app and slowly work your way up to bigger and bigger chunks.
 
 In practice, it boils down to:
 
 * getting the component in and out of the DOM; 
 * updating the component with outside data;
-* hooking up to events your component triggers. 
+* listening to events your component triggers. 
 
 And as it turns out, it's refreshingly easy to do it!
 
