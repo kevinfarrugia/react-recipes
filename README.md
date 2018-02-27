@@ -28,7 +28,15 @@ This section is about how to build React components.
 
 [__Ways to use `defaultProps`__](./recipes/defaultprops.md) to make your code clearer. 
 
-[__Handling events outside the component__](./recipes/outside-events.md), React-style.
+### The component and the outside world
+
+This section discusses how our component can interact outside its boundaries.
+
+[__Handling events outside the component__](./recipes/outside-events.md) the React way with the help of a small library.
+
+[__Rendering things outside the component__](./recipes/portals.md) with React's concept of Portals.
+
+[__Embedding React components in an existing app__](./recipes/inserting-components.md) shows how to turn some parts of your app over to React.
 
 ### How components talk to each other
 
