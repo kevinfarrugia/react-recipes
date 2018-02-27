@@ -13,27 +13,27 @@ In fact, [the recommendation from the React docs](https://reactjs.org/docs/handl
 ```jsx
 class List extends React.Component {
 
-	render() {
-		let { todos } = this.props;
-		return (
-			<ul>
-				{ 
-					todos.map(todo => 
-						<li 
-							key={ todo.id }
-							onClick={ this.markAsDone.bind(this, todo.id) }
-						>
-							{ todo.label }
-						</li>
-					)
-				}
-			</ul>
-		);
-	}
+  render() {
+    let { todos } = this.props;
+    return (
+      <ul>
+        { 
+          todos.map(todo => 
+            <li 
+              key={ todo.id }
+              onClick={ this.markAsDone.bind(this, todo.id) }
+            >
+              { todo.label }
+            </li>
+          )
+        }
+      </ul>
+    );
+  }
 
-	markAsDone(id) {
-		// Mark the item with the passed id as "done".
-	}
+  markAsDone(id) {
+    // Mark the item with the passed id as "done".
+  }
 }
 ```
 
@@ -49,26 +49,26 @@ With this pattern we can simply write:
 
 ```jsx
 render() {
-	let { items } = this.props;
-	return (
-		<List>
-			{ 
-				items.map(item => 
-					<Item 
-						key={item.id}
-						property={item.id}
-						onClick={this.removeItem}
-					>
-						{item.label}
-					</Item>
-				)
-			}
-		</List>
-	);
+  let { items } = this.props;
+  return (
+    <List>
+      { 
+        items.map(item => 
+          <Item 
+            key={item.id}
+            property={item.id}
+            onClick={this.removeItem}
+          >
+            {item.label}
+          </Item>
+        )
+      }
+    </List>
+  );
 }
 
 removeItem(id) {
-	// remove item with the passed id
+  // remove item with the passed id
 }
 ```
 
@@ -76,50 +76,50 @@ For it to work, our `Item` component will need to accept a `property` prop to pa
 
 ```jsx
 class Item extends React.PureComponent {
-	constructor(props) {
-		super(props);
-		this.onClick = this.onClick.bind(this);
-	}
+  constructor(props) {
+    super(props);
+    this.onClick = this.onClick.bind(this);
+  }
 
-	onClick() {
-		this.props.onClick(this.props.property);
-	}
+  onClick() {
+    this.props.onClick(this.props.property);
+  }
 
-	render() {
-		return (
-			<li onClick={this.onClick}>{this.props.children}</li>
-		);
-	}
+  render() {
+    return (
+      <li onClick={this.onClick}>{this.props.children}</li>
+    );
+  }
 }
 ```
 
 When you apply this pattern across several components, it makes it easy to bind each of them to different parts of the state, such as in the example below, which maps different types of UI controls to values in the state:
 
 ```jsx
-	render() {
-		return (
-			<div className='editor'>
+  render() {
+    return (
+      <div className='editor'>
 
-				<Slider 
-					value={this.state.slidervalue} 
-					property={slidervalue}
-					onChange={this.update}
-				/>
+        <Slider 
+          value={this.state.slidervalue} 
+          property={slidervalue}
+          onChange={this.update}
+        />
 
-				<List
-					value={this.state.listvalue}
-					property={listvalue}
-					onChange={this.update}
-				/>
+        <List
+          value={this.state.listvalue}
+          property={listvalue}
+          onChange={this.update}
+        />
 
-				{ // ... etc ... }
-			</div>
-		)
-	}
+        { // ... etc ... }
+      </div>
+    )
+  }
 
-	update(value, prop) {
-		this.setState({
-			[prop]: value
-		});
-	}
+  update(value, prop) {
+    this.setState({
+      [prop]: value
+    });
+  }
 ```
