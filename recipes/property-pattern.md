@@ -45,7 +45,7 @@ Depending on your app's complexity, this may or may not matter. And in the case 
 
 But for custom components that you write yourself, using callbacks this way comes with [drawbacks of its own](./purecomponent-caveats.md). 
 
-### The approach
+## The approach
 
 To address the drawbacks of the `bind` method, I like to use what I call the `property` pattern.
 
