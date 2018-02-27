@@ -13,7 +13,7 @@ When you need to change the state in the parent component in response to an acti
 In fact, [the React docs recommend](https://reactjs.org/docs/handling-events.html) `bind`-ing the callback function to each item separately. It's a bit like Oprah going [_you get a callback! you get a callback!_](https://www.youtube.com/watch?v=hcJAWKdawuM):
 
 ```jsx
-class List extends React.Component {
+class ToDoList extends React.Component {
 
   render() {
     let { todos } = this.props;
@@ -54,34 +54,39 @@ To address the drawbacks of the `bind` method, I like to use what I call the `pr
 With this pattern we can simply write:
 
 ```jsx
-render() {
-  let { items } = this.props;
-  return (
-    <List>
-      { 
-        items.map(item => 
-          <Item 
-            key={item.id}
-            property={item.id}
-            onClick={this.removeItem}
-          >
-            {item.label}
-          </Item>
-        )
-      }
-    </List>
-  );
-}
+class ToDoList extends React.Component {
 
-removeItem(id) {
-  // remove item with the passed id
+  render() {
+    let { todos } = this.props;
+    return (
+      <ul>
+        { 
+          todos.map(todo => 
+            <Todo 
+              key={todo.id}
+              property={todo.id}
+              onClick={this.markAsDone}
+            >
+              {todo.label}
+            </Todo>
+          )
+        }
+      </ul>
+    );
+  }
+
+  markAsDone(id) {
+    // Mark the item with the passed id as "done".
+  }
+
 }
 ```
 
-For it to work, our `Item` component will need to accept a `property` prop to pass along to callbacks:
+For it to work, our `Todo` component will need to accept a `property` prop to pass along to callbacks:
 
 ```jsx
-class Item extends React.PureComponent {
+class Todo extends React.PureComponent {
+
   constructor(props) {
     super(props);
     this.onClick = this.onClick.bind(this);
@@ -96,31 +101,31 @@ class Item extends React.PureComponent {
       <li onClick={this.onClick}>{this.props.children}</li>
     );
   }
+
 }
 ```
 
 When you apply this pattern across several components, it makes it easy to bind each of them to different parts of the state, such as in the example below, which maps different types of UI controls to values in the state:
 
 ```jsx
+class Editor extends React.Component {
+
   render() {
     return (
       <div className='editor'>
-
         <Slider 
           value={this.state.slidervalue} 
           property={slidervalue}
           onChange={this.update}
         />
-
         <List
           value={this.state.listvalue}
           property={listvalue}
           onChange={this.update}
         />
-
         { // ... etc ... }
       </div>
-    )
+    );
   }
 
   update(value, prop) {
@@ -128,4 +133,7 @@ When you apply this pattern across several components, it makes it easy to bind 
       [prop]: value
     });
   }
+
+}
 ```
+
