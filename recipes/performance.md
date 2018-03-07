@@ -20,4 +20,4 @@ Before we get to it, read the [Optimizing Performance](https://reactjs.org/docs/
 
 ---
 
-<small><sup>1</sup> If you open your browser's developer tools, you'll see DOM elements, or some of their attributes, flash as they're getting updated.</small>
+<sup>1</sup> If you open your browser's developer tools, you'll see DOM elements, or some of their attributes, flash as they're getting updated.
