@@ -98,11 +98,11 @@ First off, make sure you're [not `bind`-ing a function in place](./property-patt
 
 While `why-did-you-update` already offers you a lot to work with, it has some caveats:
 
-* It can't tell that functional components (components defined as simple functions) have updated unnecessarily ([issue](https://github.com/maicki/why-did-you-update/issues/10)). But functional components update unnecessarily most of the time, so consider [avoiding them](./components.md) if you're concerned about their performance.
+* It can't tell that functional components (components defined as simple functions) have updated uselessly ([issue](https://github.com/maicki/why-did-you-update/issues/10)). But functional components update uselessly most of the time, so consider [avoiding them](./components.md) if you're concerned about their performance.
 * It doesn't work with components that have a custom `componentDidUpdate` method ([issue](https://github.com/maicki/why-did-you-update/issues/17));
 
 ### Changes in props or state that don't have an effect on the DOM output
 
-Another thing that the library can't tell you is when the component re-renders due to a change in the `props` or `state`, but the output stays the same.
+Another thing that the library can't identify yet is when the component re-renders due to a change in the `props` or `state`, but the component's DOM stays the same.
 
-It might be a sign you're putting things in `props` or `state` that you actually don't need for rendering the component. If that's the case, prune them out or [store them in a different place](./derived-data.md).
+It _might_ be a sign you're putting things in `props` or `state` that you actually don't need for rendering the component. If that's the case, you can prune them out or [store them in a different place](./derived-data.md).
