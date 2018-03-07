@@ -41,8 +41,8 @@ In this section we explore some patterns of communication between components, an
 ### Performance
 
 * [__An introduction to performance__](./recipes/performance.md)
-* [__`why-did-you-update` is your best friend__](./recipes/why-did-you-update.md)
-* [__Arrays as props__](./recipes/arrays-as-props.md) and some ways they can affect your performance, and what to do about it
+* [__`why-did-you-update` is your new best friend__](./recipes/why-did-you-update.md) that lets you know when your components are updating uselessly.
+* [__Arrays as props__](./recipes/arrays-as-props.md) and some ways they can affect your performance, and what to do about it.
 
 ## Further reading
 
