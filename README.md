@@ -38,6 +38,12 @@ In this section we explore some patterns of communication between components, an
 * [__Passing React components via props__](./recipes/passing-components.md) outlines some component composition strategies.
 * [__Passing props to `this.props.children`__](./recipes/children-props.md) using `React.Children.map` and `React.cloneElement`.
 
+### Performance
+
+* [An introduction to performance](./recipes/performance.md)
+* [why-did-you-update is your best friend](./recipes/why-did-you-update.md)
+* [Arrays as props](./recipes/arrays-as-props.md) and some ways they can affect your performance, and what to do about it
+
 ## Further reading
 
 [The official React website](https://reactjs.org/) has comprehensive guides, tutorials, and links to useful tools. Spend an afternoon reading the guides cover to cover and you'll get a much firmer grasp on how to use React efficiently.
