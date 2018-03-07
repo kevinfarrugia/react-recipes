@@ -71,7 +71,7 @@ undefined === undefined; // true
 
 Others may have the "same" value but a different reference, in particular __objects__ and __arrays__:
 
-```
+```js
 [] === []; // false
 { name: 'Dan' } === { name: 'Dan' }; // false
 ```
@@ -79,6 +79,8 @@ Others may have the "same" value but a different reference, in particular __obje
 In the case of objects, see whether it makes sense to spread out the object to individual props rather than passing it as a single prop.
 
 I discuss arrays in [a separate article](./arrays-as-props.md).
+
+The library helpfully points out which of the properties are deep-equal but now shallow-equal.
 
 ### When the only thing that changed are functions
 
