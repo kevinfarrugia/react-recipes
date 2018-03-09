@@ -1,0 +1,1 @@
+# The `render` prop pattern
