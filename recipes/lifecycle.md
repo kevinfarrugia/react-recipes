@@ -54,4 +54,4 @@ This succession happens any time a mounted component receives props, regardless 
 
 ## Other component methods
 
-* [`componentDidCatch`](https://reactjs.org/docs/react-component.html#componentDidCatch) is emitted whenever there was an error in any of the _child components_, and it's the method used for building [Error Boundaries](./error-boundaries.md) in your app.
+* [`componentDidCatch`](https://reactjs.org/docs/react-component.html#componentdidcatch) is emitted whenever there was an error in any of the _child components_, and it's the method used for building [Error Boundaries](./error-boundaries.md) in your app.
