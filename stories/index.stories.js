@@ -5,6 +5,9 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { linkTo } from '@storybook/addon-links';
 
+import ErrorBoundary from './components/ErrorBoundary';
+import FaultyComponent from './components/FaultyComponent';
+
 class Lifecycle extends React.Component {
 	constructor(props) {
 		super(props);
@@ -147,3 +150,12 @@ storiesOf('Lifecycle', module)
 
 storiesOf('EventListener', module)
 	.add('Movable div', () => <Movable/>);
+
+storiesOf('ErrorBoundary', module)
+	.add('ErrorBoundary and FaultyComponent', () => {
+		return (
+			<ErrorBoundary>
+				<FaultyComponent/>
+			</ErrorBoundary>
+		);
+	})

@@ -1,0 +1,5 @@
+.error-boundary {
+	padding: 1em;
+	border: 5px solid red;
+	background: rgba(255, 0, 0, 0.1);
+}
