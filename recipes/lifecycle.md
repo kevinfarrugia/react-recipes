@@ -52,3 +52,6 @@ When the component receives its props from a parent component, the `componentWil
 
 This succession happens any time a mounted component receives props, regardless of whether they have changed or not — so each time a parent re-renders, the component will go through these methods and also re-render, unless the `shouldComponentUpdate` method dictates otherwise.
 
+## Other component methods
+
+* [`componentDidCatch`](https://reactjs.org/docs/react-component.html#componentDidCatch) is emitted whenever there was an error in any of the _child components_, and it's the method used for building [Error Boundaries](./error-boundaries.md) in your app.

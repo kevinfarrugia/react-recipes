@@ -70,27 +70,27 @@ When you update a value deep into the object, you `spread` your way to the prope
 
 ```js
 let obj = {
-	name: 'John Doe',
-	occupation: 'React Novice',
-	avatar: {
-		type: 'gravatar',
-		data: {
-			email: 'johndoe@gmail.com',
-			size: 100
-		}
-	}
+  name: 'John Doe',
+  occupation: 'React Novice',
+  avatar: {
+    type: 'gravatar',
+    data: {
+      email: 'johndoe@gmail.com',
+      size: 100
+    }
+  }
 };
 
 // Let's update our user's email address using the Spread syntax
 let new_email = {
-	...obj,
-	avatar: {
-		...obj.avatar,
-		data: {
-			...obj.avatar.data,
-			email: 'john.doe.professional@gmail.com'
-		}
-	}
+  ...obj,
+  avatar: {
+    ...obj.avatar,
+    data: {
+      ...obj.avatar.data,
+      email: 'john.doe.professional@gmail.com'
+    }
+  }
 };
 ```
 
@@ -175,22 +175,22 @@ When you have an array of objects, and you want to change something about one of
 ```js
 
 let contacts = [
-	{ name: 'Alice', email: "alice@gmail.com" },
-	{ name: 'Bob', email: 'bob@gmail.com' },
-	{ name: 'Carol', email: 'carol@gmail.com' }
+  { name: 'Alice', email: "alice@gmail.com" },
+  { name: 'Bob', email: 'bob@gmail.com' },
+  { name: 'Carol', email: 'carol@gmail.com' }
 ];
 
 let updated_contacts = contacts.map(
-	contact => {
-		if (contact.name === 'Bob') {
-			return {
-				...contact,
-				email: "bob.new@gmail.com"
-			}
-		} else {
-			return contact;
-		}
-	}
+  contact => {
+    if (contact.name === 'Bob') {
+      return {
+        ...contact,
+        email: "bob.new@gmail.com"
+      }
+    } else {
+      return contact;
+    }
+  }
 )
 
 ```
