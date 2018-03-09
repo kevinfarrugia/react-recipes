@@ -31,7 +31,9 @@ In terms of performance, we need to be mindful of how React decides to re-render
 
 With that in mind:
 
-__Use simple functions__ for _simple components that are not used extensively_; just because they're stateless, it doesn't mean they're pure components, or that you benefit from the performance enhancements of `React.PureComponent`.
+__Use simple functions__ for _simple components that are not used extensively_; just because they're stateless, it doesn't mean they're pure components, or that you benefit from the performance enhancements of `React.PureComponent`. 
+
+(In the future, React may implement optimizations for functional components to address this.)
 
 __Extend `React.PureComponent`__ when your component depends on simple props, and has a simple state, and you need better performance.
 
