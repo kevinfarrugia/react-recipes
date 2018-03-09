@@ -152,6 +152,7 @@ storiesOf('EventListener', module)
 	.add('Movable div', () => <Movable/>);
 
 storiesOf('ErrorBoundary', module)
+	.add('FaultyComponent without ErrorBoundary', () => <FaultyComponent/>)
 	.add('ErrorBoundary and FaultyComponent', () => {
 		return (
 			<ErrorBoundary>

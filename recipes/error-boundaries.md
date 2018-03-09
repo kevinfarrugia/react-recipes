@@ -1,5 +1,19 @@
 # Error Boundaries
 
+Real-world applications are never perfect. 
+
+A component will sometimes receive data it's not expecting, or the user interacts with the component in a way it doesn't know how to handle — and the component breaks.
+
+In previous versions of the library, a broken component would compromise React's inner state and lead to odd behavior and cryptic error messages in the browser console.
+
+However, React 16 handles component errors a bit differently: instead of pushing through, it bails out and __removes the entire component tree from the DOM__ to prevent further damage. If your whole app is built in React, it just goes blank.
+
+Luckily, React 16 also comes with a way to control what happens when these errors occur, with a concept called [Error Boundaries](https://reactjs.org/docs/error-boundaries.html). You may have even noticed this suggestion in the browser console whenever something breaks:
+
+> Consider adding an error boundary to your tree to customize error handling behavior.
+
+A potential blank screen in our app is a good reason to go ahead and consider it, if I ever saw one. So what's it all about?
+
 ## Example implementation
 
 We're going to implement an `ErrorBoundary` component that catches any error in its children and displays a fallback UI when that happens:
