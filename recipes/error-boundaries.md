@@ -22,7 +22,7 @@ So do we add the `componentDidCatch` method to all our components?
 
 Not quite. A component cannot safely catch errors that happen to _itself_, much like we can't catch ourselves when we're falling. Instead, __it only catches errors from its children__, or its children's children, and so on — anything further down the component tree. 
 
-We'll instead create a component whose _only purpose_ is to act as an Error Boundary to use whenever we may need it:
+We'll instead create a component whose _only purpose_ is to act as an error boundary to use whenever we may need it:
 
 ```jsx
 // Our ErrorBoundary component...
@@ -50,7 +50,7 @@ With this setup in place, any time our `FaultyComponent` goes haywire, the `Erro
 
 ### What gets caught by `componentDidCatch`, and what doesn't
 
-The Error Boundary will catch __errors that happen inside any of its descendants' lifecycle methods__, including their `render` method, their `constructor`, and `setState` calls.
+The error boundary will catch __errors that happen inside any of its descendants' lifecycle methods__, including their `render` method, their `constructor`, and `setState` calls.
 
 Errors are __not__ caught in:
 
@@ -58,11 +58,11 @@ Errors are __not__ caught in:
 * event handlers
 * server-side rendering
 
-Plus, as we learned earlier, it doesn't catch errors within itself. Rather, when [the boundary itself throws an error](https://twitter.com/_youhadonejob1), the error bubbles to the next closest Boundary up the component tree.
+Plus, as we learned earlier, it doesn't catch errors within itself. Rather, when [the boundary itself throws an error](https://twitter.com/_youhadonejob1), the error bubbles to the next closest boundary up the component tree.
 
 Errors in asynchronous code event handlers don't _need_ to be caught in Error Boundaries because they won't affect React. You can, however, use the regular JavaScript `try / catch` construct if you want to handle those as well.
 
-__Note:__ if an event handler calls `setState`, as they often do, and something breaks as a result of it, it _will_ get caught by the Error Boundary.
+__Note:__ if an event handler calls `setState`, as they often do, and something breaks as a result of it, it _will_ get caught by the error boundary.
 
 ## What to do about errors
 
@@ -116,7 +116,7 @@ class ErrorBoundary extends React.Component {
 
   // We also want to allow the user to recover from an error,
   // so we add a button in the fallback UI that resets the 
-  // Error Boundary to its initial state (no error).
+  // error boundary to its initial state (no error).
   // 
   // This causes it to try to re-render the child components
   // and hope they don't break again in the process.
@@ -148,20 +148,27 @@ class ErrorBoundary extends React.Component {
 }
 ```
 
-In addition to capturing errors and rendering the fallback UI, our `ErrorBoundary` component also includes a _Try again_ button that clears the error and tries to re-render the component it wraps. 
+In addition to capturing errors and rendering the fallback UI, our `ErrorBoundary` component includes a _Try again_ button that clears the error and tries to re-render the component it wraps. 
 
 Depending on the error, the component may break again immediately. But re-mounting a fresh component may sometimes solve the problem — if the error was, for example, the result of some aspect of the component's `state` getting corrupted. For at least these cases, letting the user reset the `ErrorBoundary` is better than nothing.
 
-Now, let's put this Error Boundary to good use. Below we have a `FaultyComponent` that will break when the user presses its only button.
+Now, let's put this error boundary to good use. Below we have a `FaultyComponent` that will break when the user presses its only button.
 
 ```jsx
 class FaultyComponent extends React.Component {
 
   constructor(props) {
     super(props);
+
+    // notice a conspicuous lack 
+    // of state initialization in the constructor
+
+    // bind event handlers
     this.break = this.break.bind(this);
   }
 
+  // We "forgot" to add an initial state,
+  // so this method breaks the component.
   break() {
     this.setState(
       prevState => ({ counter: prevState.counter + 1 })
@@ -184,7 +191,7 @@ class FaultyComponent extends React.Component {
 }
 ```
 
-If we were to include the `FaultyComponent` by itself in our app, a press to our rigged button will blow up the entire thing. But if we wrap it in the `ErrorBoundary` we've just created, the boundary will stop the error from propagating, and show the fallback UI:
+If we were to include the `FaultyComponent` by itself in our app, a press of our rigged button will blow up the entire thing. But if we wrap it in the `ErrorBoundary` we've just created, the boundary will stop the error from propagating, and show the fallback UI:
 
 ```jsx
 <ErrorBoundary>
@@ -194,7 +201,7 @@ If we were to include the `FaultyComponent` by itself in our app, a press to our
 
 ## Where to put your Error Boundaries
 
-You can generally write a single `ErrorBoundary` component and use it in as many placess as you need it. One Boundary that wraps the entire app can be a starting point, but we could also add a few in major areas of the app that can work independently of one another.
+You can generally write a single `ErrorBoundary` component and use it in as many placess as you need it. A single boundary that wraps the entire app can be a starting point, but we could also add a few in major areas of the app that can work independently of one another.
 
 We can go further and make our `ErrorBoundary` a bit more generic, and have it render a fallback UI that we can configure. Maybe in some places we feel like showing a frowny _Bummer!_ message, and that in others a _Quote of the day_ widget is a good replacement for broken functionality. (Reader, it rarely is.)
 
@@ -215,7 +222,7 @@ This is a good fit for the [render prop pattern](./render-prop-pattern.md), with
 </ErrorBoundary>
 ```
 
-To support the pattern we'll make a small change to the Boundary's `render()` method:
+To support the pattern we'll make a small change to the boundary's `render()` method:
 
 ```jsx
 class ErorrBoundary extends React.Component {
