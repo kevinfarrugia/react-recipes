@@ -66,14 +66,14 @@ __Note:__ if an event handler calls `setState`, as they often do, and something 
 
 ## What to do about errors
 
-Error boundaries are useful for:
+So far our `ErrorBoundary` component doesn't do anything useful. Let's make it:
 
-* Showing a __fallback UI__ instead of the broken component;
-* Sending the errors to a third-party service, such as [Sentry](https://blog.sentry.io/2017/09/28/react-16-error-boundaries), to keep track of them.
-
-Let's see how we might implement an `ErrorBoundary` component to do these.
+* show a __fallback UI__ instead of the broken component;
+* send the errors to a third-party service, such as [Sentry](https://blog.sentry.io/2017/09/28/react-16-error-boundaries), to keep track of them.
 
 ![Error Boundary Demo](./assets/error-boundary.png)
+
+The code below walks you through the process of building such a component:
 
 ```jsx
 
