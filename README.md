@@ -29,7 +29,7 @@ This section discusses how our component can interact outside its boundaries.
 * [__Handling events outside the component__](./recipes/outside-events.md) the React way with the help of a small library.
 * [__Rendering things outside the component__](./recipes/portals.md) with React's concept of Portals.
 * [__Embedding React components in an existing app__](./recipes/inserting-components.md) shows how to turn some parts of your app over to React.
-* [__The `render` prop pattern__](./recipes/render-prop-pattern.md)
+* [__The render prop pattern__](./recipes/render-prop-pattern.md)
 * [__Error Boundaries__](./recipes/error-boundaries.md) will stop a component that crashed from breaking your whole app.
 
 ### How components talk to each other
