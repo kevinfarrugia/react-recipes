@@ -60,7 +60,7 @@ Errors are __not__ caught in:
 
 Plus, as we learned earlier, it doesn't catch errors within itself. Rather, when [the boundary itself throws an error](https://twitter.com/_youhadonejob1), the error bubbles to the next closest boundary up the component tree.
 
-Errors in asynchronous code event handlers don't _need_ to be caught in Error Boundaries because they won't affect React. You can, however, use the regular JavaScript `try / catch` construct if you want to handle those as well.
+Errors in asynchronous code and event handlers don't _need_ to be caught in error boundaries because they won't break React. You can, however, use the regular JavaScript [`try...catch` statement](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/try...catch) inside the handlers to catch possible erorrs.
 
 __Note:__ if an event handler calls `setState`, as they often do, and something breaks as a result of it, it _will_ get caught by the error boundary.
 
@@ -199,7 +199,7 @@ If we were to include the `FaultyComponent` by itself in our app, a press of our
 </ErrorBoundary>
 ```
 
-## Where to put your Error Boundaries
+## Where to put your error boundaries
 
 You can generally write a single `ErrorBoundary` component and use it in as many placess as you need it. A single boundary that wraps the entire app can be a starting point, but we could also add a few in major areas of the app that can work independently of one another.
 
@@ -258,4 +258,4 @@ ErrorBoundary.defaultProps = {
 
 ## Conclusion
 
-An `ErrorBoundary` is a good addition to our app's menagerie of general-purpose components. Write it once, put it in a few places, and you're already offering a better experience to your users.
+An `ErrorBoundary` is a good addition to your app's menagerie of general-purpose components. Write it once, put it in a few places, and you're already offering a better experience to your users.
