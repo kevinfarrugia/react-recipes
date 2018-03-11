@@ -139,4 +139,4 @@ class Editor extends React.Component {
 
 ---
 
-<sup>1</sup> I coined the term since I haven't found references to this technique, but I'd love to know if it's called something different.
+<sup>1</sup> This is a term I coined since I haven't found references to this particular technique, but I'd love to know if it's documented somewhere, and/or called something different.
