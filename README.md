@@ -1,6 +1,6 @@
 # React Recipes
 
-[This repository](https://github.com/danburzo/react-recipes/) contains some tried-and-testes ways to work with React.
+[This repository](https://github.com/danburzo/react-recipes/) contains some tried-and-tested ways to work with React.
 
 These articles assume _some_ prior knowledge of React, and that you use [JSX](https://reactjs.org/docs/introducing-jsx.html) and ES6 features (such as classes and modules), for which you'll need a tool like [Babel](https://babeljs.io) to transform your code into something that browsers can understand — a bit more tooling around, but it makes the examples clearer.
 
