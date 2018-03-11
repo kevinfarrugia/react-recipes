@@ -29,8 +29,6 @@ This section discusses how our component can interact outside its boundaries.
 * [__Handling events outside the component__](./recipes/outside-events.md) the React way with the help of a small library.
 * [__Rendering things outside the component__](./recipes/portals.md) with React's concept of Portals.
 * [__Embedding React components in an existing app__](./recipes/inserting-components.md) shows how to turn some parts of your app over to React.
-* [__The render prop pattern__](./recipes/render-prop-pattern.md)
-* [__Error Boundaries__](./recipes/error-boundaries.md) will stop a component that crashed from breaking your whole app.
 
 ### How components talk to each other
 
@@ -39,6 +37,8 @@ In this section we explore some patterns of communication between components, an
 * [__The `property` pattern for callbacks__](./recipes/property-pattern.md) helps you handle events more elegantly. 
 * [__Passing React components via props__](./recipes/passing-components.md) outlines some component composition strategies.
 * [__Passing props to `this.props.children`__](./recipes/children-props.md) using `React.Children.map` and `React.cloneElement`.
+* [__The render prop pattern__](./recipes/render-prop-pattern.md)
+* [__Error Boundaries__](./recipes/error-boundaries.md) will stop a component that crashed from breaking your whole app.
 
 ### Performance
 

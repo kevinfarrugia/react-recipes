@@ -2,15 +2,17 @@
 
 ## The gist
 
-When each item in a set of components emits some event, use the `property` pattern to know from which item the event originates, all the while passing a common callback function, instead of creating several separate, item-bound callbacks.
+When each item in a set of elements accepts some callback, use the `property` pattern to know which item the callback comes from, all the while passing a single, shared function, instead of creating several separate, item-bound callbacks.
 
 ## The motivation
 
-A common scenario is to have lists of items with actions associated to each item. A typical example is the infamous _To Do List_, where you have a checkbox next to each item to mark it as _done_.
+A common scenario is to have lists of items with actions associated to each item. A typical example is the (in)famous _To Do List_, where you have a checkbox next to each item to mark it as _done_.
 
 When you need to change the state in the parent component in response to an action triggered by one of its children, you'll quickly find yourself in a bind (tee-hee) — technically, you'll need to pass a separate callback function to each item so that you can later tell which item is the source of the action. 
 
-In fact, [the React docs recommend](https://reactjs.org/docs/handling-events.html) `bind`-ing the callback function to each item separately. It's a bit like Oprah going [_you get a callback! you get a callback!_](https://www.youtube.com/watch?v=hcJAWKdawuM):
+The React documentation page on handling events [suggests](https://reactjs.org/docs/handling-events.html#passing-arguments-to-event-handlers) `bind`-ing the callback function to each item separately. 
+
+A bit like Oprah going [_you get a callback! you get a callback!_](https://www.youtube.com/watch?v=hcJAWKdawuM):
 
 ```jsx
 class ToDoList extends React.Component {
@@ -39,15 +41,15 @@ class ToDoList extends React.Component {
 }
 ```
 
-This solution, while straightforward, has the drawback that every time the parent renders, the children always get _different functions_ as their `onClick` callback. In turn, this will cause useless DOM operations, as React needs to constantly remove the old callbacks and add in the new ones. 
+This solution, while straightforward, has the drawback that every time the parent renders, the children get _new functions_ as their `onClick` callback. For simple DOM elements, this will cause useless DOM operations, as React needs to constantly remove the old callbacks and add in the new ones. And for custom components that you write yourself, using callbacks this way comes with [drawbacks of its own](./purecomponent-caveats.md).
 
-This may not matter if you're building something small. And in the case of simple DOM elements, there isn't much of an alternative to this technique.
+It won't hurt performance too much to use `bind` on plain DOM elements. And if it does become an issue, you can [use `data` attributes](https://reactjs.org/docs/faq-functions.html#example-passing-params-using-data-attributes) to alleviate it.
 
-But for custom components that you write yourself, using callbacks this way comes with [drawbacks of its own](./purecomponent-caveats.md).
+Let's see if we can do something similar for custom components.
 
 ## The approach
 
-To address the drawbacks of the `bind` technique, I like to use what I call the `property` pattern.
+To address the drawbacks of the `bind` technique, we can use something I call _the `property` pattern_<sup>1</sup>.
 
 > Make your components accept an optional `property` prop that gets passed back with all callbacks originating from the component.
 
@@ -137,3 +139,6 @@ class Editor extends React.Component {
 }
 ```
 
+---
+
+<sup>1</sup> I coined the term since I haven't found references to this technique, but I'd love to know if it's called something different.
