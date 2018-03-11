@@ -6,9 +6,9 @@ When each item in a set of elements accepts some callback, use the `property` pa
 
 ## The motivation
 
-A common scenario is to have lists of items with actions associated to each item. A typical example is the (in)famous _To Do List_, where you have a checkbox next to each item to mark it as _done_.
+A common scenario is to have a list of items with one or more actions associated to each item. A typical example is the (in)famous _To Do List_, where you have a checkbox next to each item to mark it as _done_.
 
-When the parent component's state needs to be updated in response to an action triggered by one of its children, we'll quickly find ourselves in a bind (\*cough\*) — technically, we'll need to pass a separate callback function to each item so that we can later tell which item the action originated from. The React docs on handling events [themselves suggest](https://reactjs.org/docs/handling-events.html#passing-arguments-to-event-handlers) `bind`-ing the callback function to each item separately:
+When we need to update the parent component's state in response to an action triggered by one of its children, we'll quickly find ourselves in a bind (\*cough\*) — technically, we need to pass a separate callback function to each item so that we can later tell which item a certain action originated from. The React docs on handling events [themselves suggest](https://reactjs.org/docs/handling-events.html#passing-arguments-to-event-handlers) `bind`-ing the callback function to each item separately:
 
 ```jsx
 class ToDoList extends React.Component {
@@ -41,9 +41,9 @@ My brain's stuck on Oprah going [_You get a callback! You get a callback!_](http
 
 The solution, while straightforward, has the drawback that every time the parent renders, the children get _new functions_ as their `onClick` callback. For simple DOM elements, this will cause useless DOM operations, as React needs to constantly remove the old callbacks and add in the new ones. And for class components, using callbacks this way comes with [drawbacks of its own](./purecomponent-caveats.md).
 
-It won't hurt performance too much to use `bind` on plain DOM elements. And if it does become an issue, you can [use `data` attributes](https://reactjs.org/docs/faq-functions.html#example-passing-params-using-data-attributes) to alleviate it.
+It normally won't hurt performance too much to use `bind` on plain DOM elements; and if it does become an issue, you can [use `data` attributes](https://reactjs.org/docs/faq-functions.html#example-passing-params-using-data-attributes) to alleviate it.
 
-Let's see if we can make similar performance optimizations for class components.
+We can make a similar performance optimization for class components.
 
 ## The approach
 
