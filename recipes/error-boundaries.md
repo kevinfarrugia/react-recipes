@@ -240,7 +240,7 @@ class ErorrBoundary extends React.Component {
 }
 ```
 
-What if we only _occasionally_ need custom fallback components, and are in general happy with a default one? [`defaultProps` lets us plug missing props](./defaultprops.md), so we'll just put a default `render` prop:
+What if we only _occasionally_ need custom fallback components, and are in general happy with a default one? [`defaultProps` lets us plug missing props](./defaultprops.md), so we'll set up a default `render` prop:
 
 ```jsx
 ErrorBoundary.defaultProps = {

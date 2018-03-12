@@ -62,7 +62,7 @@ ReactDOM.render(<MyButton label={new_label}/>, wrapper);
 
 ## Listening to events from the component
 
-Finally, our component may trigger actions as a response to user interaction. To listen to them, just send the outside functions as callbacks via `props`:
+Finally, our component may trigger actions as a response to user interaction. To listen to them, we send the outside functions as callbacks via `props`:
 
 ```jsx
 function shout() {

@@ -1,6 +1,6 @@
 # `why-did-you-update` is your new best friend
 
-Try as you might to make your components as performant as possible — and no, that [doesn't mean just making all your components `PureComponent`s](./purecomponent-caveats.md) — it's quite possible you missed a few spots. Why not accept a helping hand from your new friend, [`why-did-you-update`](https://github.com/maicki/why-did-you-update)?
+Try as you might to make your components as performant as possible — and no, that [doesn't mean making all your components `PureComponent`s](./purecomponent-caveats.md) — it's quite possible you missed a few spots. Why not accept a helping hand from your new friend, [`why-did-you-update`](https://github.com/maicki/why-did-you-update)?
 
 `why-did-you-update` is a small library that you wrap over React while you're developing that lets you know when a component has re-rendered uselessly. 
 
