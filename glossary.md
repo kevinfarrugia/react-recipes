@@ -144,7 +144,115 @@ See [method, lifecycle](#method-lifecycle).
 
 #### merge, shallow
 
+_Merging_ means combining two or more objects. It usually involves a _source_ object and a _destination_ object.
+
+A _shallow merge_ is takes the properties from the source object and copies them over to the _destination_ object, adding to it any new properties and _overwriting_ existing properties with new values.
+
+```js
+const source = {
+	name: 'New Name',
+	address: {
+		city: 'Bucharest'
+	},
+	birthdate: '01/01/1911'
+};
+
+const destination = {
+	name: 'Old Name',
+	address: {
+		city: "Cluj-Napoca",
+		street: "Museum Square"
+	},
+	occupation: 'freelancer'
+};
+
+shallowMerge(destination, source);
+
+/* => 
+{
+	name: 'New Name',
+	address: {
+		city: 'Bucharest'
+	},
+	occupation: 'freelancer'
+}
+ */
+```
+
+In the example above, the _destination_ object:
+
+* gets a new value for the existing string property `name`;
+* gets an entirely new object for the existing object property `address`;
+* gets a new property `birthdate`;
+* retains its value for the property `occupation`.
+
+It's called a _shallow_ merge because it doesn't merge nested properties; instead it overwrites them altogheter (in the example, the `address` property gets overwritten). A merge that also applies to nested properties is called a [deep merge](#merge-deep).
+
+A React component's `setState(newState)` method _shallowly merges_ `newState` into the component's existing [state](#state-react), so you only need to send the properties you want to change to it.
+
 #### merge, deep
+
+_Merging_ means combining two or more objects. It usually involves a _source_ object and a _destination_ object.
+
+A _deep merge_ is takes the properties from the source object and copies them over to the _destination_ object, adding to it any new properties and _merging_ the old values of existing properties with the new values.
+
+```js
+const source = {
+	name: 'New Name',
+	address: {
+		city: 'Bucharest'
+	},
+	birthdate: '01/01/1911'
+};
+
+const destination = {
+	name: 'Old Name',
+	address: {
+		city: "Cluj-Napoca",
+		street: "Museum Square"
+	},
+	occupation: 'freelancer'
+};
+
+deepMerge(destination, source);
+
+/* => 
+{
+	name: 'New Name',
+	address: {
+		city: 'Bucharest',
+		street: "Museum Square"
+	},
+	occupation: 'freelancer'
+}
+ */
+```
+
+In the example above, the _destination_ object:
+
+* gets a new value for the existing string property `name`;
+* gets a value for the existing object property `address` that merges existing value and the new value;
+* gets a new property `birthdate`;
+* retains its value for the property `occupation`.
+
+It's called a _deep_ merge because also _merges_ nested properties instead of overwriting them altogether as in the case of a [shallow-merge](#merge-shallow).
+
+A React component's `setState(newState)` method __does not__ deeply merge `newState` into the component's existing [state](#state-react) (it does so [shallowly](#merge-shallow)). In order to update a nested property in the state, you need to use [a variant of the `setState` function](./recipes/set-state.md) that allows you to build the new state out of the previous one:
+
+```js
+this.setState(
+	previous_state => {
+		return {
+			address: {
+				...previous_state.address,
+				city: 'Bucharest'
+			}
+		}
+	}
+)
+```
+
+The example above updates the nested `address.city` property of the state. 
 
 #### method, lifecycle
 
@@ -169,6 +277,8 @@ See [component, pure](#component-pure).
 See [function, pure](#function-pure).
 
 #### prop
+
+#### props
 
 #### property, static
 
