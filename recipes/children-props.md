@@ -1,6 +1,6 @@
 # Passing props to `this.props.children`
 
-You want your component to augment all its children with some properties. To do so you can use `React.Children.map` and `React.cloneElement`, like so:
+You want your component to augment all its children with some props. To do so you can use `React.Children.map` and `React.cloneElement`, like so:
 
 ```jsx
 

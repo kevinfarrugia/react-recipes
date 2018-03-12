@@ -1,7 +1,176 @@
 # Glossary
 
-__component, functional__ — a _functional component_ is a way to define a component as a simple function that takes props as input and returns a corresponding UI.
+The glossary explains some common React jargon in simpler terms.
 
-__component, pure__ — a component that, for a set of props it receives, generates the same output every time. This is used when talking about components that extend `React.PureComponent`, which is an optimized `React.Component` that only re-renders when the props actually change.
+#### ancestor component
 
-__component, stateless__ — a React component that does not keep any internal state: you don't use `setState` nor read off `this.state`.
+See [component, ancestor](#component-ancestor).
+
+#### Babel
+
+#### callback function
+
+See [function, callback](#function-callback).
+
+#### child component
+
+See [component, child](#component-child).
+
+#### class component
+
+See [component, class](#component-class).
+
+#### descendant component
+
+See [component, descendant](#component-descendant).
+
+#### comparison, deep
+
+#### comparison, shallow
+
+#### component
+
+#### component, ancestor
+
+#### component, child
+
+#### component, class
+
+#### component, descendant
+
+#### component, functional
+
+#### component, higher-order
+
+#### component, parent
+
+#### component, pure
+
+#### component, stateful
+
+#### component, stateless
+
+#### component tree
+
+#### cross-cutting concern
+
+#### deep comparison
+
+See [comparison, deep](#comparison-deep).
+
+#### deep merge
+
+See [merge, deep](#merge-deep).
+
+#### element
+
+#### ES2015
+
+#### ES6
+
+#### event
+
+#### event, native
+
+#### event, synthetic
+
+#### function, callback
+
+#### function, pure
+
+#### function, impure
+
+#### functional component
+
+See [component, functional](#component-functional).
+
+#### higher-order component
+
+See [component, higher-order](#component-higher-order).
+
+#### immutable structure
+
+#### impure function
+
+See [function, impure](#function-impure).
+
+#### JSX
+
+#### lifecycle method
+
+See [method, lifecycle](#method-lifecycle).
+
+#### map
+
+#### merge, shallow
+
+#### merge, deep
+
+#### method, lifecycle
+
+#### mount
+
+_Mounting_ means adding a [component](#component) to the DOM. The opposite operation of removing a component from the DOM is called [unmounting](#unmount).
+
+#### native event
+
+See [event, native](#event-native).
+
+#### parent component
+
+See [component, parent](#component-parent).
+
+#### pure component
+
+See [component, pure](#component-pure).
+
+#### pure function
+
+See [function, pure](#function-pure).
+
+#### prop
+
+#### property, static
+
+#### React
+
+#### Redux
+
+#### shallow comparison
+
+See [comparison, shallow](#comparison-shallow).
+
+#### shallow merge
+
+See [merge, shallow](#merge-shallow).
+
+#### side-effect
+
+#### state
+
+#### state (React)
+
+#### state (Redux)
+
+#### stateful component
+
+See [component, stateful](#component-stateful).
+
+#### stateless component
+
+See [component, stateless](#component-stateless).
+
+#### static property
+
+See [property, static](#property-static).
+
+#### synthetic event
+
+See [event, synthetic](#event-synthetic).
+
+#### unmount
+
+_Unmounting_ means removing a [component](#component) to the DOM. The opposite operation of adding a component to the DOM is called [mounting](#mount).
+
+#### Webpack
+
