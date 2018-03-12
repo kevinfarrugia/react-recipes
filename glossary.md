@@ -38,9 +38,9 @@ The reverse of an ancestor is called a [descendant](#component-descendant). A di
 
 ```jsx
 <A>
-	<B>
-		<C/>
-	</B>
+  <B>
+    <C/>
+  </B>
 </A>
 ```
 
@@ -62,9 +62,9 @@ The reverse of an descendant is called an [ancestor](#component-ancestor). A dir
 
 ```jsx
 <A>
-	<B>
-		<C/>
-	</B>
+  <B>
+    <C/>
+  </B>
 </A>
 ```
 
@@ -150,31 +150,31 @@ A _shallow merge_ is takes the properties from the source object and copies them
 
 ```js
 const source = {
-	name: 'New Name',
-	address: {
-		city: 'Bucharest'
-	},
-	birthdate: '01/01/1911'
+  name: 'New Name',
+  address: {
+    city: 'Bucharest'
+  },
+  birthdate: '01/01/1911'
 };
 
 const destination = {
-	name: 'Old Name',
-	address: {
-		city: "Cluj-Napoca",
-		street: "Museum Square"
-	},
-	occupation: 'freelancer'
+  name: 'Old Name',
+  address: {
+    city: "Cluj-Napoca",
+    street: "Museum Square"
+  },
+  occupation: 'freelancer'
 };
 
 shallowMerge(destination, source);
 
 /* => 
 {
-	name: 'New Name',
-	address: {
-		city: 'Bucharest'
-	},
-	occupation: 'freelancer'
+  name: 'New Name',
+  address: {
+    city: 'Bucharest'
+  },
+  occupation: 'freelancer'
 }
  */
 ```
@@ -198,32 +198,32 @@ A _deep merge_ is takes the properties from the source object and copies them ov
 
 ```js
 const source = {
-	name: 'New Name',
-	address: {
-		city: 'Bucharest'
-	},
-	birthdate: '01/01/1911'
+  name: 'New Name',
+  address: {
+    city: 'Bucharest'
+  },
+  birthdate: '01/01/1911'
 };
 
 const destination = {
-	name: 'Old Name',
-	address: {
-		city: "Cluj-Napoca",
-		street: "Museum Square"
-	},
-	occupation: 'freelancer'
+  name: 'Old Name',
+  address: {
+    city: "Cluj-Napoca",
+    street: "Museum Square"
+  },
+  occupation: 'freelancer'
 };
 
 deepMerge(destination, source);
 
 /* => 
 {
-	name: 'New Name',
-	address: {
-		city: 'Bucharest',
-		street: "Museum Square"
-	},
-	occupation: 'freelancer'
+  name: 'New Name',
+  address: {
+    city: 'Bucharest',
+    street: "Museum Square"
+  },
+  occupation: 'freelancer'
 }
  */
 ```
@@ -235,20 +235,20 @@ In the example above, the _destination_ object:
 * gets a new property `birthdate`;
 * retains its value for the property `occupation`.
 
-It's called a _deep_ merge because also _merges_ nested properties instead of overwriting them altogether as in the case of a [shallow-merge](#merge-shallow).
+It's called a _deep_ merge because also _merges_ nested properties instead of overwriting them altogether as in the case of a [shallow merge](#merge-shallow).
 
-A React component's `setState(newState)` method __does not__ deeply merge `newState` into the component's existing [state](#state-react) (it does so [shallowly](#merge-shallow)). In order to update a nested property in the state, you need to use [a variant of the `setState` function](./recipes/set-state.md) that allows you to build the new state out of the previous one:
+A React component's `setState(newState)` method __does not__ deeply merge `newState` into the component's existing [state](#state-react) (instead, it does so [shallowly](#merge-shallow)). Use [a variant of the `setState` function](./recipes/set-state.md) that allows you to build the new state out based on the existing one to update a nested property:
 
 ```js
 this.setState(
-	previous_state => {
-		return {
-			address: {
-				...previous_state.address,
-				city: 'Bucharest'
-			}
-		}
-	}
+  previous_state => {
+    return {
+      address: {
+        ...previous_state.address,
+        city: 'Bucharest'
+      }
+    }
+  }
 )
 ```
 

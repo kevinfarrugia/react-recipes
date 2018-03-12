@@ -67,7 +67,7 @@ this.setState(
 
 In addition to being asynchronous, setState also gets _batched_, in that React will take a set of `setState` calls and merge them together, if these calls happen in very quick succession (such as when you set the state in response to mouse movement). That prevents your component from being overwhelmed with frequent state updates — you might call `setState` a hundred times and the component gets re-rendered only a handful of times.
 
-When you want to want to be informed of changes in the state, you need to decide whether to strap onto the `setState` firehose and be informed a hundred times, or get informed only as often as your component gets re-rendered. 
+When you want to want to be informed of changes in the state, first decide whether to strap onto the `setState` firehose and be informed a hundred times, or get informed only as often as your component gets re-rendered. 
 
 The firehose option is setting a callback to the `setState` function. 
 
