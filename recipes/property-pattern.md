@@ -39,7 +39,7 @@ class ToDoList extends React.Component {
 
 My brain's stuck on Oprah going [_You get a callback! You get a callback!_](https://www.youtube.com/watch?v=hcJAWKdawuM) every time I do this.
 
-The solution, while straightforward, has the drawback that every time the parent renders, the children get _new functions_ as their `onClick` callback. For simple DOM elements, this will cause useless DOM operations, as React needs to constantly remove the old callbacks and add in the new ones. And for class components, using callbacks this way comes with [drawbacks of its own](./purecomponent-caveats.md).
+The solution, while straightforward, has the drawback that every time the parent renders, the children get _new functions_ as their `onClick` callback. For plain DOM elements, this will cause useless DOM operations, as React needs to constantly remove the old callbacks and add in the new ones. And for class components, using callbacks this way comes with [drawbacks of its own](./purecomponent-caveats.md).
 
 It normally won't hurt performance too much to use `bind` on plain DOM elements; and if it does become an issue, you can [use `data` attributes](https://reactjs.org/docs/faq-functions.html#example-passing-params-using-data-attributes) to alleviate it.
 

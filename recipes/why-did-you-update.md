@@ -100,7 +100,7 @@ First off, make sure you're [not `bind`-ing a function in place](./property-patt
 
 While `why-did-you-update` already offers you a lot to work with, it has some caveats:
 
-* It can't tell that functional components (components defined as simple functions) have updated uselessly ([issue](https://github.com/maicki/why-did-you-update/issues/10)). But functional components update uselessly most of the time, so consider [avoiding them](./components.md) if you're concerned about their performance.
+* It can't tell that functional components (components defined as plain functions) have updated uselessly ([issue](https://github.com/maicki/why-did-you-update/issues/10)). But functional components update uselessly most of the time, so consider [avoiding them](./components.md) if you're concerned about their performance.
 * It doesn't work with components that have a custom `componentDidUpdate` method ([issue](https://github.com/maicki/why-did-you-update/issues/17));
 
 ### Changes in props or state that don't have an effect on the DOM output

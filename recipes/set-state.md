@@ -13,7 +13,7 @@ No notification of change | `setState(object)` | `setState(function)`
 Notified of _each_ change | `setState(object, callback)` | `setState(function, callback)`
 Notified of _batched_ changes | use `componentDidUpdate` | use `componentDidUpdate`
 
-__When your new state does not depend on the previous state,__ you can call `setState` with a simple object that will be _shallowly merged_ into the existing state:
+__When your new state does not depend on the previous state,__ you can call `setState` with a plain object that will be _shallowly merged_ into the existing state:
 
 ```js
 this.setState({ myvalue: 5 })

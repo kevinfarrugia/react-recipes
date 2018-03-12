@@ -2,7 +2,7 @@
 
 A component sometimes needs to listen to events on DOM nodes outside its scope, most frequently on either `document` or `window`. Instead of managing the events manually, via `addEventListener` and `removeEventListener`, we can use the small [`react-event-listener`](https://github.com/oliviertassinari/react-event-listener) library to handle them in a way that feels more natural to React and is clearer and less error-prone. 
 
-Take this simple component which you can move with your mouse:
+Take this small component which you can move with your mouse:
 
 ```jsx
 import EventListener from 'react-event-listener';

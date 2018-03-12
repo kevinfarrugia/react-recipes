@@ -2,10 +2,10 @@
 
 In the most basic sense, all React components do one thing: take some input (via props) and return a piece of UI. A component can be:
 
-* a simple function
+* a plain function
 * a class that extends `React.Component` or `React.PureComponent`
 
-__Simple functions__ take the props as input and return the UI:
+__Plain functions__ take the props as input and return the UI:
 
 ```jsx
 const Button = props => <button>{ props.label }</button>
@@ -23,7 +23,7 @@ class Button extends React.Component {
 
 In terms of performance, we need to be mindful of how React decides to re-render components:
 
-* simple functions are re-rendered every time 
+* plain functions are re-rendered every time 
 * classes extending `React.PureComponent` only re-render when their props or state change
 * classes extending `React.Component` re-render every time by default, but this can be controlled by implementing the `shouldComponentUpdate` method.
 
@@ -31,7 +31,7 @@ In terms of performance, we need to be mindful of how React decides to re-render
 
 With that in mind:
 
-__Use simple functions__ for _simple components that are not used extensively_; just because they're stateless, it doesn't mean they're pure components, or that you benefit from the performance enhancements of `React.PureComponent`. 
+__Use plain functions__ for _simple components that are not used extensively_; just because they're stateless, it doesn't mean they're pure components, or that you benefit from the performance enhancements of `React.PureComponent`. 
 
 (In the future, React may implement optimizations for functional components to address this.)
 
