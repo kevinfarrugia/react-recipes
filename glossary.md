@@ -32,17 +32,53 @@ See [component, descendant](#component-descendant).
 
 #### component, ancestor
 
+We say that a component is an _ancestor_ of another component if it's higher up the [component tree](#component-tree). A direct ancestor is usually called a [parent](#component-parent) component. 
+
+The reverse of an ancestor is called a [descendant](#component-descendant). A direct descendant is called a [child](#component-child).
+
+```jsx
+<A>
+	<B>
+		<C/>
+	</B>
+</A>
+```
+
+In the example above, `A` is an ancestor of `C`; conversely, `C` is a descendant of `A`.
+
+In React parents and children communicate via [props](#prop). Ancestors and descendants can use the [context](#context) API to communicate direcly without having to pass props down the component tree from parent to child.
+
 #### component, child
+
+In React parents and children communicate via [props](#prop).
 
 #### component, class
 
 #### component, descendant
+
+We say that a component is a _descendant_ of another component if it's lower down the [component tree](#component-tree). A direct descendant is usually called a [child](#component-child) component. 
+
+The reverse of an descendant is called an [ancestor](#component-ancestor). A direct ancestor is called a [parent](#component-parent).
+
+```jsx
+<A>
+	<B>
+		<C/>
+	</B>
+</A>
+```
+
+In the example above, `C` is an descendant of `A`; conversely, `A` is an ancestor of `C`.
+
+In React parents and children communicate via [props](#prop). Ancestors and descendants can use the [context](#context) API to communicate direcly without having to pass props down the component tree from parent to child.
 
 #### component, functional
 
 #### component, higher-order
 
 #### component, parent
+
+In React parents and children communicate via [props](#prop).
 
 #### component, pure
 
@@ -51,6 +87,10 @@ See [component, descendant](#component-descendant).
 #### component, stateless
 
 #### component tree
+
+Also called _component hierarchy_.
+
+#### context
 
 #### cross-cutting concern
 
@@ -135,6 +175,8 @@ See [function, pure](#function-pure).
 #### React
 
 #### Redux
+
+#### ref
 
 #### shallow comparison
 
