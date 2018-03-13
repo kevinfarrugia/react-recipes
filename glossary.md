@@ -52,25 +52,50 @@ let arrA = arrB = [1, 2, 3];
 arrA === arrB;
 ```
 
-A more useful comparison might look at whether the objects or arrays have the same values inside:
+A more useful comparison might look at whether the properties of two objects, or the items in two arrays, are the same:
 
 ```js
-equal({ a: 1, b: 2}, {a: 1, b: 2 }) // => true
+equal({ a:1, b:2 }, {a: 1, b: 2 }) // => true
 ```
 
-A _shallow comparison_ looks at the properties of an object, or the items in an array, to see if they all match. It only does so for the top-level properties, hence the name shallow:
+Now the question is, how deep inside objects do we look?
+
+A _shallow comparison_ looks only at the top-level properties to see if they match, hence the name _shallow_:
 
 ```js
-let objA = { a: 1, b: 2};
-let objB = { a: 1, b: 2};
-shallowEqual(objA, objB); // => true
+let objA = { a:1, b:2 };
+let objB = { a:1, b:2 };
 
-let objC = { a: 1, b: {ba: 1, bb: 2 }};
-let objD = { a: 1, b: {ba: 1, bb: 2 }};
+shallowEqual(objA, objB); // => true
+```
+
+```js
+let objC = { 
+  a:1, 
+  b: { 
+    ba:1, 
+    bb:2 
+  } 
+};
+
+let objD = { 
+  a:1, 
+  b: { 
+    ba:1, 
+    bb:2 
+  }
+};
+
 shallowEqual(objC, objD); // => false
 ```
 
-A comparison that looks at nested properties as well is called a [deep comparison](#comparison-deep).
+A comparison that looks at nested properties inside objects is called a [deep comparison](#comparison-deep), but it can be slower to check the properties at all levels.
+
+A shallow comparison is thus useful enough, and fast enough, to be used in React components so that we can tell whether anything was added, removed, or updated in the component's `props` or `state`, and decide whether that warrants a re-render.
+
+`React.PureComponent` is, in fact, just a `React.Component` that implements a shallow comparison between the current `props` and the new `props`, and the current `state` and new `state` in the `shouldComponentUpdate` method. 
+
+It makes it important to use [immutable structures](#immutable-structure).
 
 #### component
 
