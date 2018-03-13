@@ -222,11 +222,23 @@ This is a good fit for the [render prop pattern](./render-prop-pattern.md), with
 </ErrorBoundary>
 ```
 
-To support the pattern we'll make a small change to the boundary's `render()` method:
+To support the pattern we'll make a change to the boundary's `render()` method so that when an error exists, it calls the render prop with the error data.
 
 ```jsx
 class ErorrBoundary extends React.Component {
-  // ...
+  constructor(props) {
+    super(props);
+    this.state = initial_state;
+    this.reset = this.reset.bind(this);
+  }
+
+  componentDidCatch(error, info) {
+    this.setState({ error: error, info: info });
+  }
+
+  reset() {
+    this.setState(initial_state);
+  }
 
   render() {
     let { error, info } = this.state;
@@ -235,8 +247,6 @@ class ErorrBoundary extends React.Component {
     }
     return this.props.children;
   }
-
-  // ...
 }
 ```
 
