@@ -28,6 +28,50 @@ See [component, descendant](#component-descendant).
 
 #### comparison, shallow
 
+We make a _comparison_ to tell if two objects are the same. 
+
+In JavaScript simple values (numbers, strings, etc.) that match are equal:
+
+```js
+"hello" === "hello"
+1 === 1
+null === null
+undefined === undefined
+```
+
+However, Arrays and Objects are only equal if they have the _same reference_ (that is, they point to the same thing), even though they look to have the same values inside.
+
+```js
+{ a: 1, b: 2} !== { a:1, b: 2 };
+[1, 2, 3] !== [1, 2, 3];
+
+let objA = objB = { a: 1, b: 2};
+objA === objB;
+
+let arrA = arrB = [1, 2, 3];
+arrA === arrB;
+```
+
+A more useful comparison might look at whether the objects or arrays have the same values inside:
+
+```js
+equal({ a: 1, b: 2}, {a: 1, b: 2 }) // => true
+```
+
+A _shallow comparison_ looks at the properties of an object, or the items in an array, to see if they all match. It only does so for the top-level properties, hence the name shallow:
+
+```js
+let objA = { a: 1, b: 2};
+let objB = { a: 1, b: 2};
+shallowEqual(objA, objB); // => true
+
+let objC = { a: 1, b: {ba: 1, bb: 2 }};
+let objD = { a: 1, b: {ba: 1, bb: 2 }};
+shallowEqual(objC, objD); // => false
+```
+
+A comparison that looks at nested properties as well is called a [deep comparison](#comparison-deep).
+
 #### component
 
 #### component, ancestor
