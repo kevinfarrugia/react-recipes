@@ -142,6 +142,8 @@ See [method, lifecycle](#method-lifecycle).
 
 #### map
 
+#### memoize
+
 #### merge, shallow
 
 _Merging_ means combining two or more objects. It usually involves a _source_ object and a _destination_ object.
