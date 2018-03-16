@@ -2,103 +2,130 @@
 
 [`setState`](https://reactjs.org/docs/react-component.html#setstate) can be invoked in many ways, and the decision to choose one over the other boils down to two questions:
 
-* _Does the new state depend on the previous state?_
+* _Does the new state depend on the current state?_
 * _Do I need to know I've set the state?_
 
-Here's a cheatsheet below to help you decide:
+Here's a cheatsheet below to help you decide on how to update the state:
 
-Depends on previous state ? | No | Yes
---------------------------- | -- | ---
+Does it depend on the current state? | No | Yes
+------------------------------------ | -- | ---
 No notification of change | `setState(object)` | `setState(function)`
 Notified of _each_ change | `setState(object, callback)` | `setState(function, callback)`
-Notified of _batched_ changes | use `componentDidUpdate` | use `componentDidUpdate`
+Notified of _batched_ changes | `setState(object)` and implement `componentDidUpdate` | `setState(function)` and implement `componentDidUpdate`
 
-__When your new state does not depend on the previous state,__ you can call `setState` with a plain object that will be _shallowly merged_ into the existing state:
+## The flavors of `setState`
+
+### `setState(object)`
+
+__When the new state is independent of the current state,__ you can call `setState` with a plain object that will be [shallowly merged](../glossary.md#merge-shallow) into the current state. This is the simplest form:
 
 ```js
-this.setState({ myvalue: 5 })
+this.setState({ count: 5 })
 ```
 
-__If the new state depends on the previous state,__ always call `setState` with a function. The function gets the previous state as its first parameter, so you can build opon it. The example below simulates a counter that gets incremented with each call to `increment`.
+### `setState(function)`
+
+__When the new state depends on the current state,__ always call `setState` with a function.
+
+`setState` is an asynchronous method. It tells React to update the state _eventually_, but not necessarily right away. So using `this.state` directly to access the current state will not always give us the latest values.
+
+When you call `setState` with a function, the function gets the current state as its first parameter, so you can build opon it. In the example below, a counter gets incremented with each `tick()`:
 
 ```js
-increment() {
-	this.setState(
-		previous_state => {
-			return {
-				myvalue: previous_state.myvalue + 1
-			}
-		}
-	);
+tick() {
+  this.setState(
+    current_state => {
+      return {
+        count: current_state.count + 1
+      }
+    }
+  );
 }
 ```
 
-What if it turns out __your new value coincides with your old value__? Starting with React 16, you can `return null` from the updater function to prevent the state from updating pointlessly. In the example below, our counter is capped at 100:
+What if it turns out __your new state coincides with your current state__? Starting with React 16, you can `return null` from the updater function to cancel a pointless state update. Below, a counter which stops counting at 100:
 
 ```js
-increment() {
-	this.setState(
-		previous_state => {
-			let new_value = Math.min(previous_state.myvalue + 1, 100);
-			return new_value !== previous_state.myvalue ? {
-				myvalue: new_value
-			} : null;
-		}
-	)
+count() {
+  this.setState(
+    current_state => {
+      let new_count = Math.min(current_state.myvalue + 1, 100);
+      return new_count !== current_state.count ? {
+        myvalue: new_count
+      } : null;
+    }
+  )
 }
 ```
 
-__If you want to know when you've updated the state,__ you have (at least) two options:
+The `setState(function)` flavor also _shallowly merges_ the new state into the current state, so you only need to return the properties you want to update.
 
-* either supply a callback to `setState`, or
-* implement the `componentDidUpdate` method in your component
+### `setState(object or function, function)`
 
-`setState` is an asynchronous method, in that it tells React to update the state _eventually_, so reading `this.state` immediately after `setState` will not give you the updated values. Instead, you pass a _callback function_ to the `setState` method, that gets called immediately after your new state is applied:
+__If you want to know when you've updated the state,__ there are two main ways to know:
+
+* either supply a callback as the second paramenter of `setState`, or
+* implement the `componentDidUpdate` method in your component.
+
+I mentioned earlier that `setState` _eventually_ updates the state, but not right away. The example below is not accurate:
 
 ```js
-this.setState(
-	{ myvalue: 5 }, 
-	() => {
-		console.log(this.state.myvalue);
-		// => '5'
-	}
-)
+tick() {
+  this.setState({ count: 5 });
+  console.log('I've updated the state');
+}
 ```
 
-In addition to being asynchronous, setState also gets _batched_, in that React will take a set of `setState` calls and merge them together, if these calls happen in very quick succession (such as when you set the state in response to mouse movement). That prevents your component from being overwhelmed with frequent state updates — you might call `setState` a hundred times and the component gets re-rendered only a handful of times.
+Instead `setState` accepts as a second parameter a _callback function_ that gets called once the state is _actually_ updated:
 
-When you want to want to be informed of changes in the state, first decide whether to strap onto the `setState` firehose and be informed a hundred times, or get informed only as often as your component gets re-rendered. 
+```js
+tick() {
+  this.setState({ count: 5 }, () => {
+    console.log('I've updated the state');
+  });
+}
+```
 
-The firehose option is setting a callback to the `setState` function. 
+In addition to being asynchronous, `setState` calls may also be _batched_, in that React will take a set of `setState` calls and merge them together. That prevents your component from being overwhelmed with frequent state updates — you might call `setState` a hundred times and the component gets updated only once, with the latest state.
 
-__Pros:__
+__Future-proofing:__ Although right now (React 16.2) batching only happens in a handful of cases, future versions of the library may make extensive use of batching for optimizing performance. It's a good rule of thumb to assume all `setState` will be batched.
 
-* Potentially know of _each time_ you set the state, if you need to do so;
-* Listen to only the `setState` calls you want to.
+__Gotcha:__ when `setState` calls with callback functions get batched, these callbacks will be invoked _after_ the states have been merged, so reading `this.state` inside the callback may not give you the value you expect:
 
-__Cons:__
+```js
+componentWillMount() {
+  this.setState({ count: 5 }, () => { console.log(this.state.count) });
+  this.setState({ count: 6 }, () => { console.log(this.state.count) });
+}
+```
 
-* You need to provide a callback to all the places that call `setState` in your component.
-* You may receive a potentially overwhelming amount of updates.
+In the example above, both `console.log`s will output the value `6`, since `setState` calls inside lifecycle methods get batched, and both callbacks are invoked after the `count` went from `5` to `6`.
 
+## The `componentDidUpdate` method
 
-The "debounced" option is implementing the `componentDidUpdate` method in your component:
+Another way of telling that the state has been updated is by implementing the `componentDidUpdate` [lifecycle method](./lifecycle.md). It gets invoked immediately after each render.
 
 ```js
 componentDidUpdate(previous_props, previous_state) {
-	if (this.state.myvalue !== previous_state.myvalue) {
-		console.log(this.state.myvalue);
-	}
+  if (this.state.count !== previous_state.count) {
+    console.log(this.state.count);
+  }
 }
 ```
 
-__Pros:__
+### `setState` callback function vs. `componentDidUpdate`
 
-* Know when the state has been changed from several places in the component;
-* Get a reasonable amount of updates.
+While both the `setState` callback function and the `componentDidUpdate` method can be used to keep track of changes in the state, there are subtle differences to how they work:
 
-__Cons:__
+The `componentDidUpdate` method will only be invoked once, after `render`, even if the update is a result of several (batched) `setState` calls that triggered it. As with `render`, it will only be invoked if `shouldComponentUpdate` returns `true`. 
 
-* The inability to distinguish between the _sources_ of the update, if you only want to react to a _certain_ `setState` call.
+In contrast, callbacks on `setState` will always be triggered, even if the component does not update as a result. They also allow you to discern specific `setState` calls, something that is difficult to do with `componentDidUpdate`. 
 
-(In regards to the above, it may be that you need to rethink your state so that you don't need to distinguish between the _sources_ of the update.)
+### Favor `componentDidUpdate`
+
+In general, you should use the behavior of `componentDidUpdate` to think about observing changes in state. It's easier to for everyone to follow along with your code if it's all in a single method, rather than scattered as callbacks to all the `setState` calls in your component. 
+
+It also benefits from optimizations: the batching of `setState` calls results in a single `componentDidUpdate`; and the `shouldComponentUpdate` method can potentially prevent pointless updates.
+
+However, if the need arises for absolutely knowing about each and every `setState` call, or specific `setState` calls in the code, remember you can use a _callback function_, but be aware of its peculiarities to stay out of trouble.
+
