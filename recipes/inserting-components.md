@@ -12,7 +12,7 @@ And as it turns out, it's refreshingly easy to do it!
 
 ## How to add a React component to your app
 
-## Mounting the component
+### Mounting the component
 
 Any React component will need a DOM element to claim as its own, where it can do its thing:
 
@@ -34,7 +34,7 @@ let wrapper = document.getElementById("my-button-wrapper");
 ReactDOM.render(<MyButton label="Push me"/>, wrapper);
 ```
 
-## Unmounting the component
+### Unmounting the component
 
 To remove the component from the DOM, we need to know the element in which we rendered the component, and call [`ReactDOM.unmountComponentAtNode`](https://reactjs.org/docs/react-dom.html#unmountcomponentatnode):
 
@@ -48,7 +48,7 @@ let wrapper = document.getElementById("my-button-wrapper");
 ReactDOM.unmountComponentAtNode(wrapper);
 ```
 
-## Updating the component
+### Updating the component
 
 The way our React component receives data from the outside world is via its `props`. Whenever we need to update the component with new data — and this is the part that feels magic in its simplicity — we just render it again using the new props, and React knows how to do it efficiently:
 
@@ -62,7 +62,7 @@ let wrapper = document.getElementById("my-button-wrapper");
 ReactDOM.render(<MyButton label={new_label}/>, wrapper);
 ```
 
-## Listening to events from the component
+### Listening to events from the component
 
 Finally, our component may trigger actions as a response to user interaction. To listen to them, we send the outside functions as callbacks via `props`:
 
