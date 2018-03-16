@@ -10,6 +10,8 @@ In practice, it boils down to:
 
 And as it turns out, it's refreshingly easy to do it!
 
+## How to add a React component to your app
+
 ## Mounting the component
 
 Any React component will need a DOM element to claim as its own, where it can do its thing:
@@ -70,6 +72,35 @@ function shout() {
 }
 
 ReactDOM.render(<MyComponent label="Press me" onPress={shout}/>, wrapper);
+```
+
+## How to handle many React components in your app
+
+With the approach above, you can have as many separate React components in your app as you wish. 
+
+A cleaner alternative is to keep a single React component that you manage outside React (our _root_ component), which then spreads its children across various DOM elements on the page with React's [Portals](./portals.md) feature.
+
+Instead of separately managing a `Header` component that goes to the `#header` DOM element, and a `Footer` component that goes to the `#footer` DOM element, let's have a single `App` component (mounted in an `#app` DOM element) that manages both:
+
+```jsx
+class App extends React.Component {
+
+	constructor(props) {
+		super(props);
+
+		// cache the DOM nodes where we'll
+		// place our components via Portals
+		this.header_el = document.getElementById('#header');
+		this.footer_el = document.getElementById('#footer');
+	}
+
+	render() {
+		<div>
+			{ React.createPortal(<Header/>, header_el) }
+			{ React.createPortal(<Footer/>, footer_el) }
+		</div>
+	}
+}
 ```
 
 ## Further reading

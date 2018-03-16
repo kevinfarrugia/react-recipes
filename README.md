@@ -21,7 +21,6 @@ This section is about how to build React components.
 * [__Why immutability is important__](./recipes/immutability.md) clarifies why you want to keep your data immutable when working with React.
 * [__The Component lifecycle__](./recipes/lifecycle.md) describes the methods available on a component, when they're called and what to do with each of them.
 * [__Use the best `setState` style for the job__](./recipes/set-state.md) when updating your component's state. 
-* [__Storing derived data__](./recipes/derived-data.md) shows you how to store additional data on your component.
 * [__Ways to use `defaultProps`__](./recipes/defaultprops.md) to make your code clearer. 
 
 ### The component and the outside world
