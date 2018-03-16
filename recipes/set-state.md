@@ -72,7 +72,7 @@ I mentioned earlier that `setState` _eventually_ updates the state, but not righ
 ```js
 tick() {
   this.setState({ count: 5 });
-  console.log('I've updated the state');
+  console.log("I've updated the state");
 }
 ```
 
@@ -81,7 +81,7 @@ Instead `setState` accepts as a second parameter a _callback function_ that gets
 ```js
 tick() {
   this.setState({ count: 5 }, () => {
-    console.log('I've updated the state');
+    console.log("I've updated the state");
   });
 }
 ```
@@ -129,3 +129,7 @@ It also benefits from optimizations: the batching of `setState` calls results in
 
 However, if the need arises for absolutely knowing about each and every `setState` call, or specific `setState` calls in the code, remember you can use a _callback function_, but be aware of its peculiarities to stay out of trouble.
 
+## Further reading
+
+* https://stackoverflow.com/a/48610973/21613
+* https://github.com/facebook/react/issues/11527#issuecomment-360199710
