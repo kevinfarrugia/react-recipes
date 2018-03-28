@@ -1,5 +1,7 @@
 # The Component lifecycle
 
+__Note:__ Methods marked with ⚠️ will be deprecated starting with React 16.3, and methods marked with 🆕 can be used as their replacement.
+
 The life of a component has three phases:
 
 * __Mounting__ is when the component gets added to the DOM;
@@ -13,7 +15,8 @@ React implements a handful of so-called _lifecycle methods_ that allow you to ob
 When a component is added to the DOM, the following methods are called in succession:
 
 * [`constructor`](https://reactjs.org/docs/react-component.html#constructor)
-* [`componentWillMount`](https://reactjs.org/docs/react-component.html#componentwillmount)
+* 🆕 `static getDerivedStateFromProps`
+* ⚠️ `componentWillMount`
 * [`render`](https://reactjs.org/docs/react-component.html#render)
 * [`componentDidMount`](https://reactjs.org/docs/react-component.html#componentdidmount)
 
@@ -34,7 +37,8 @@ The mounted component will re-render when its state is changed or when it receiv
 As the result of calling `setState` on a component, the following methods are invoked in succession:
 
 * [`shouldComponentUpdate`](https://reactjs.org/docs/react-component.html#shouldcomponentupdate)
-* [`componentWillUpdate`](https://reactjs.org/docs/react-component.html#componentwillupdate)
+* ⚠️ `componentWillUpdate`
+* 🆕 `static getSnapshotBeforeUpdate`
 * [`render`](https://reactjs.org/docs/react-component.html#render)
 * [`componentDidUpdate`](https://reactjs.org/docs/react-component.html#componentdidupdate)
 
@@ -42,11 +46,13 @@ This succession is invoked with any `setState` call, regardless of whether the s
 
 ### The props change
 
-When the component receives its props from a parent component, the `componentWillReceiveProps` method is invoked, followed by the same succession of methods that a change in state would incur:
+When the component receives its props from a parent component, ~~the `componentWillReceiveProps` method is invoked~~ `getDerivedStateFromProps` allows you to map any prop to the state, followed by the same succession of methods that a change in state would incur:
 
-* [`componentWillReceiveProps`](https://reactjs.org/docs/react-component.html#componentwillreceiveprops)
+* 🆕 `static getDerivedStateFromProps`
+* ⚠️ `componentWillReceiveProps`
 * [`shouldComponentUpdate`](https://reactjs.org/docs/react-component.html#shouldcomponentupdate)
-* [`componentWillUpdate`](https://reactjs.org/docs/react-component.html#componentwillupdate)
+* ⚠️ `componentWillUpdate`
+* 🆕 `static getSnapshotBeforeUpdate`
 * [`render`](https://reactjs.org/docs/react-component.html#render)
 * [`componentDidUpdate`](https://reactjs.org/docs/react-component.html#componentdidupdate)
 
@@ -55,3 +61,8 @@ This succession happens any time a mounted component receives props, regardless 
 ## Error handling
 
 * [`componentDidCatch`](https://reactjs.org/docs/react-component.html#componentdidcatch) is emitted whenever there was an error in any of the _child components_, and it's the method used for building [Error Boundaries](./error-boundaries.md) in your app.
+
+## New static methods in React 16.3
+
+* `getDerivedStateFromProps`
+* `getSnapshotBeforeUpdate`

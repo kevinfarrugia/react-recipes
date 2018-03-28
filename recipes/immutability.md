@@ -31,7 +31,7 @@ let new_arr = [...arr, 4]; // Also immutable
 
 You'll naturally ask yourself why you'd want to favor this unfamiliar way of doing things. 
 
-It's a bit like having too many cooks making a dish. Changing an object you've already sent places, or changing it from several places at whim, may cause bugs that are harder to trace and areas of your apps silently falling out of sync.
+It's a bit like having too many cooks making a dish. Changing an object you've already sent places, or  from several places on a whim, may cause bugs that are harder to trace and areas of your apps silently falling out of sync.
 
 But there's a more subtle reason why you want to favor immutability, especially when working with React: 
 
