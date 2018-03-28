@@ -1,7 +1,5 @@
 # The Component lifecycle
 
-__Note:__ Methods marked with ⚠️ will be deprecated starting with React 16.3, and methods marked with 🆕 can be used as their replacement.
-
 The life of a component has three phases:
 
 * __Mounting__ is when the component gets added to the DOM;
@@ -15,8 +13,7 @@ React implements a handful of so-called _lifecycle methods_ that allow you to ob
 When a component is added to the DOM, the following methods are called in succession:
 
 * [`constructor`](https://reactjs.org/docs/react-component.html#constructor)
-* 🆕 `static getDerivedStateFromProps`
-* ⚠️ `componentWillMount`
+* `static getDerivedStateFromProps`
 * [`render`](https://reactjs.org/docs/react-component.html#render)
 * [`componentDidMount`](https://reactjs.org/docs/react-component.html#componentdidmount)
 
@@ -37,8 +34,7 @@ The mounted component will re-render when its state is changed or when it receiv
 As the result of calling `setState` on a component, the following methods are invoked in succession:
 
 * [`shouldComponentUpdate`](https://reactjs.org/docs/react-component.html#shouldcomponentupdate)
-* ⚠️ `componentWillUpdate`
-* 🆕 `static getSnapshotBeforeUpdate`
+* `static getSnapshotBeforeUpdate`
 * [`render`](https://reactjs.org/docs/react-component.html#render)
 * [`componentDidUpdate`](https://reactjs.org/docs/react-component.html#componentdidupdate)
 
@@ -46,13 +42,11 @@ This succession is invoked with any `setState` call, regardless of whether the s
 
 ### The props change
 
-When the component receives its props from a parent component, ~~the `componentWillReceiveProps` method is invoked~~ `getDerivedStateFromProps` allows you to map any prop to the state, followed by the same succession of methods that a change in state would incur:
+When the component receives its props from a parent component, `getDerivedStateFromProps` allows you to map any prop to the state, followed by the same succession of methods that a change in state would incur:
 
-* 🆕 `static getDerivedStateFromProps`
-* ⚠️ `componentWillReceiveProps`
+* `static getDerivedStateFromProps`
 * [`shouldComponentUpdate`](https://reactjs.org/docs/react-component.html#shouldcomponentupdate)
-* ⚠️ `componentWillUpdate`
-* 🆕 `static getSnapshotBeforeUpdate`
+* `static getSnapshotBeforeUpdate`
 * [`render`](https://reactjs.org/docs/react-component.html#render)
 * [`componentDidUpdate`](https://reactjs.org/docs/react-component.html#componentdidupdate)
 
