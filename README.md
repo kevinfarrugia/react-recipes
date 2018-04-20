@@ -1,5 +1,7 @@
 # React Recipes
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/danburzo/react-recipes.svg)](https://greenkeeper.io/)
+
 __Updated for: React 16.3__
 
 [This repository](https://github.com/danburzo/react-recipes/) contains some tried-and-tested ways to work with React. 
