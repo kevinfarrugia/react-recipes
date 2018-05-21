@@ -24,6 +24,10 @@ See [component, class](#component-class).
 
 See [component, descendant](#component-descendant).
 
+#### drilling, prop
+
+Prop drilling refers to passing down a prop from an ancestor to a descendant component by repeatedly passing it from parent to child component. Also called [threading](#threading).
+
 #### comparison, deep
 
 #### comparison, shallow
@@ -390,6 +394,10 @@ See [property, static](#property-static).
 #### synthetic event
 
 See [event, synthetic](#event-synthetic).
+
+#### threading
+
+See [drilling, prop](#drilling-prop).
 
 #### unmount
 
