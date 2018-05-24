@@ -1,16 +1,181 @@
 # The Context API
 
+__Status: WIP__
+
+Context is a neat way to share the application state with many components.
+
+## Some background
+
+Let's take a small example application to understand where Contexts fit.
+
+A quick way to write our app might be to have a single component, with a big old `render()` method:
+
+__Application.js__
+
+```jsx
+import React from 'react';
+
+class Application extends React.Component {
+ 
+  constructor(props) {
+    super(props);
+
+    // set up the initial state
+    this.state = {
+      message: 'Hello World!'
+    };
+  }
+
+  render() {
+    return (
+      <div className='top'>
+        <div className='middle'>
+          <div className='bottom'>
+            { this.state.message }
+          </div'>
+        </div className='middle'>
+      </div>
+    );
+  }
+};
+```
+
+Here we have a _component tree_ made up of three nested `div` elements. Such a setup allows us to place bits of the `state` liberally at whatever level in the component tree. 
+
+As we flesh out our application, we start extracting separate components, and the `div` elements become the components `Top`, `Middle`, and `Bottom`.
+
+__Application.js__
+
+```jsx
+import React from 'react';
+
+const Top = props => <div className='top'>{props.children}</div>
+const Middle = props => <div className='middle'>{props.children}</div>
+const Bottom = props => <div className='bottom'>{props.children}</div>
+
+class Application extends React.Component {
+ 
+  constructor(props) {
+    super(props);
+
+    // set up the initial state
+    this.state = {
+      message: 'Hello World!'
+    };
+  }
+
+  render() {
+    return (
+      <Top>
+        <Middle>
+          <Bottom>
+            { this.state.message }
+          </Bottom>
+        </Middle>
+      </Top>
+    );
+  }
+};
+```
+
+To keep the same structure in the application's `render()` method, the three components accept whatever children we pass to them, and dutifully render them. At this point, we can still puts bits of `state` wherever in our app.
+
+But then we may realize `Top`, `Middle`, and `Bottom` always go together in this sequence, and a better abstraction is to have `Top` encapsulate everything below it. For this to work, we have to start introducing some structure to how the application's state flows around: we start passing it via `props`. 
+
+Our `Top` component will now accept a `message` props and puts it into the `Bottom` component:
+
+__Top.js__
+
+```jsx
+const Top = props => (
+  <div className='top'>
+    <Middle> 
+      <Bottom>{ props.message }</Bottom>
+    </Middle>
+  </div>
+)
+```
+
+__Application.js__
+
+```jsx
+import React from 'react';
+
+class Application extends React.Component {
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+      message: 'Hello World!'
+    };
+  }
+
+  render() {
+    return <A message={this.state.message}/>;
+  }
+}
+```
+
+But then we want component `B` to _also_ encapsulate everything below it, so we change `A` to be:
+
+```jsx
+const A = props => (
+  <div className='A'>
+    <B message={props.message} />
+  </div>
+);
+```
+
+and `B` to be:
+
+```jsx
+const B = props => (
+  <div className='B'>
+    <C>{props.message}</C>
+  </div>
+);
+```
+
+And then of course `C` wants to be part of the fun, and encapsulate everything below it. `B` becomes:
+
+```jsx
+const B = props => (
+  <div className='B'>
+    <C message={props.message}/>
+  </div>
+);
+```
+
+And finally `C`:
+
+```jsx
+const C = props => (
+  <div className='C'>
+    { props.message }
+  </div>
+);
+```
+
+When did this:
+
+```jsx
+
+```
+
+become hotter than this?
+
+```jsx
+
+```
+
 React components normally talk only when they're in a parent-child relationship. Parents pass down props to their children, and children talk back to their parents via callback functions they receive as props.
 
 Passing a prop several levels down in the component tree, from a component to its grandchild, or grand-grandchild, requires the collaboration of all the components along the way: we repeatedly pass the prop from parent to child, until in reaches the destination. (This is sometimes called _prop drilling_.)
 
+In our example, components `A` and `B` dutifully accept a `message` prop to pass along until it reaches `C`:
+
 ```jsx
-class Grandma extends React.Component {
-  render() {
-    <Mother></Mother>
-  }
-}
-```
+const A = props => <B message=
 
 This is fine for a while, but can become tedious. Furthermore, it's impossible to pass through components that return `false` in their `shouldComponentUpdate` method for a particular update: the prop drilling stops in its track.
 
