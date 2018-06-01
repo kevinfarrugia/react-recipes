@@ -35,6 +35,7 @@ As the result of calling `setState` on a component, the following methods are in
 
 * [`shouldComponentUpdate`](https://reactjs.org/docs/react-component.html#shouldcomponentupdate)
 * `static getSnapshotBeforeUpdate`
+* `static getDerivedStateFromProps`
 * [`render`](https://reactjs.org/docs/react-component.html#render)
 * [`componentDidUpdate`](https://reactjs.org/docs/react-component.html#componentdidupdate)
 

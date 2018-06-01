@@ -1,6 +1,6 @@
 # The Context API
 
-__Status: WIP__
+_Status: WIP_
 
 Context is a neat way to share the application state with many components.
 
@@ -154,18 +154,6 @@ const C = props => (
     { props.message }
   </div>
 );
-```
-
-When did this:
-
-```jsx
-
-```
-
-become hotter than this?
-
-```jsx
-
 ```
 
 React components normally talk only when they're in a parent-child relationship. Parents pass down props to their children, and children talk back to their parents via callback functions they receive as props.
