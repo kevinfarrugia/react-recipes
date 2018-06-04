@@ -76,9 +76,9 @@ While you can set up your project's structure in many ways, let's keep it simple
 
 ```
 my-project
-	dist/
-	public/
-	src/
+  dist/
+  public/
+  src/
 ```
 
 * __src__ will hold the JS source code
@@ -100,39 +100,161 @@ __public/index.html__
 
 ```html
 <!DOCTYPE html>
-	<html>
-		<head>
-			<meta charset='utf-8'/>
-			<title>My project</title>
-		</head>
-		<body>
-			<div id='app'>
-				<!-- Our React App goes here -->
-			</div>
+  <html>
+    <head>
+      <meta charset='utf-8'/>
+      <title>My project</title>
+    </head>
+    <body>
+      <div id='app'>
+        <!-- Our React App goes here -->
+      </div>
 
-			<script src='../src/index.js'></script>
-		</body>
+      <script src='../src/index.js'></script>
+    </body>
 </html>
 ```
 
 If you open `index.html` in a browser and open the Developer Tools, you should see the `Hello World` message. This means we've properly linked the script inside the HTML file. 
 
+Let's now configure Parcel to process our files so we can start writing some modules. 
+
 ### Add scripts to `package.json`
+
+In `package.json` we add two scripts:
+
+* _start_ will make Parcel watch for changes in our source files and continously build our bundle
+* _build_ will build an optimized version of our code that we can then deploy to a server.
 
 ```js
 {
-	...
-	"scripts": {
-		"start": "parcel index.html",
-		"build": "parcel build index.html"
-	}
-	...
+  ...
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  }
+  ...
 }
 ```
 
-__Create your React App__
+You run these scripts via `yarn` like so:
 
-__Add build folder to .gitignore__
+```bash
+yarn start
 
-__TODO publish to github pages__
+# You should see something like this in your console:
+# ---------------------------------------------------
+# yarn run v1.7.0
+# $ parcel public/index.html
+# Server running at http://localhost:1234 
+# ✨  Built in 3.23s.
+```
 
+Opening [http://localhost:1234](http://localhost:1234) in your browser lets you access your app. When you make changes to your source files, the app automatically reloads with the changes.
+
+```bash
+yarn build
+
+# You should see something like this in your console:
+# ---------------------------------------------------
+# yarn run v1.7.0
+# $ parcel build public/index.html
+# ✨  Built in 2.76s.
+# dist/src.5e4eefaf.js     102.63 KB    8.12s
+# dist/index.html              197 B      9ms
+# dist/src.c0271552.css         43 B     12ms
+# dist/src.3e396d5e.map          0 B    8.12s
+# ✨  Done in 3.33s.
+```
+
+This builds your whole app in the `dist/` folder, the content of which you can then take and put up on a server.
+
+Now that we've set up Parcel, we can finally start writing Fancy JavaScript™. 
+
+### Create your React App
+
+Under `src/`, we create a `components/` folder and write a simple _Hello world_ React component:
+
+__src/components/App.js__
+
+```jsx
+import React from 'react';
+
+class App extends React.Component {
+  render() {
+    return "Hello world!";
+  }
+}
+
+export default App;
+```
+
+And then, in our _index.js_ file, we import the module containing our React component and [add it to our page](./inserting-components.md).
+
+__src/index.js__
+
+```jsx
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+import App from './components/App';
+
+ReactDOM.render(<App/>, document.getElementById('app'));
+```
+
+If we head back to the browser, the app should now display the message _Hello world!_ on-screen, which means we've successfully set up a React project. 🙌
+
+### A dash of CSS
+
+To demonstrate how to load other types of files, such as CSS, let's make a minimal stylesheet for our app:
+
+__src/style.css__
+
+```css
+body {
+  font-family: sans-serif;
+}
+```
+
+In our main JS file, _index.js_, we import the CSS much like we would a normal JS module:
+
+__src/index.js__
+
+```jsx
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+// importing CSS files in your app will create a CSS bundle
+// that gets automatically included in your index.html file.
+import './style.css';
+
+import App from './components/App';
+
+ReactDOM.render(<App/>, document.getElementById('app'));
+```
+
+The browser should now show us the same _Hello World!_ message, but now with a different font.
+
+That, my friend, is a wrap! 🙌
+
+## Alternatives
+
+I hope you found this article, at the end of which we have pretty much all we need to start playing with React, not to long or hard to follow. There are other ways to get a similar result:
+
+* Use the [`create-react-app`](https://github.com/facebook/create-react-app) command-line tool to set up a React environment even faster; it's frankly a great experience, with the caveat that it comes with a bunch of extras that make it harder to discern what's going on when you're first starting out.
+* Take the scenic route and walk through this [excellent article](https://blog.usejournal.com/creating-a-react-app-from-scratch-f3c693b84658) on setting up React with Babel and Webpack, if you prefer to expose yourself to some of the unsightly configuration that Parcel handles for you.
+
+## A couple of notes on Git / GitHub
+
+Not to stretch this article further, but a few quick notes if you put your project on GitHub.
+
+First off, you should create a `.gitignore` file in your root folder to which you add the following lines:
+
+```
+node_modules/
+dist/
+```
+
+This instructs Git not to include the two folders in its version control. We don't want these hanging around on Github.
+
+And if you're curious on how to publish the content of the `dist/` folder to GitHub Pages, check out the [`gh-pages`](https://npmjs.org/package/gh-pages) package.
