@@ -4,7 +4,7 @@ __Updated for: React 16.3__
 
 [This repository](https://github.com/danburzo/react-recipes/) contains some tried-and-tested ways to work with React. 
 
-These articles assume _some_ prior knowledge of React, and that you use [JSX](https://reactjs.org/docs/introducing-jsx.html) and ES6 features (such as classes and modules), for which you'll need a tool like [Babel](https://babeljs.io) to transform your code into something that browsers can understand — a bit more tooling around, but it makes the examples clearer.
+These articles assume _some_ prior knowledge of React, and that you use [JSX](https://reactjs.org/docs/introducing-jsx.html) and ES6 features (such as classes and modules). See [Setting up shop](./recipes/setting-up-shop.md) for a quick way to get started.
 
 It doesn't touch libraries you sometimes find in the same sentence with React, such as [Redux](https://redux.js.org), because you can built lots of things [without it](https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367).
 
@@ -13,6 +13,10 @@ It also doesn't cover React style (naming, indentation, et cetera). If that is y
 Finally, these articles [reflect my current understanding](https://github.com/danburzo/as-we-learn) of how React works and while I strive to get the clearest picture possible, some aspects may still be inaccurate. If you spot any errors or dubious claims, I'd appreciate an issue or pull request!
 
 ## Table of contents
+
+### Getting started
+
+* [__Setting up shop__](./recipes/setting-up-shop.md) walks you through a (mostly) painless way to start working on a React project with JSX and fancy JavaScript features.
 
 ### Life inside a component
 
