@@ -1,6 +1,6 @@
 # Setting up shop: Start a React project from scratch
 
-Before we can actually start writing React code, we need to set a few things up. Since we'll be relying on JSX syntax and more recent additions to JavaScript (such as modules and classes), we can't just include our code and libraries in `<script>` tags and start working. We need to transform our code before it works in browsers.
+Before we can actually start writing React code, we need to set a few things up. Since we'll be relying on JSX syntax and more recent additions to JavaScript (such as modules and classes), we can't just include our code and libraries in `<script>` tags and call it a day. We need to transform our code before it works in browsers.
 
 In particular, any React project needs:
 
@@ -12,7 +12,7 @@ While Webpack is the more established bundler, setting it up is tedious and erro
 
 I don't want to spend my life configuring build tools, and that probably makes the two of us; we'll therefore use Parcel.
 
-__Note:__ I've written down what I did on a macOS setup, but it can be tweaked to any operating system with a bit of work.
+__Note:__ I've written down the steps I made on a macOS setup, but it can be tweaked to any operating system.
 
 ## Prerequisites
 
@@ -235,13 +235,13 @@ ReactDOM.render(<App/>, document.getElementById('app'));
 
 The browser should now show us the same _Hello World!_ message, but now with a different font.
 
-That, my friend, is a wrap! 🙌
+And that, friends, is a wrap! 🙌
 
 ## Alternatives
 
-I hope you found this article, at the end of which we have pretty much all we need to start playing with React, not to long or hard to follow. There are other ways to get a similar result:
+I hope you found this article, at the end of which we have pretty much all we need to start playing with React, not too long, or hard to follow. There are other ways to get a similar result:
 
-* Use the [`create-react-app`](https://github.com/facebook/create-react-app) command-line tool to set up a React environment even faster; it's frankly a great experience, with the caveat that it comes with a bunch of extras that make it harder to discern what's going on when you're first starting out.
+* Use the [`create-react-app`](https://github.com/facebook/create-react-app) command-line tool to set up a React environment even faster; it's frankly a great experience, with the caveat that it comes with a bunch of extras that make it harder to discern what's going on when you're first starting out. 
 * Take the scenic route and walk through this [excellent article](https://blog.usejournal.com/creating-a-react-app-from-scratch-f3c693b84658) on setting up React with Babel and Webpack, if you prefer to expose yourself to some of the unsightly configuration that Parcel handles for you.
 
 ## A couple of notes on Git / GitHub
