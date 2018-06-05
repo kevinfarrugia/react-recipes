@@ -1,8 +1,8 @@
 # Setting up shop: Start a React project from scratch
 
-Before we can actually start writing React code, we need to set a few things up. Since we'll be relying on JSX syntax and more recent additions to JavaScript (such as modules and classes), we can't just include our code and libraries in `<script>` tags and call it a day. We need to transform our code before it works in browsers.
+Before we can actually start writing React code, we need to set a few things up. Since we'll be relying on JSX syntax and more recent additions to JavaScript (such as modules and classes), we can't just include our code and libraries in `<script>` tags and call it a day<sup>1</sup>. 
 
-In particular, any React project needs:
+We need to transform our code before it works in browsers. In particular, any React project needs:
 
 __A tool to _transpile_ your code__. A transpiler transforms your code from JSX / fancy JavaScript to normal JavaScript that works in browsers; [Babel](https://babeljs.io) and [Bublé](https://buble.surge.sh/guide/) are some popular choices.
 
@@ -274,3 +274,7 @@ dist/
 This instructs Git not to include the two folders in its version control. We don't want these hanging around on Github.
 
 And if you're curious on how to publish the content of the `dist/` folder to GitHub Pages, check out the [`gh-pages`](https://npmjs.org/package/gh-pages) package.
+
+---
+
+<sup>1</sup> Well, [technically you can](https://reactjs.org/docs/try-react.html#minimal-html-template), but it's not something you should inflict on your website visitors.
