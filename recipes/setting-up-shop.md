@@ -21,10 +21,10 @@ Like many other JavaScript projects, React is distributed as [NPM packages](http
 To start a React project we need:
 
 * A command-line such as the Terminal in macOS
-* Node.js and NPM (if you installed Node, it comes with the `npm` command-line tool)
-* Yarn (Optionally)
+* [Node.js](https://nodejs.org/en/) and NPM (if you installed Node, it comes with the `npm` command-line tool)
+* [Yarn](https://yarnpkg.com) (Optionally)
 
-__Note:__ The instructions below include commands run with Yarn, which is an alternative to the `npm` command-line tool that's a bit nicer to work with in my opinion. [The Yarn documentation](https://yarnpkg.com/lang/en/docs/migrating-from-npm/#toc-cli-commands-comparison) shows the `npm` equivalents to the various `yarn` commands, if you plan on using it instead.
+__Note:__ The instructions below include commands run with `yarn`, which is an alternative to the `npm` command-line tool that's a bit nicer to work with in my opinion. [The Yarn documentation](https://yarnpkg.com/lang/en/docs/migrating-from-npm/#toc-cli-commands-comparison) shows the `npm` equivalents to the various `yarn` commands, if you plan on using it instead.
 
 ## Setting up
 
@@ -45,7 +45,7 @@ yarn init --yes
 
 __Note__: The `--yes` flag instructs Yarn to skip all the questions and just initialize a run-of-the-mill `package.json` that looks like this:
 
-```js
+```json
 {
   "name": "my-project",
   "version": "1.0.0",
@@ -53,6 +53,8 @@ __Note__: The `--yes` flag instructs Yarn to skip all the questions and just ini
   "license": "MIT"
 }
 ```
+
+(You can also just copy the JSON file above and create the file manually.)
 
 ### Install React and ReactDOM
 
@@ -72,18 +74,21 @@ yarn add --dev parcel-bundler
 
 ### Create a project structure
 
-While you can set up your project's structure in many ways, let's keep it simple and just add a few folders:
+While you can set up your project's structure in many ways, let's keep it simple and just add a couple of folders:
 
 ```
 my-project
   dist/
-  public/
   src/
 ```
 
-* __src__ will hold the JS source code
-* __public__ holds the static files (HTML, CSS, SVG, images, etc.)
-* __dist__ is where our app will get built
+__src/__ will hold our application's source code: HTML, JavaScript, CSS, SVG, images and all we want to include. The __dist/__ folder is where our app will get built, so we can deploy it to a server.
+
+To make these folders, we can run:
+
+```bash
+mkdir src dist
+```
 
 Let's make an _index.js_ file inside our `src` folder:
 
@@ -94,9 +99,9 @@ __src/index.js__
 console.log('Hello world');
 ```
 
-Let's make an _index.html_ file inside the `public` folder, and fetch our `index.js` script inside it:
+And a _index.html_ file as well, where we fetch our `index.js` script:
 
-__public/index.html__
+__src/index.html__
 
 ```html
 <!DOCTYPE html>
@@ -110,12 +115,12 @@ __public/index.html__
         <!-- Our React App goes here -->
       </div>
 
-      <script src='../src/index.js'></script>
+      <script src='./index.js'></script>
     </body>
 </html>
 ```
 
-If you open `index.html` in a browser and open the Developer Tools, you should see the `Hello World` message. This means we've properly linked the script inside the HTML file. 
+If you open `index.html` in a browser and open the Developer Tools, you should see the `Hello World` message in the console. This means we've properly linked the script inside the HTML file. 
 
 Let's now configure Parcel to process our files so we can start writing some modules. 
 
@@ -126,14 +131,25 @@ In `package.json` we add two scripts:
 * _start_ will make Parcel watch for changes in our source files and continously build our bundle
 * _build_ will build an optimized version of our code that we can then deploy to a server.
 
-```js
+__package.json__
+
+```json
 {
-  ...
+  "name": "my-project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+  	"react": "^16.4.0",
+  	"react-dom": "^16.4.0"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.8.1"
+  },
   "scripts": {
-    "start": "parcel index.html",
-    "build": "parcel build index.html"
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html"
   }
-  ...
 }
 ```
 
@@ -145,7 +161,7 @@ yarn start
 # You should see something like this in your console:
 # ---------------------------------------------------
 # yarn run v1.7.0
-# $ parcel public/index.html
+# $ parcel src/index.html
 # Server running at http://localhost:1234 
 # ✨  Built in 3.23s.
 ```
@@ -158,7 +174,7 @@ yarn build
 # You should see something like this in your console:
 # ---------------------------------------------------
 # yarn run v1.7.0
-# $ parcel build public/index.html
+# $ parcel build src/index.html
 # ✨  Built in 2.76s.
 # dist/src.5e4eefaf.js     102.63 KB    8.12s
 # dist/index.html              197 B      9ms
