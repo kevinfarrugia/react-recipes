@@ -4,7 +4,7 @@ __Updated for: React 16.3__
 
 [This repository](https://github.com/danburzo/react-recipes/) contains some tried-and-tested ways to work with React, along with in-depth explanations of how certain aspects of the library work.
 
-It assumes _some_ prior knowledge of React (hopefully I'll be able to include introductory articles at some point), and that you use [JSX](https://reactjs.org/docs/introducing-jsx.html) and Fancy Javascript, such as classes and modules. These features require a bit of initial setup. Although they're widely touted as _not necessary_, foregoing JSX and ES6 modules is a... less-than-stellar development experience; instead, see [Setting up shop](./recipes/setting-up-shop.md) for a quick way to get started on a React project with all the goodness.
+It assumes _some_ prior knowledge of React (hopefully I'll be able to include introductory articles at some point), and that you use [JSX](https://reactjs.org/docs/introducing-jsx.html) and Fancy Javascript, such as classes and modules. These features require a bit of initial setup. Although they're widely touted as _not necessary_, forgoing JSX and ES6 modules is a... less-than-stellar development experience; instead, see [Setting up shop](./recipes/setting-up-shop.md) for a quick way to get started on a React project with all the goodness.
 
 It doesn't touch libraries you sometimes find in the same sentence with React, such as [Redux](https://redux.js.org), because you can build lots of things [without it](https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367), using just the plain React API. Some articles do however point to useful libraries and tools, when they don't entail learning a host of new concepts or seem like they're celebrating complexity and over-the-top abstractions.
 
@@ -63,3 +63,7 @@ Then there are other React pattern repositories you might find interesting:
 * [react-in-patterns](https://github.com/krasimir/react-in-patterns)
 * [react-playbook](https://github.com/kylpo/react-playbook)
 * [react-bits](https://github.com/vasanthk/react-bits)
+
+Assorted articles from around the web:
+
+* [React Tutorial: A Comprehensive Guide to learning React.js in 2018](https://tylermcginnis.com/reactjs-tutorial-a-comprehensive-guide-to-building-apps-with-react/) by Tyler McGinnis
