@@ -16,7 +16,7 @@ Finally, but most importantly, these articles [reflect my current understanding]
 
 ### Getting started
 
-* [__Setting up shop__](./recipes/setting-up-shop.md) walks you through a (mostly) painless way to start working on a React project with JSX and fancy JavaScript features.
+* [__Setting up shop__](./recipes/setting-up-shop.md) walks you through setting up a React project with JSX and Fancy JavaScript without losing your soul in the process.
 
 ### Life inside a component
 
@@ -55,9 +55,9 @@ In this section we explore some patterns of communication between components, an
 
 ## Further reading
 
-[The official React website](https://reactjs.org/) has comprehensive guides, tutorials, and links to useful tools. Spend an afternoon reading the guides cover to cover and you'll get a much firmer grasp on how to use React efficiently.
+[The official React website](https://reactjs.org/) has comprehensive guides, tutorials, and links to useful tools. Spend an afternoon to a fortnight reading the guides cover to cover and you'll get a much firmer grasp on how to use React efficiently.
 
-Other React pattern repositories:
+Then there are other React pattern repositories you might find interesting:
 
 * [reactpatterns.com](http://reactpatterns.com/)
 * [react-in-patterns](https://github.com/krasimir/react-in-patterns)

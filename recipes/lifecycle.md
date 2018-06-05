@@ -14,7 +14,7 @@ Components defined as functions are not aware of these phases. Whenever React ne
 
 Class-based elements, on the other hand, afford more control. Besides being able to hold an internal `state`, you can define a handful of so-called _lifecycle methods_ with which to observe and direct the component's behavior in each of these three phases. 
 
-Below we discuss each of the phases and the lifecycle methods relevant to them.
+Below we discuss each of the phases and the lifecycle methods relevant to them. For a more concise visual representation, see [this interactive diagram](http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/).
 
 ## The Mounting phase
 
