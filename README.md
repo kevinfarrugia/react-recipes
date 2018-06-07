@@ -6,7 +6,7 @@ __Updated for: React 16.3__
 
 It assumes _some_ prior knowledge of React (hopefully I'll be able to include introductory articles at some point), and that you use [JSX](https://reactjs.org/docs/introducing-jsx.html) and Fancy Javascript, such as classes and modules. These features require a bit of initial setup. Although they're widely touted as _not necessary_, forgoing JSX and ES6 modules is a... less-than-stellar development experience; instead, see [Setting up shop](./recipes/setting-up-shop.md) for a quick way to get started on a React project with all the goodness.
 
-It doesn't touch libraries you sometimes find in the same sentence with React, such as [Redux](https://redux.js.org), because you can build lots of things [without it](https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367), using just the plain React API. Some articles do however point to useful libraries and tools, when they don't entail learning a host of new concepts or seem like they're celebrating complexity and over-the-top abstractions.
+I try to stick to the plain React API. Some articles do however point to useful libraries and tools when they're easy to pick up on and don't introduce too many new concepts.
 
 It also doesn't cover React style (naming, indentation, et cetera). If that is your thing, feel free to peruse the [Airbnb React/JSX Style Guide](https://github.com/airbnb/javascript/tree/master/react).
 
