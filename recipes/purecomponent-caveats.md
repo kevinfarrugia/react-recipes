@@ -9,3 +9,19 @@ __Are you sending functions (callbacks)__ to your component? Make sure you're no
 __Are you sending children__ to your component? Remember that `children` is still a prop. Unless you're sending a string as the only child for the component, this property _will always change_. Drop `React.PureComponent` in this case.
 
 __Are you sending React components__ on any props? These props will always change, so you're better off dropping `React.PureComponent`.
+
+## Arrays, objects, booleans
+
+TBD.
+
+```js
+const __emptyArray = [];
+const __emptyObject = {};
+
+// also discuss:
+prop={inferredBoolean} // vs.
+prop={Boolean(inferredBoolean)}
+
+// e.g. inferredBoolean = enabled && arr.length;
+// many different things are truthy
+```
