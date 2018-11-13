@@ -1,6 +1,6 @@
 # Ways to use `defaultProps`
 
-[`defaultProps`](https://reactjs.org/docs/react-component.html#defaultprops) is an object you set on your component class to provide default values for your properties. If your component gets initialized without a property (meaning its value is `undefined`), you'll get its default value instead. Note that `null` is a valid value that will not fall back to the default.
+[`defaultProps`](https://reactjs.org/docs/react-component.html#defaultprops) is an object you set on your component to provide default values for your properties. If your component gets initialized without a property (meaning its value is `undefined`), you'll get its default value instead. Note that `null` is a valid value that will not fall back to the default.
 
 The main purpose of `defaultProps` is to plug any “holes” in your properties. 
 
