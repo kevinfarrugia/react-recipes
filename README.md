@@ -57,6 +57,8 @@ In this section we explore some patterns of communication between components, an
 
 [The official React website](https://reactjs.org/) has comprehensive guides, tutorials, and links to useful tools. Spend an afternoon to a fortnight reading the guides cover to cover and you'll get a much firmer grasp on how to use React efficiently.
 
+On his [Overreacted](https://overreacted.io/) blog, Dan Abramov goes on interesting deep-dives into how React works under the hood.
+
 Then there are other React pattern repositories you might find interesting:
 
 * [reactpatterns.com](http://reactpatterns.com/)
