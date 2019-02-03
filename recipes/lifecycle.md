@@ -58,7 +58,7 @@ class Counter extends React.Component {
 }
 ```
 
-The constructor receives the `prop` as its only argument, and the first line needs to be `super(props)`. This calls the constructor that's built into `React.Component` and should always be the first thing you do in your component's constructor.
+The constructor receives the `props` as its only argument. The first thing you need to do in the constructor is to call `super(props)`. (If you're curious why that's the case, Dan Abramov [explains it here](https://overreacted.io/why-do-we-write-super-props/)).
 
 After calling the constructor, React does an _initial render_ that consists of the following methods:
 

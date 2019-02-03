@@ -43,6 +43,8 @@ which results in a plain object:
 }
 ```
 
+> 📖 The `$$typeof` property exists to improve React's resilience against malicious markup. [Dan Abramov explains](https://overreacted.io/why-do-react-elements-have-typeof-property/).
+
 ## A DOM element with children
 
 ### Single child

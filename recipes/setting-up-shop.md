@@ -8,20 +8,18 @@ __A tool to _transpile_ your code__. A transpiler transforms your code from JSX 
 
 __A tool to _bundle_ your JavaScript modules__, and any code you import from npm modules, into a single JavaScript file. They usually have a way to communicate with the _transpiler_ so that your JavaScript is transformed to browser-compatible code. They will also handle other types of files, such as HTML, CSS, JSON, or SVG, so you can import them in your project as you would normal JS modules. [Webpack](https://webpack.js.org/), [Browserify](http://browserify.org/), [Rollup](https://rollupjs.org/), and [Parcel](https://parceljs.org/) are examples of bundlers.
 
-While Webpack is the more established bundler, setting it up is tedious and error-prone. Parcel, on the other hand, is a bundler that needs no configuration and works out-of-the-box for most things.
+Parcel, a bundler that works out-of-the-box for most things we need, is a good choice for quickly setting up a React playground.
 
-I don't want to spend my life configuring build tools, and that probably makes the two of us; we'll therefore use Parcel.
-
-__Note:__ I've written down the steps I made on a macOS setup, but it can be tweaked to any operating system.
+__Note:__ I've written down the steps I made on macOS, but it should be similar on other operating systems.
 
 ## Prerequisites
 
-Like many other JavaScript projects, React is distributed as [NPM packages](https://docs.npmjs.com/getting-started/what-is-npm); You add it to your project with the command line.
+Like many other JavaScript projects, React is distributed as [npm packages](https://docs.npmjs.com/getting-started/what-is-npm); You add it to your project with the command line.
 
 To start a React project we need:
 
 * A command-line such as the Terminal in macOS
-* [Node.js](https://nodejs.org/en/) and NPM (if you installed Node, it comes with the `npm` command-line tool)
+* [Node.js](https://nodejs.org/en/) and npm (if you installed Node, it comes with the `npm` command-line tool)
 * [Yarn](https://yarnpkg.com) (Optionally)
 
 __Note:__ The instructions below include commands run with `yarn`, which is an alternative to the `npm` command-line tool that's a bit nicer to work with in my opinion. [The Yarn documentation](https://yarnpkg.com/lang/en/docs/migrating-from-npm/#toc-cli-commands-comparison) shows the `npm` equivalents to the various `yarn` commands, if you plan on using it instead.
@@ -255,10 +253,10 @@ And that, friends, is a wrap! 🙌
 
 ## Alternatives
 
-I hope you found this article, at the end of which we have pretty much all we need to start playing with React, not too long, or hard to follow. There are other ways to get a similar result:
+I hope you found this article, at the end of which we have pretty much all we need to start playing with React, not too long, nor hard to follow. There are other ways to get a similar result:
 
 * Use the [`create-react-app`](https://github.com/facebook/create-react-app) command-line tool to set up a React environment even faster; it's frankly a great experience, with the caveat that it comes with a bunch of extras that make it harder to discern what's going on when you're first starting out. 
-* Take the scenic route and walk through this [excellent article](https://blog.usejournal.com/creating-a-react-app-from-scratch-f3c693b84658) on setting up React with Babel and Webpack, if you prefer to expose yourself to some of the unsightly configuration that Parcel handles for you.
+* Take the scenic route and walk through this [excellent article](https://blog.usejournal.com/creating-a-react-app-from-scratch-f3c693b84658) on setting up React with Babel and Webpack, if you prefer to expose yourself to some of the unsightly configuration that Parcel sweeps under the rug for you.
 
 ## A couple of notes on Git / GitHub
 
@@ -271,10 +269,10 @@ node_modules/
 dist/
 ```
 
-This instructs Git not to include the two folders in its version control. We don't want these hanging around on Github.
+This instructs Git not to include the two folders in version control. We don't want these hanging around on Github.
 
 And if you're curious on how to publish the content of the `dist/` folder to GitHub Pages, check out the [`gh-pages`](https://npmjs.org/package/gh-pages) package.
 
 ---
 
-<sup>1</sup> Well, [technically you can](https://reactjs.org/docs/try-react.html#minimal-html-template), but it's not something you should inflict on your website visitors.
+<sup>1</sup> [Technically you can](https://reactjs.org/docs/getting-started.html#online-playgrounds), for small experiments on your machine. You'll probably want to avoid publishing them as-is on the web, though.
