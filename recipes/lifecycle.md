@@ -2,9 +2,9 @@
 
 _This article reflects the React 16.4 API_
 
-[There are two ways](./components.md) of defining components: as simple functions or as classes. 
+[There are two ways](./components.md) of defining components: as functions or as classes. 
 
-React constantly adds and removes elements from the DOM to reflect the state of your application. Each individual element in your app's component tree goes through three phases throughout its lifetime:
+React constantly adds and removes elements from the DOM to reflect the state of your application. Each individual element in your app's element tree goes through three phases throughout its lifetime:
 
 * __Mounting__ is when React first adds the element to the DOM;
 * __Updating__ is when React updates the DOM to match the element's props and state;
@@ -98,7 +98,7 @@ The succession is similar to the _mounting phase_, but with more hooks to contro
 * `componentDidUpdate` is called after each `render()`, much like `componentDidMount` is called after the initial render.
 * `getSnapshotBeforeUpdate` is rather infrequent, so we're not going to discuss it here.
 
-When does React re-evaluate, and possibly re-render a component? Whenever the state in your component, or somewhere above it in the component tree, was updated through a `setState()` call.
+When does React re-evaluate, and possibly re-render a component? Whenever the state in your component instance, or somewhere above it in the element tree, was updated through a `setState()` call.
 
 In particular, when you call `setState()` inside your component, React needs to re-evaluate it and see whether the updated state warrants updates to the DOM. 
 

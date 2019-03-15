@@ -18,6 +18,10 @@ Finally, but most importantly, these articles [reflect my current understanding]
 
 * [__Setting up shop__](./recipes/setting-up-shop.md) walks you through setting up a React project with JSX and Fancy JavaScript without losing your soul in the process.
 
+### Mental models
+
+* [Reading JSX as if it were JavaScript](./recipes/jsx-to-javascript.md)
+
 ### Life inside a component
 
 This section is about how to build React components.
@@ -41,6 +45,7 @@ This section discusses how our component can interact outside its boundaries.
 
 In this section we explore some patterns of communication between components, and how to combine them like Lego bricks to build up our app.
 
+* [__How components talk to each other__](./recipes/component-communication.md) is an intro to how React components compose.
 * [__The `property` pattern for callbacks__](./recipes/property-pattern.md) helps you handle events more elegantly. 
 * [__Passing React components via props__](./recipes/passing-components.md) outlines some component composition strategies.
 * [__Passing props to `this.props.children`__](./recipes/children-props.md) using `React.Children.map` and `React.cloneElement`.

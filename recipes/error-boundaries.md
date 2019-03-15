@@ -58,7 +58,7 @@ Errors are __not__ caught in:
 * event handlers
 * server-side rendering
 
-Plus, as we learned earlier, it doesn't catch errors within itself. Rather, when [the boundary itself throws an error](https://twitter.com/_youhadonejob1), the error bubbles to the next closest boundary up the component tree.
+Plus, as we learned earlier, it doesn't catch errors within itself. Rather, when [the boundary itself throws an error](https://twitter.com/_youhadonejob1), the error bubbles to the next closest boundary up the element tree.
 
 Errors in asynchronous code and event handlers don't _need_ to be caught in error boundaries because they won't break React. You can, however, use the regular JavaScript [`try...catch` statement](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/try...catch) inside the handlers to catch possible erorrs.
 
