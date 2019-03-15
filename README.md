@@ -20,7 +20,7 @@ Finally, but most importantly, these articles [reflect my current understanding]
 
 ### Mental models
 
-* [Reading JSX as if it were JavaScript](./recipes/jsx-to-javascript.md)
+* [__Reading JSX as if it were JavaScript__](./recipes/jsx-to-javascript.md)
 
 ### Life inside a component
 

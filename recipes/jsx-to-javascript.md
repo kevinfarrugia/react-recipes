@@ -10,13 +10,13 @@ React.createElement(type, props, ...children)
 
 to build up all the components and nested elements that make up your app.
 
-Otherwise, you're free to:
+> Otherwise, you're free to:
+>
+> * [not use JSX][react-without-jsx] to write React components
+> * use a shorthand other than JSX to write React components
+> * transform JSX to something other than `React.createElement` calls
 
-* [not use JSX][react-without-jsx] to write React components
-* use a shorthand other than JSX to write React components
-* transform JSX to something other than `React.createElement` calls
-
-A _transpiler_, such as [Babel](https://babeljs.io/), will transform the JSX into JavaScript. You can write some JSX in the [Babel Playground][babel-playground] to see what the resulting JavaScript looks like:
+A _transpiler_, such as [Babel](https://babeljs.io/), knows how to transform the JSX into JavaScript. You can try out some JSX in the [Babel Playground][babel-playground] to see what the resulting JavaScript looks like:
 
 ```jsx
 // Input:
@@ -36,28 +36,9 @@ function Button(props) {
 }
 ```
 
-We can instruct Babel to use something other than `React.createElement` when transforming JSX, by writing `/* @jsx some-string */` at the top of the file, e.g.:
+> We can instruct Babel to use something other than `React.createElement` when transforming JSX, by writing `/* @jsx some-string */` at the top of the JavaScript file. Try something crazy like `/* @jsx λ */` to see what happens.
 
-```jsx
-// Input:
-
-/* @jsx λ */
-function Button(props) {
-	return (
-		<button type='button'>{props.label}</button>
-	);
-}
-
-// Output:
-
-function Button(props) {
-	return λ("button", {
-		type: "button"
-	}, props.label);
-}
-```
-
-So, JSX is transformed to `React.createElement` calls at build-time. Then, when we execute the code, what all the calls to `React.createElement` do is return plain JavaScript objects that describe the elements. For example, running:
+So, unless we instruct Babel otherwise, JSX is transformed to `React.createElement` calls at build-time. Then, when we execute the code, the calls to `React.createElement` themselves return something even barer: plain JavaScript objects that describe our elements. For example, running:
 
 ```js
 React.createElement(
