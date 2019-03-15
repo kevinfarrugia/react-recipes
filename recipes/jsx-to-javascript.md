@@ -22,24 +22,17 @@ A _transpiler_, such as [Babel](https://babeljs.io/), will transform the JSX int
 // Input:
 function Button(props) {
 	return (
-      <button type='button'>{props.label}</button>
-    );
+		<button type='button'>{props.label}</button>
+	);
 }
 
 // Output:
 function Button(props) {
-  return React.createElement(
-  	// type
-  	"button", 
-
-  	// props
-  	{
-    	type: "button"
-  	}, 
-
-  	// children
-  	props.label
-  );
+	return React.createElement(
+		"button", // type
+		{ type: "button" }, // props
+		props.label // children
+	);
 }
 ```
 
@@ -51,20 +44,20 @@ We can instruct Babel to use something other than `React.createElement` when tra
 /* @jsx λ */
 function Button(props) {
 	return (
-      <button type='button'>{props.label}</button>
-    );
+		<button type='button'>{props.label}</button>
+	);
 }
 
 // Output:
 
 function Button(props) {
-  return λ("button", {
-    type: "button"
-  }, props.label);
+	return λ("button", {
+		type: "button"
+	}, props.label);
 }
 ```
 
-So, JSX is transformed to `React.createElement` calls at build-time. Then, when we execute the code, what all the callse to `React.createElement` do is return plain JavaScript objects that describe the elements. For example, running:
+So, JSX is transformed to `React.createElement` calls at build-time. Then, when we execute the code, what all the calls to `React.createElement` do is return plain JavaScript objects that describe the elements. For example, running:
 
 ```js
 React.createElement(
@@ -89,7 +82,7 @@ Results in this object:
 		children: "Click me"
 	},
 
-	// reserved props
+	// some reserved props
 	key: null,
 	ref: null,
 
@@ -107,14 +100,14 @@ The `$$typeof` property has an interesting backstory: it exists to improve React
 
 Next we see the `type` and `props` we defined for the element, with a few notes:
 
-* `key` and `ref`, which are props with special meaning in React, will not be part of the `props`. Instead, they're represented separately, with their own properties inside the resulting object.
+* `key` and `ref`, which are a couple of props with special meaning in React, will not be part of the `props` object. Instead, they have their own properties inside the resulting object.
 * `children` is treated as any other prop on the element. Notice that if you have a single child to the element, `props.children` will be a primitive value (in this case, a string). When we have many children to an element, `props.children` will become an array.
 
 Finally, some miscellaneous, underscore-prefixed stuff set up by React (some only used in _development mode_).
 
 > 📖 The source code for `React.createElement` is in [ReactElement.js](https://github.com/facebook/react/blob/master/packages/react/src/ReactElement.js), if you're curious to read it.
 
-At the end of the day, JSX is just an nice way to write one big-ass JavaScript object that represents an element, or an element tree, in your application. So, if you look at `<button>` and remember that it's basically `{ type: 'button', props: {} }` when that piece of code is run, I think many more things in React start to make more sense.
+At the end of the day, JSX is just an nice way to write one big-ass JavaScript object that represents an element, or an element tree, in your application. So, if you look at `<button>` and remember that if you strip all the onion layers you get `{ type: 'button', props: {} }`, I think many more things in React start to make more sense.
 
 Further reading from the official docs:
 
