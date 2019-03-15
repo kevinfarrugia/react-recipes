@@ -1,17 +1,19 @@
 # Ways to define components
 
-In the most basic sense, all React components do one thing: take some input (via props) and return a piece of UI. A component can be:
+All React components do one thing: based on some input that they get via `props` they return a piece of UI in the form of an element tree. Data that goes in gets baked into something you see on your screen.
+
+A component can be:
 
 * a plain function
-* a class that extends `React.Component` or `React.PureComponent`
+* a `class` that extends `React.Component`
 
-__Plain functions__ take the props as input and return the UI:
+__Plain functions__ take the set of props as their only parameter and return an element tree:
 
 ```jsx
 const Button = props => <button>{ props.label }</button>
 ```
 
-__Classes__ that extend either `React.Component` or `React.PureComponent` take the props as input and return the UI via the `render()` function:
+__Classes__ that extend `React.Component` have their `render()` method called to return an element tree. They read the current props from the class instance's `this.props` property: 
 
 ```jsx
 class Button extends React.Component {
