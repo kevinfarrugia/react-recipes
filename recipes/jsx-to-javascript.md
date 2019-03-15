@@ -261,7 +261,7 @@ function Button(props) {
 }
 ```
 
-In the resulting JavaScript, `_extend` is a polyfill Babel introduces for cases where [`Object.assign`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign) is unavailable.
+In the resulting JavaScript, `_extends` is a polyfill Babel introduces for cases where [`Object.assign`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign) is unavailable.
 
 ## Conclusion
 
