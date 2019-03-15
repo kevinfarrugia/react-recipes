@@ -128,7 +128,7 @@ However, expressions any more complicated than that, such as `<components[props.
 
 ### JavaScript inside JSX
 
-JSX allows JavaScript __expressions__ for props, including `children`, but not JavaScript statements. I remember being confused about this when I was starting out, but if you look at how directly and unassumingly Babel places them in the resulting `React.createElement()`, it's clear that having JavaScript statements is untenable, as it requires more work of the transpiler to make them into valid JavaScript.
+JSX allows JavaScript __expressions__ for props, including `children`, by using the curly braces (`{}`). It does not, however, allow JavaScript statements. I remember being confused about this when I was starting out, but if you look at how directly and unassumingly Babel places them in the resulting `React.createElement()`, it's clear that having JavaScript statements is untenable, as it requires more work of the transpiler to make them into valid JavaScript.
 
 ```jsx
 // Input:
@@ -184,6 +184,55 @@ const Button = props => React.createElement(Button, {
 	disabled: true
 });
 ```
+
+### Will anyone think of the `children`
+
+On prop in particular, the `children`, has more syntatic sugar going for it in JSX. Anything between the opening tag and the closing tag of an element is split up into text nodes, expressions, and elements, and passed to React as individual children.  For example:
+
+```jsx
+// Input:
+function Total(props) {
+	return (
+		<div>
+			Sum: { props.a + props.b }
+			<span>Cool, huh!</span>
+		</div>
+	);
+}
+
+// Output:
+function Total(props) {
+	return React.createElement(
+		"div", 
+		null, 
+
+		// children
+		"Sum: ", 
+		props.a + props.b, 
+		React.createElement("span", null, "Cool, huh!")
+	);
+}
+```
+
+There's nothing stoping us from renouncing this benefit and writing it up as a normal prop with an array value:
+
+```jsx
+function Total(props) {
+	return (
+		<div 
+			children={
+				[
+					'Sum: ', 
+					props.a + props.b, 
+					<span>Cool, huh!</span>
+				]
+			} 
+		/>
+	);
+}
+```
+
+Except common sense, that is.
 
 ## Conclusion
 
