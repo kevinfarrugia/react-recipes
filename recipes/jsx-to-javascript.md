@@ -128,16 +128,13 @@ However, expressions any more complicated than that, such as `<components[props.
 
 ### JavaScript inside JSX
 
-JSX allows JavaScript __expressions__ for props, including `children`, but not JavaScript statements. I remember being confused about this when I was starting out, but if you look at how directly and unassumingly Babel places them in the resulting `React.createElement()`, it's clear that having JavaScript statements is untenable.
+JSX allows JavaScript __expressions__ for props, including `children`, but not JavaScript statements. I remember being confused about this when I was starting out, but if you look at how directly and unassumingly Babel places them in the resulting `React.createElement()`, it's clear that having JavaScript statements is untenable, as it requires more work of the transpiler to make them into valid JavaScript.
 
 ```jsx
 // Input:
 function Button(props) {
 	return (
-		<Button 
-			type='button' 
-			disabled={this.props.disabled} 
-		>
+		<Button type='button' disabled={ this.props.disabled }>
 			{ this.props.label }
 		</Button>
 	);
