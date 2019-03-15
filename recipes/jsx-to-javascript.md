@@ -88,7 +88,109 @@ Finally, some miscellaneous, underscore-prefixed stuff set up by React (some onl
 
 > 📖 The source code for `React.createElement` is in [ReactElement.js](https://github.com/facebook/react/blob/master/packages/react/src/ReactElement.js), if you're curious to read it.
 
-At the end of the day, JSX is just an nice way to write one big-ass JavaScript object that represents an element, or an element tree, in your application. So, if you look at `<button>` and remember that if you strip all the onion layers you get `{ type: 'button', props: {} }`, I think many more things in React start to make more sense.
+## Some aspects of how JSX works
+
+### Element type casing
+
+When you write a tag in JSX, the casing of the tag name matters. `<button/>` will become `{ type: 'button' }`, a string identifying it as a native DOM element. On the other hand, a capitalized `<Button>` tag will become `{ type: Button }`, i.e. a reference to the React component your element is based on.
+
+If you want to store the reference to a component in a variable, you need to make the variable _capitalized_ for it to be interpreted as a component reference, rather than a native DOM element:
+
+```jsx
+// Input:
+function DynamicComponent(props) {
+	var ActualComponent = props.component;
+	return <ActualComponent />;
+}
+
+// Output:
+function DynamicComponent(props) {
+	var ActualComponent = props.component;
+	return React.createElement(ActualComponent, null);
+}
+```
+
+Note that JSX recognizes element types that have dots in their name, so in this particular case, it works even with:
+
+```jsx
+// Input:
+function DynamicComponent(props) {
+	return <props.component />;
+}
+
+// Output:
+function DynamicComponent(props) {
+	return React.createElement(props.component, null);
+}
+```
+
+However, expressions any more complicated than that, such as `<components[props.type] />`, will not work.
+
+### JavaScript inside JSX
+
+JSX allows JavaScript __expressions__ for props, including `children`, but not JavaScript statements. I remember being confused about this when I was starting out, but if you look at how directly and unassumingly Babel places them in the resulting `React.createElement()`, it's clear that having JavaScript statements is untenable.
+
+```jsx
+// Input:
+function Button(props) {
+	return (
+		<Button 
+			type='button' 
+			disabled={this.props.disabled} 
+		>
+			{ this.props.label }
+		</Button>
+	);
+}
+
+// Output:
+function Button(props) {
+	return React.createElement(Button, {
+		type: "button",
+		disabled: this.props.disabled
+	}, this.props.label);
+}
+```
+
+It's also worth noting that any prop set as a string in JSX will remain a string throughout the process — there's no _"oh this looks like a number, let me convert it"_ process going on:
+
+```jsx
+// Input:
+const Button = props => <Button tabindex='0' disabled='true'/>;
+
+// Output:
+const Button = props => React.createElement(Button, {
+  tabindex: "0",
+  disabled: "true"
+});
+```
+
+The only case where this happens is with boolean props (the ones that are merely present, but don't have a value), which _do_ show up as `true`:
+
+```jsx
+// Input:
+const Button = props => <Button disabled/>;
+
+// Output:
+const Button = props => React.createElement(Button, { disabled: true });
+```
+
+Otherwise, you need to set the props as JavaScript expressions for them to be of the intended type:
+
+```jsx
+// Input:
+const Button = props => <Button tabindex={0} disabled={true} />;
+
+// Output:
+const Button = props => React.createElement(Button, {
+	tabindex: 0,
+	disabled: true
+});
+```
+
+## Conclusion
+
+At the end of the day, JSX is just an nice way to write big-ass JavaScript objects that represent elements, or element trees, in your application. So, if you look at `<button>` and remember that if you strip all the onion layers you get `{ type: 'button', props: {} }`, I think many more things in React start to make more sense.
 
 Further reading from the official docs:
 
