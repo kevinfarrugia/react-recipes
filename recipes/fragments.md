@@ -44,9 +44,11 @@ function Items(props) {
 
 However, some HTML element types may not make sense together, and we can't find a suitable element in which to wrap our items. Other times, having an extra wrapper makes the entire structure harder to style via CSS. Further still, adding DOM elements just for the purpose of wrapping other elements to overcome a limitation in JSX can lead to an [excessive DOM size][dom-size] which may make the application slower.
 
+> `document.querySelectorAll('*').length` is a quick way to count the number of DOM nodes on a page.
+
 Ideally, we want to just be able to have a component return a list of items without a useless wrapper. React 16 introduced two related features that help us avoid it:
 
-- [`React.Fragment`][fragments], which has no representation in the DOM, and whose only purpose is to wrap a list of elements;
+- A new element called [`React.Fragment`][fragments], which has no representation in the DOM, and whose only purpose is to wrap other elements;
 - the ability to return an array of elements from a component.
 
 We can use either one instead of the element wrapper:
