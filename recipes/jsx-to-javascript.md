@@ -1,5 +1,7 @@
 # Reading JSX as if it were JavaScript
 
+_Status: Draft_
+
 I think it's easier to reason about how React works after you learn to look at JSX as if it were JavaScript. In this article, we're taking it apart to see how it actually ends up in the browser. 
 
 ## From JSX to JavaScript
@@ -128,7 +130,7 @@ However, expressions any more complicated than that, such as `<components[props.
 
 JSX allows JavaScript __expressions__ for props, including `children`, if you wrap them in curly braces (`{}`). It does not, however, allow JavaScript statements. I remember being confused about this when I was starting out because I was trying to look at JSX as if it were a templating language.
 
-Looking instead at how Babel places the expressions in the resulting `React.createElement()` _word-for-word_, with no interpreting whatsoever, clarifies why everything between curly braces needs to make sense as something to assign to a prop.
+Looking instead at how Babel places the expressions in the resulting `React.createElement()` _word-for-word_, with no interpreting whatsoever, clarifies why everything between curly braces needs to make sense as something to assign to an object property, in order to get valid JavaScript.
 
 ```jsx
 // Input:
@@ -285,9 +287,19 @@ function Button(props) {
 
 In the resulting JavaScript, `_extends` is a polyfill Babel introduces for cases where [`Object.assign`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign) is unavailable.
 
+With `Object.assign` (and the polyfill), the order of the objects to extend matters. Overlapping properties in the objects get overwritten from left to right. By the same token, the position of the spread operator in a JSX element matters:
+
+```jsx
+// `type` is potentially overwrittenn
+<button type="button" {...props} />
+
+// `type` is always "button"
+<button {...props} type="button" />
+```
+
 ## Conclusion
 
-At the end of the day, JSX is just an nice way to write big-ass JavaScript objects to represent the elements, and element trees, that make up your application. If you look at a `<button>` and remember that when you strip all the onion layers you get an object akin to `{ type: 'button', props: {} }`, I think many more things in React start to make more sense.
+At the end of the day, JSX is just an nice way to write big-ass JavaScript objects to represent the React elements, and element trees, that make up your application. If you look at a `<button>` and remember that when you strip all the onion layers you get an object akin to `{ type: 'button', props: {} }`, I think many more things in React start to make more sense.
 
 Further reading from the official docs:
 
