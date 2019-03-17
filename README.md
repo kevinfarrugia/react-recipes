@@ -21,6 +21,7 @@ Finally, but most importantly, these articles [reflect my current understanding]
 ### Mental models
 
 * [__Reading JSX as if it were JavaScript__](./recipes/jsx-to-javascript.md)
+* [__Why immutability is important__](./recipes/immutability.md) clarifies why you want to keep your data immutable when working with React.
 
 ### Life inside a component
 
@@ -28,7 +29,6 @@ This section is about how to build React components.
 
 * [__Ways to define components__](./recipes/components.md) walks you through the pros and cons of functional vs. class-based React components.
 * [__`React.PureComponent` caveats__](./recipes/purecomponent-caveats.md) shows you some scenarios where you're better off not using `PureComponent`.
-* [__Why immutability is important__](./recipes/immutability.md) clarifies why you want to keep your data immutable when working with React.
 * [__The Component lifecycle__](./recipes/lifecycle.md) describes the methods available on a component, when they're called and what to do with each of them.
 * [__Use the best `setState` style for the job__](./recipes/set-state.md) when updating your component's state. 
 * [__Ways to use `defaultProps`__](./recipes/defaultprops.md) to make your code clearer. 
