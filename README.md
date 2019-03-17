@@ -62,6 +62,7 @@ In this section we explore some patterns of communication between components, an
 - [**The `useMemo` hook**](./usememo.md)
 - [**Pure component caveats**](./recipes/pure-caveats.md) shows you some scenarios where you're better off not using `PureComponent`.
 - [**`why-did-you-update` is your new best friend**](./recipes/why-did-you-update.md) that lets you know when your components are updating uselessly.
+- [**DOM Frugality: `React.Fragment` and returning arrays**](./recipes/fragments.md)
 
 ## Further reading
 

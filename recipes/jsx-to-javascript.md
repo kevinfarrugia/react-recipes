@@ -2,7 +2,7 @@
 
 _Status: Draft_
 
-I think it's easier to reason about how React works after you learn to look at JSX as if it were JavaScript. In this article, we're taking it apart to see how it actually ends up in the browser. 
+I think it's easier to reason about how React works after you learn to look at JSX as if it were JavaScript. In this article, we're taking it apart to see how it actually ends up in the browser.
 
 ## From JSX to JavaScript
 
@@ -11,7 +11,7 @@ I think it's easier to reason about how React works after you learn to look at J
 JSX is not a part of React _per se_. See, React itself has a _syntax for defining the tree structures with attributes_ that make up an application. It's the humble [`createElement`][create-element]:
 
 ```js
-React.createElement(type, props, ...children)
+React.createElement(type, props, ...children);
 ```
 
 We can use it to create a structure of nested elements. But while it's somewhat concise, it's not too familiar. Nesting a bunch of `createElement()` statements quickly becomes unreadable, so that's where JSX comes in and lets us write the _sort-of-HTML_ that gets transformed, by way of [Babel](https://babeljs.io/) or a similar _transpiler_, into `React.createElement` statements<sup>1</sup>. This happens at build-time, so the browser will never know JSX was there in the first place.
@@ -21,16 +21,16 @@ You can try out some JSX in the [Babel Playground][babel-playground] to see what
 ```jsx
 // Input:
 function Button(props) {
-	return <button type='button'>{props.label}</button>;
+  return <button type="button">{props.label}</button>;
 }
 
 // Output:
 function Button(props) {
-	return React.createElement(
-		"button", // type
-		{ type: "button" }, // props
-		props.label // children
-	);
+  return React.createElement(
+    "button", // type
+    { type: "button" }, // props
+    props.label // children
+  );
 }
 ```
 
@@ -38,9 +38,9 @@ In turn, when the browser executes the calls to `React.createElement`, they them
 
 ```js
 React.createElement(
-	"button", // type
-	{ type: "button" }, // props
-	'Click me' // children
+  "button", // type
+  { type: "button" }, // props
+  "Click me" // children
 );
 ```
 
@@ -99,14 +99,14 @@ If you want to store the reference to a component in a variable, you need to mak
 ```jsx
 // Input:
 function DynamicComponent(props) {
-	var ActualComponent = props.component;
-	return <ActualComponent />;
+  var ActualComponent = props.component;
+  return <ActualComponent />;
 }
 
 // Output:
 function DynamicComponent(props) {
-	var ActualComponent = props.component;
-	return React.createElement(ActualComponent, null);
+  var ActualComponent = props.component;
+  return React.createElement(ActualComponent, null);
 }
 ```
 
@@ -115,12 +115,12 @@ JSX recognizes element types that have dots in their name, and considers them re
 ```jsx
 // Input:
 function DynamicComponent(props) {
-	return <props.component />;
+  return <props.component />;
 }
 
 // Output:
 function DynamicComponent(props) {
-	return React.createElement(props.component, null);
+  return React.createElement(props.component, null);
 }
 ```
 
@@ -128,26 +128,30 @@ However, expressions any more complicated than that, such as `<components[props.
 
 ### JavaScript inside JSX
 
-JSX allows JavaScript __expressions__ for props, including `children`, if you wrap them in curly braces (`{}`). It does not, however, allow JavaScript statements. I remember being confused about this when I was starting out because I was trying to look at JSX as if it were a templating language.
+JSX allows JavaScript **expressions** for props, including `children`, if you wrap them in curly braces (`{}`). It does not, however, allow JavaScript statements. I remember being confused about this when I was starting out because I was trying to look at JSX as if it were a templating language.
 
 Looking instead at how Babel places the expressions in the resulting `React.createElement()` _word-for-word_, with no interpreting whatsoever, clarifies why everything between curly braces needs to make sense as something to assign to an object property, in order to get valid JavaScript.
 
 ```jsx
 // Input:
 function Button(props) {
-	return (
-		<Button type='button' disabled={ this.props.disabled }>
-			{ this.props.label }
-		</Button>
-	);
+  return (
+    <Button type="button" disabled={this.props.disabled}>
+      {this.props.label}
+    </Button>
+  );
 }
 
 // Output:
 function Button(props) {
-	return React.createElement(Button, {
-		type: "button",
-		disabled: this.props.disabled
-	}, this.props.label);
+  return React.createElement(
+    Button,
+    {
+      type: "button",
+      disabled: this.props.disabled
+    },
+    this.props.label
+  );
 }
 ```
 
@@ -155,20 +159,21 @@ You may also notice that any prop set as a string in JSX will remain a string th
 
 ```jsx
 // Input:
-const Button = props => <Button tabindex='0' disabled='true'/>;
+const Button = props => <Button tabindex="0" disabled="true" />;
 
 // Output:
-const Button = props => React.createElement(Button, {
-  tabindex: "0",
-  disabled: "true"
-});
+const Button = props =>
+  React.createElement(Button, {
+    tabindex: "0",
+    disabled: "true"
+  });
 ```
 
 Boolean props — the ones which are merely present in name, but don't have a value — are the exception. They show up as boolean `true` values in the resulting JavaScript:
 
 ```jsx
 // Input:
-const Button = props => <Button disabled/>;
+const Button = props => <Button disabled />;
 
 // Output:
 const Button = props => React.createElement(Button, { disabled: true });
@@ -181,38 +186,39 @@ Otherwise, you need to pass the props as JavaScript expressions for them to reta
 const Button = props => <Button tabindex={0} disabled={true} />;
 
 // Output:
-const Button = props => React.createElement(Button, {
-	tabindex: 0,
-	disabled: true
-});
+const Button = props =>
+  React.createElement(Button, {
+    tabindex: 0,
+    disabled: true
+  });
 ```
 
 ### The element's children
 
-On prop in particular, the `children`, has more syntatic sugar going for it in JSX. Anything between the opening tag and the closing tag of an element is split up into text nodes, expressions, and elements, and passed to React as individual children.  For example:
+On prop in particular, the `children`, has more syntatic sugar going for it in JSX. Anything between the opening tag and the closing tag of an element is split up into text nodes, expressions, and elements, and passed to React as individual children. For example:
 
 ```jsx
 // Input:
 function Total(props) {
-	return (
-		<div>
-			Sum: { props.a + props.b }
-			<span>Cool, huh!</span>
-		</div>
-	);
+  return (
+    <div>
+      Sum: {props.a + props.b}
+      <span>Cool, huh!</span>
+    </div>
+  );
 }
 
 // Output:
 function Total(props) {
-	return React.createElement(
-		"div", 
-		null, 
+  return React.createElement(
+    "div",
+    null,
 
-		// children
-		"Sum: ", 
-		props.a + props.b, 
-		React.createElement("span", null, "Cool, huh!")
-	);
+    // children
+    "Sum: ",
+    props.a + props.b,
+    React.createElement("span", null, "Cool, huh!")
+  );
 }
 ```
 
@@ -220,17 +226,9 @@ We've seen in the previous section that when JSX becomes a JavaScript object, `c
 
 ```jsx
 function Total(props) {
-	return (
-		<div 
-			children={
-				[
-					'Sum: ', 
-					props.a + props.b, 
-					<span>Cool, huh!</span>
-				]
-			} 
-		/>
-	);
+  return (
+    <div children={["Sum: ", props.a + props.b, <span>Cool, huh!</span>]} />
+  );
 }
 ```
 
@@ -240,9 +238,9 @@ The way the `children` prop ends up with an array that mixes text nodes, element
 function Bag(props) {
   return (
     <div>
-      	This is my bag.
-      	{ props.empty && <span>...and it's empty!</span> }
-  	</div>
+      This is my bag.
+      {props.empty && <span>...and it's empty!</span>}
+    </div>
   );
 }
 ```
@@ -251,16 +249,18 @@ Whenever the `empty` prop is truth-y, an additional message (and thus, an additi
 
 ```js
 function Bag(props) {
-	return React.createElement(
-		"div", 
-		null, 
-		"This is my bag.", 
-		props.empty && React.createElement("span", null, "...and it's empty!")
-	);
+  return React.createElement(
+    "div",
+    null,
+    "This is my bag.",
+    props.empty && React.createElement("span", null, "...and it's empty!")
+  );
 }
 ```
 
-It's just that the slot can be filled with either `false`, or a React element, depending on what the expression evaluates to. And since React __won't render__ a `false` child, this amounts to adding/removing the child in the second slot from the DOM.
+It's just that the slot can be filled with either `false`, or a React element, depending on what the expression evaluates to. And since React **won't render** a `false` child, this amounts to adding/removing the child in the second slot from the DOM.
+
+> 👉 React will not render boolean values (`true` and `false`), `null`, nor `undefined`, and this makes conditional rendering work.
 
 ### The spread operator
 
@@ -269,19 +269,16 @@ One last bit of syntactic sugar JSX affords is the [spread operator](https://dev
 ```jsx
 // Input:
 function Button(props) {
-	return <button type='button' {...props} />;
+  return <button type="button" {...props} />;
 }
 
 // Output:
 function Button(props) {
-	return React.createElement(
-		"button",
-		_extends(
-			{ type: "button" },
-			props
-		),
-		"Hello world!"
-	);
+  return React.createElement(
+    "button",
+    _extends({ type: "button" }, props),
+    "Hello world!"
+  );
 }
 ```
 
@@ -303,16 +300,16 @@ At the end of the day, JSX is just an nice way to write big-ass JavaScript objec
 
 Further reading from the official docs:
 
-* [Introducing JSX][introducing-jsx]
-* [JSX in depth][jsx-in-depth]
+- [Introducing JSX][introducing-jsx]
+- [JSX in depth][jsx-in-depth]
 
 ---
 
 <sup>1</sup> We're free to:
 
-* [not use JSX][react-without-jsx] to write React components;
-* use a shorthand other than JSX to write React components;
-* transform JSX to something other than `React.createElement` calls. Tell this to Babel by writing `/* @jsx some-string */` at the top of the JavaScript file. Try something crazy like `/* @jsx λ */` in the Playground to see what happens.
+- [not use JSX][react-without-jsx] to write React components;
+- use a shorthand other than JSX to write React components;
+- transform JSX to something other than `React.createElement` calls. Tell this to Babel by writing `/* @jsx some-string */` at the top of the JavaScript file. Try something crazy like `/* @jsx λ */` in the Playground to see what happens.
 
 [create-element]: https://reactjs.org/docs/react-api.html#createelement
 [jsx]: https://facebook.github.io/jsx/
