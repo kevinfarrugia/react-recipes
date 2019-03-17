@@ -1,6 +1,6 @@
-# `React.PureComponent` caveats
+# Pure component caveats
 
-When used appropriately, pure components can boost your application's performance by avoiding useless renders. A pure component performs a _shallow comparison_ of its `props` and `state` against their previous values and skips the re-render if nothing has (shallowly) changed.
+When used appropriately, [pure components](./pure.md) can boost your application's performance by avoiding useless renders. A pure component performs a _shallow comparison_ of its `props` and `state` against their previous values and skips the re-render if nothing has (shallowly) changed.
 
 This shallow comparison is reasonably fast, and definitely faster than a re-render. But it's still a cost, and in some cases, you may find that some prop has surprisingly changed even though it didn't look like it. The pure component does the shallow comparison, and then re-renders anyways, and you get the worst of both worlds.
 
@@ -14,11 +14,11 @@ When the component receives a function as a prop, make sure its parent is not co
 
 ```jsx
 class Snow extends React.PureComponent {
-	render() {
-		<div className='snow' onClick={this.props.onClick}/>
-	}
+  render() {
+    <div className="snow" onClick={this.props.onClick} />;
+  }
 }
-``` 
+```
 
 But then the parent component does:
 
@@ -26,8 +26,8 @@ But then the parent component does:
 class SnowGlobe extends React.Component {
 	render() {
 		return (
-			<Snow 
-				onClick={ 
+			<Snow
+				onClick={
 					e => console.log(e);
 				}
 			/>
@@ -40,16 +40,13 @@ Here, because we create an anonymous function inside `SnowGlobe`'s `render()` me
 
 ```jsx
 class SnowGlobe extends React.Component {
+  log(e) {
+    console.log(e);
+  }
 
-	log(e) {
-		console.log(e);
-	};
-
-	render() {
-		return (
-			<Snow onClick={ log.bind(this) }/>
-		);
-	}
+  render() {
+    return <Snow onClick={log.bind(this)} />;
+  }
 }
 ```
 
@@ -61,22 +58,22 @@ When you send React elements on any prop, including `children`, will cause a re-
 
 ```jsx
 const App = props => (
-	<PureComponent>
-		<h1>So pure</h1>
-	</PureComponent>
+  <PureComponent>
+    <h1>So pure</h1>
+  </PureComponent>
 );
 ```
 
 `PureComponent` will receive this as the `children` prop:
 
 ```js
-	{ 
-		type: 'h1', 
-		props: { 
-			children: 'So pure' 
+	{
+		type: 'h1',
+		props: {
+			children: 'So pure'
 		}
 	}
-``` 
+```
 
 And these JavaScript objects are not equal by reference, even though they have the same content.
 
@@ -85,11 +82,7 @@ And these JavaScript objects are not equal by reference, even though they have t
 It's not just React elements as `children` that cause problems. Any time you have _more than one child_ to a component, it will cause the component to re-render each time. For example:
 
 ```jsx
-const App = props => (
-	<PureComponent>
-		Sum: { 1 + 1 }
-	</PureComponent>
-);
+const App = props => <PureComponent>Sum: {1 + 1}</PureComponent>;
 ```
 
 Here, the `children` prop is `['Sum: ', 1 + 1]`, and arrays, much like objects, are not shallowly equal even if they contain the same elements. And again, the pure component re-renders.
@@ -100,16 +93,18 @@ Let's assume you have a list and a little piece of UI that is shown when there a
 
 ```jsx
 class List extends React.Component {
-	render() {
-		return (
-			<div className='list'>
-				<ul>
-					{ this.props.items.map(item => <li>...</li>)}
-				</ul>
-				<PureMessage hidden={this.props.items.length} />
-			</div>
-		);
-	}
+  render() {
+    return (
+      <div className="list">
+        <ul>
+          {this.props.items.map(item => (
+            <li>...</li>
+          ))}
+        </ul>
+        <PureMessage hidden={this.props.items.length} />
+      </div>
+    );
+  }
 }
 ```
 

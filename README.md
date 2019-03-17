@@ -1,43 +1,46 @@
 # React Recipes
 
-**Updated for: React 16.3**
+## Introduction
 
-[This repository](https://github.com/danburzo/react-recipes/) contains some tried-and-tested ways to work with React, along with in-depth explanations of how certain aspects of the library work.
+[This repository](https://github.com/danburzo/react-recipes/) contains some tried-and-tested ways to work with React that I picked up along the way, and in-depth explanations of how certain aspects of the library work.
 
-It assumes _some_ prior knowledge of React (hopefully I'll be able to include introductory articles at some point), and that you use [JSX](https://reactjs.org/docs/introducing-jsx.html) and Fancy Javascript, such as classes and modules. These features require a bit of initial setup. Although they're _not actually necessary_, forgoing JSX and ES6 modules is a less-than-stellar development experience; instead, see [Setting up shop](./recipes/setting-up-shop.md) for a quick way to get started on a React project with all the goodness.
+The articles assume you have a bit of experience with React, and that you've set it up to use [JSX](https://reactjs.org/docs/introducing-jsx.html) and modern JavaScript features, such as classes and modules. These require a bit of initial setup and although they're not 100% necessary, forgoing JSX and ES6 modules makes for a less-than-stellar development experience. Check out [_Setting up shop_](./recipes/setting-up-shop.md) for a quick way to get started on a React project with all the goodness baked in.
 
-I try to stick to the plain React API. Some articles do however point to useful libraries and tools when they're easy to pick up on and don't introduce too many new concepts.
+I mostly discuss the plain React API. Some articles do however point to useful libraries and tools when they're easy to pick up and don't introduce too many new concepts. The articles rarely touch on aspects of React style, such as naming, indentation, using arrow functions, et cetera. You can enforce a consistent style in your project with [Prettier](https://prettier.io/), and supplement it with the [Airbnb React/JSX Style Guide](https://github.com/airbnb/javascript/tree/master/react).
 
-It rarely touches on React style such as naming, indentation, et cetera. You can enforce a consistent style in your project with [Prettier](https://prettier.io/), and supplement it with the [Airbnb React/JSX Style Guide](https://github.com/airbnb/javascript/tree/master/react).
-
-Finally, but most importantly, these articles [reflect my current understanding](https://github.com/danburzo/as-we-learn) of how React works. While I strive to get the clearest picture possible, some aspects may still be inaccurate, out of date, or generally Bad Ideas. Sorry about that — I'm trying my best. If you spot any errors or dubious claims, please let me know by filing an issue or a pull request.
+Finally, but most importantly, these articles [reflect my current understanding](https://github.com/danburzo/as-we-learn) of how React works. While I strive to give the clearest picture possible, some aspects may still be inaccurate, out of date, or just plain Bad Ideas. Sorry in advance, I'm trying my best! If you spot any errors or dubious claims, please let me know by filing an issue or a pull request.
 
 ## Table of contents
 
-### Getting started
+### First steps
 
-- [**Setting up shop**](./recipes/setting-up-shop.md) walks you through setting up a React project with JSX and Fancy JavaScript without losing your soul in the process.
+This section is about getting started with React. I hope to expand this section with more introductory articles.
+
+- [**Setting up shop**](./recipes/setting-up-shop.md) walks you through setting up a React project with JSX and modern JavaScript without losing your soul in the process.
 
 ### Mental models
 
 - [**Reading JSX as if it were JavaScript**](./recipes/jsx-to-javascript.md) to get a clearer picture of how React works.
-- [**Why immutability is important**](./recipes/immutability.md) clarifies why you want to keep your data immutable when working with React.
+- [**Why immutability is important**](./recipes/immutability.md) explains why you want to keep your data immutable when working with React.
 
 ### Life inside a component
 
-This section is about how to build React components.
+This section is about how to build strong React components.
 
 - [**Ways to define components**](./recipes/components.md) walks you through the pros and cons of functional vs. class-based React components.
-- [**The Component lifecycle**](./recipes/lifecycle.md) describes the methods available on a component, when they're called and what to do with each of them.
-- [**Use the best `setState` style for the job**](./recipes/set-state.md) when updating your component's state.
 - [**Ways to use `defaultProps`**](./recipes/defaultprops.md) to make your code clearer.
+- [**Using `propTypes`**](./recipes/defaultprops.md) to ensure components receive what they expect.
+- [**Using hooks**](./recipes/hooks.md)
+- [**The component lifecycle**](./recipes/lifecycle.md) describes the methods available on a class component, how they're invoked and what they're good at.
+- [**Use the best `setState` style for the job**](./recipes/set-state.md) when updating your component's state.
+- [**Controlled, uncontrolled, and somewhere in between**](./recipes/controlled-uncontrolled.md)
 
 ### The component and the outside world
 
-This section discusses how our component can interact outside its boundaries.
+This section discusses how our component can interact with things outside its boundaries.
 
 - [**Handling events outside the component**](./recipes/outside-events.md) the React way with the help of a small library.
-- [**Rendering things outside the component**](./recipes/portals.md) with React's concept of Portals.
+- [**Rendering things outside the component**](./recipes/portals.md) with Portals.
 - [**Embedding React components in an existing app**](./recipes/inserting-components.md) shows how to turn some parts of your app over to React.
 
 ### How components talk to each other
@@ -54,13 +57,15 @@ In this section we explore some patterns of communication between components, an
 ### Performance
 
 - [**An introduction to performance**](./recipes/performance.md)
+- [**Making things simpler and faster with memoization**](./recipes/memoization.md)
+- [**Preventing useless updates with `React.PureComponent` and `React.memo`**](./pure.md)
+- [**The `useMemo` hook**](./usememo.md)
+- [**Pure component caveats**](./recipes/pure-caveats.md) shows you some scenarios where you're better off not using `PureComponent`.
 - [**`why-did-you-update` is your new best friend**](./recipes/why-did-you-update.md) that lets you know when your components are updating uselessly.
-- [**Arrays as props**](./recipes/arrays-as-props.md) and some ways they can affect your performance, and what to do about it.
-- [**`React.PureComponent` caveats**](./recipes/purecomponent-caveats.md) shows you some scenarios where you're better off not using `PureComponent`.
 
 ## Further reading
 
-[The official React website](https://reactjs.org/) has comprehensive guides, tutorials, and links to useful tools. Spend an afternoon to a fortnight reading the guides cover to cover and you'll get a much firmer grasp on how to use React efficiently.
+[The official React website](https://reactjs.org/) has comprehensive guides, tutorials, and links to useful tools. React has one of the best documentations around. Spend a fortnight reading the guides cover to cover and you'll get a much firmer grasp on how to use React efficiently.
 
 On his [Overreacted](https://overreacted.io/) blog, Dan Abramov goes on interesting deep-dives into how React works under the hood.
 
@@ -71,6 +76,6 @@ Then there are other React pattern repositories you might find interesting:
 - [react-playbook](https://github.com/kylpo/react-playbook)
 - [react-bits](https://github.com/vasanthk/react-bits)
 
-Assorted articles from around the web:
+Finally, some assorted articles from around the web:
 
 - [React Tutorial: A Comprehensive Guide to learning React.js in 2018](https://tylermcginnis.com/reactjs-tutorial-a-comprehensive-guide-to-building-apps-with-react/) by Tyler McGinnis

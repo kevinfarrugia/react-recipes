@@ -1,4 +1,4 @@
-# Making things simpler and faster with Memoization
+# Making things simpler and faster with memoization
 
 Memoization is a way to cache the result of a function call for a particular set of arguments, and returning the cached result instead of computing it all over again.
 
@@ -20,7 +20,7 @@ Storing _all_ the input/output pairs for a memoized function can balloon out of 
 
 Instead, for most purposes, it's enough to just store the last input/output pair to get all the perks and none of the headache. In this example, we're going to use the [`memoize-one`](https://npmjs.org/package/memoize-one) library.
 
-Let's build a small widget that gets a list of names and displays a search box and the names that match the search term. 
+Let's build a small widget that gets a list of names and displays a search box and the names that match the search term.
 
 The list of names looks like this:
 
@@ -36,76 +36,64 @@ The list of names looks like this:
 
 Let's give it a first shot:
 
-__Widget.js__
+**Widget.js**
+
 ```jsx
-
 class Widget extends React.Component {
+  constructor(props) {
+    super(props);
+    this.search = this.search.bind(this);
+    this.state = {
+      search_term: ""
+    };
+  }
 
-	constructor(props) {
-		super(props);
-		this.search = this.search.bind(this);
-		this.state = {
-			search_term: ''
-		};
-	}
+  render() {
+    let filtered_names = this.props.names.filter(
+      item => item.name.indexOf(this.state.search_term) > -1
+    );
 
-	render() {
-
-		let filtered_names = this.props.names.filter(
-			item => item.name.indexOf(this.state.search_term) > -1
-		);
-
-		return (
-			<div>
-				<input 
-					value={this.state.search_term}
-					onChange={this.search}
-				/>
-				<List names={filtered_names} />
-			</div>
-		);
-	}
+    return (
+      <div>
+        <input value={this.state.search_term} onChange={this.search} />
+        <List names={filtered_names} />
+      </div>
+    );
+  }
 }
 ```
 
 List is a `PureComponent` since for a given list of names, it produces the same output every time.
 
-__List.js__
+**List.js**
+
 ```jsx
 class List extends React.Component {
-	render() {
-		return (
-			<ul>
-			{
-				this.props.names.map(
-					item => <li key={item.id}>{item.name}</li>
-				)
-			}
-			</ul>
-		)
-	}
+  render() {
+    return (
+      <ul>
+        {this.props.names.map(item => (
+          <li key={item.id}>{item.name}</li>
+        ))}
+      </ul>
+    );
+  }
 }
 ```
 
 Let's assume our component receives the following props:
 
-* `list` is a set of names
-* `term` is a search term for those names
+- `list` is a set of names
+- `term` is a search term for those names
 
 With this, we want to display only the names from the `list` that match our `term`. Let's give it a shot:
 
 ```jsx
-import React from 'react';
+import React from "react";
 
 class FilteredList extends React.Component {
-	render() {
-		return (
-			<ul>
-			{
-				this.props
-			}
-			</ul>
-		);
-	}
+  render() {
+    return <ul>{this.props}</ul>;
+  }
 }
 ```
