@@ -21,7 +21,9 @@
     "pretty-quick": "^1.10.0"
   },
   "husky": {
-    "pre-commit": "pretty-quick --staged"
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
   },
   "scripts": {
     "storybook:start": "start-storybook -p 6006",
