@@ -28,7 +28,6 @@ Finally, but most importantly, these articles [reflect my current understanding]
 This section is about how to build React components.
 
 - [**Ways to define components**](./recipes/components.md) walks you through the pros and cons of functional vs. class-based React components.
-- [**`React.PureComponent` caveats**](./recipes/purecomponent-caveats.md) shows you some scenarios where you're better off not using `PureComponent`.
 - [**The Component lifecycle**](./recipes/lifecycle.md) describes the methods available on a component, when they're called and what to do with each of them.
 - [**Use the best `setState` style for the job**](./recipes/set-state.md) when updating your component's state.
 - [**Ways to use `defaultProps`**](./recipes/defaultprops.md) to make your code clearer.
@@ -57,6 +56,7 @@ In this section we explore some patterns of communication between components, an
 - [**An introduction to performance**](./recipes/performance.md)
 - [**`why-did-you-update` is your new best friend**](./recipes/why-did-you-update.md) that lets you know when your components are updating uselessly.
 - [**Arrays as props**](./recipes/arrays-as-props.md) and some ways they can affect your performance, and what to do about it.
+- [**`React.PureComponent` caveats**](./recipes/purecomponent-caveats.md) shows you some scenarios where you're better off not using `PureComponent`.
 
 ## Further reading
 
