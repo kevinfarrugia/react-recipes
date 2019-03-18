@@ -51,7 +51,19 @@ In this section we explore some patterns of communication between components, an
 - [**The `property` pattern for callbacks**](./recipes/property-pattern.md) helps you handle events more elegantly.
 - [**Passing React components via props**](./recipes/passing-components.md) outlines some component composition strategies.
 - [**Passing props to `this.props.children`**](./recipes/children-props.md) using `React.Children.map` and `React.cloneElement`.
-- [**The render prop pattern**](./recipes/render-prop-pattern.md)
+
+#### Passing props to children
+
+A component that receives `children` it knows little about may want to share information with them nonetheless. The React API affords a few methods:
+
+- [**Extending children with `React.Children` and `React.cloneElement`**](./recipes/extending-children.md)
+- [**Higher-Order Components**](./recipes/hoc.md)
+- [**Render props**](./recipes/render-props.md)
+
+### Special-purpose components
+
+The React API allows us to write some useful generic components for our app.
+
 - [**Error Boundaries**](./recipes/error-boundaries.md) will stop a component that crashed from breaking your whole app.
 
 ### Performance
