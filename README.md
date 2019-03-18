@@ -54,7 +54,7 @@ In this section we explore some patterns of communication between components, an
 
 #### Passing props to children
 
-A component that receives `children` it knows little about may want to share information with them nonetheless. The React API affords a few methods:
+A component that receives `children` it knows little about may want to share information with them nonetheless. The React API affords a few related methods:
 
 - [**Extending children with `React.Children` and `React.cloneElement`**](./recipes/extending-children.md)
 - [**Higher-Order Components**](./recipes/hoc.md)
