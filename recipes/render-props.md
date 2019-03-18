@@ -1,12 +1,16 @@
 # Render props
 
+> This article is part of a section on how components can share data with their children. [See the section overview here](./children-data-overview.md).
+
 [Render props][render-props] is a technique for sharing data between a component and its children. Render props are based on the ability to pass functions as props to a component.
 
-Functions in props are usually meant as callbacks for the component to invoke. The component tells us _something has happened_. In contrast, functions that serve as render props are meant to be _rendered_ (that is, shown in the UI) by the component. So we're telling the component what to render.
+Functions in props are usually meant as callbacks for the component to invoke; the component tells us _something has happened_. In contrast, functions that serve as render props are meant to be _rendered_ (that is, shown in the UI) by the component; we're telling the component what to render.
 
 ## The canonical render prop: function as a child
 
-When `children` is used as a render prop, the pattern is also called **function as a child**, and it's the one most often seen around.
+> When `children` is used as a render prop, the pattern is also called **function as a child**, and it's the variant used most often.
+
+We tell components what to render all the time: passing children to components is one of the basic ways to compose our application's element tree. When a custom component receives children,
 
 ## Variants
 

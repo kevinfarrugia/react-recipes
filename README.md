@@ -52,10 +52,11 @@ In this section we explore some patterns of communication between components, an
 - [**Passing React components via props**](./recipes/passing-components.md) outlines some component composition strategies.
 - [**Passing props to `this.props.children`**](./recipes/children-props.md) using `React.Children.map` and `React.cloneElement`.
 
-#### Passing props to children
+#### Passing data to children
 
-A component that receives `children` it knows little about may want to share information with them nonetheless. The React API affords a few related methods:
+Passing children to components is one of the basic ways to compose our application's element tree. A component that receives `children` it knows little about may want to share information with them nonetheless. The React API affords a few related methods to do that.
 
+- [**Passing data to children: an overview**](./recipes/children-data-overview.md)
 - [**Extending children with `React.Children` and `React.cloneElement`**](./recipes/extending-children.md)
 - [**Higher-Order Components**](./recipes/hoc.md)
 - [**Render props**](./recipes/render-props.md)
