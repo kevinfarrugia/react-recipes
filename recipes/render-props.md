@@ -69,6 +69,8 @@ So you can think of this particular subset of render props as function component
 
 Render props can be used instead of [Higher-Order Components](./hoc.md) when you need more flexibility. While HOCs encapsulate the way components get decorated with extra props in an inflexible way which occasionally can result in prop name collisions, render props simply expose data, and you can choose inline how to apply them to the child elements.
 
+See Michael Jackson's article [_Use a Render Prop!_](https://cdb.reacttraining.com/use-a-render-prop-50de598f11ce).
+
 ### Render props vs. hooks
 
 TODO.

@@ -92,3 +92,4 @@ Then there are other React pattern repositories you might find interesting:
 Finally, some assorted articles from around the web:
 
 - [React Tutorial: A Comprehensive Guide to learning React.js in 2018](https://tylermcginnis.com/reactjs-tutorial-a-comprehensive-guide-to-building-apps-with-react/) by Tyler McGinnis
+- [Writing good component API](https://sid.studio/component-api/) by Siddharth Kshetrapal
