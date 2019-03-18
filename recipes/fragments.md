@@ -52,7 +52,7 @@ Ideally, we want to just be able to have a component return a list of items with
 
 ## Returning arrays and `React.Fragment`
 
-[React 16 introduced](https://reactjs.org/blog/2017/11/28/react-v16.2.0-fragment-support.html) two related features that help us avoid :
+[React 16 introduced](https://reactjs.org/blog/2017/11/28/react-v16.2.0-fragment-support.html) two related features that help us avoid wrapper elements:
 
 - the ability to return an array of elements from a component;
 - A new element called [`React.Fragment`][fragments], which has no representation in the DOM, and whose only purpose is to wrap other elements.
