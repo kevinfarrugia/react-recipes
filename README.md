@@ -30,10 +30,21 @@ This section is about how to build strong React components.
 - [**Ways to define components**](./recipes/components.md) walks you through the pros and cons of functional vs. class-based React components.
 - [**Ways to use `defaultProps`**](./recipes/defaultprops.md) to make your code clearer.
 - [**Using `propTypes`**](./recipes/defaultprops.md) to ensure components receive what they expect.
-- [**Using hooks**](./recipes/hooks.md)
+- [**Controlled, uncontrolled, and somewhere in between**](./recipes/controlled-uncontrolled.md)
+
+#### Class components
+
 - [**The component lifecycle**](./recipes/lifecycle.md) describes the methods available on a class component, how they're invoked and what they're good at.
 - [**Use the best `setState` style for the job**](./recipes/set-state.md) when updating your component's state.
-- [**Controlled, uncontrolled, and somewhere in between**](./recipes/controlled-uncontrolled.md)
+
+#### Function components
+
+##### Hooks
+
+Notes on the various hooks available in React.
+
+- [**Using hooks**](./recipes/hooks.md)
+- [**`useState`**](./recipes/use-state.md)
 
 ### The component and the outside world
 
