@@ -3,15 +3,15 @@
 [The `useState` hook][use-state] creates a piece of state for the component. Calling the hook returns the current value of that piece of state, and a method to update it, in the form of an array.
 
 ```js
-let [state, setState] = useState(initialState);
+let [state, setState] = useState(initial_state);
 ```
 
 > 👉 Having the return value be an array means we can destructure it and name the two parts, `state` and `setState` however we want.
 
-_initialState_ is the initial value for that piece of state, set on the first render. If the initial value is expensive to compute, we can wrap it in a function and React will evaluate it lazily:
+_initial_state_ is the initial value for that piece of state, set on the first render. If the initial value is expensive to compute, we can wrap it in a function and React will evaluate it lazily:
 
 ```js
-let [state, setState] = useState(() => initialState);
+let [state, setState] = useState(() => initial_state);
 ```
 
 On each render, the `state` will have the most recent value of that piece of state.

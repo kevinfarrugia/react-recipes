@@ -45,6 +45,7 @@ Notes on the various hooks available in React.
 
 - [**Using hooks**](./recipes/hooks.md)
 - [**`useState`**](./recipes/use-state.md)
+- [**`useEffect`**](./recipes/use-effect.md)
 
 ### The component and the outside world
 
@@ -83,7 +84,7 @@ The React API allows us to write some useful generic components for our app.
 - [**An introduction to performance**](./recipes/performance.md)
 - [**Making things simpler and faster with memoization**](./recipes/memoization.md)
 - [**Preventing useless updates with `React.PureComponent` and `React.memo`**](./pure.md)
-- [**The `useMemo` hook**](./usememo.md)
+- [**The `useMemo` hook**](./use-memo.md)
 - [**Pure component caveats**](./recipes/pure-caveats.md) shows you some scenarios where you're better off not using `PureComponent`.
 - [**`why-did-you-update` is your new best friend**](./recipes/why-did-you-update.md) that lets you know when your components are updating uselessly.
 - [**DOM Frugality: `React.Fragment` and returning arrays**](./recipes/fragments.md)
