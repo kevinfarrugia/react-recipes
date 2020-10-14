@@ -39,13 +39,22 @@ This section is about how to build strong React components.
 
 #### Function components
 
-##### Hooks
+#### Hooks
 
 Notes on the various hooks available in React.
 
-- [**Using hooks**](./recipes/hooks.md)
+- [**Hooks: an overview**](./recipes/hooks.md)
+
+##### Built-in hooks
+
 - [**`useState`**](./recipes/use-state.md)
 - [**`useEffect`**](./recipes/use-effect.md)
+
+##### Custom hooks
+
+- [**Writing custom hooks**](./recipes/custom-hooks.md)
+- [**`usePrevious`**](./recipes/custom-hooks/use-previous.md) — keep references to the previous value of thigs
+- [**`useBounds`**](./recipes/custom-hooks/use-bounds.md) — a few ways to measure DOM elements
 
 ### The component and the outside world
 

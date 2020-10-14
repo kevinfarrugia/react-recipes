@@ -1,30 +1,27 @@
 # Setting up shop: Start a React project from scratch
 
-Before we can actually start writing React code, we need to set a few things up. Since we'll be relying on JSX syntax and more recent additions to JavaScript (such as modules and classes), we can't just include our code and libraries in `<script>` tags and call it a day<sup>1</sup>. 
+Before we can actually start writing React code, we need to set a few things up. We can't just include our code and libraries in `<script>` tags and call it a day<a href='#fn1'><sup>1</sup></a>, since we'll be relying on JSX syntax and more recent additions to JavaScript (such as modules and classes).
 
-We need to transform our code before it works in browsers. In particular, any React project needs:
+We need to transform our code before it works in browsers. In particular, a React project needs:
 
 __A tool to _transpile_ your code__. A transpiler transforms your code from JSX / fancy JavaScript to normal JavaScript that works in browsers; [Babel](https://babeljs.io) and [Bublé](https://buble.surge.sh/guide/) are some popular choices.
 
-__A tool to _bundle_ your JavaScript modules__, and any code you import from npm modules, into a single JavaScript file. They usually have a way to communicate with the _transpiler_ so that your JavaScript is transformed to browser-compatible code. They will also handle other types of files, such as HTML, CSS, JSON, or SVG, so you can import them in your project as you would normal JS modules. [Webpack](https://webpack.js.org/), [Browserify](http://browserify.org/), [Rollup](https://rollupjs.org/), and [Parcel](https://parceljs.org/) are examples of bundlers.
+__A tool to _bundle_ your JavaScript modules__, and any code you import from npm modules, into a single JavaScript file. The bundler usually has a way to communicate with the _transpiler_ so that your JavaScript is transformed to browser-compatible code in the process. It will also handle other types of files, such as HTML, CSS, JSON, or SVG, so you can import them in your project as you would normal JS modules. [Webpack](https://webpack.js.org/), [Rollup](https://rollupjs.org/), and [Parcel](https://parceljs.org/) are examples of bundlers.
 
-Parcel, a bundler that works out-of-the-box for most things we need, is a good choice for quickly setting up a React playground.
+Parcel, a bundler that works for most things we need without requiring any configuration, is a good choice for quickly setting up a React playground.
 
-__Note:__ I've written down the steps I made on macOS, but it should be similar on other operating systems.
+__Note:__ I'm on macOS, but the steps should be similar enough on other operating systems.
 
-## Prerequisites
+## Setting up
 
-Like many other JavaScript projects, React is distributed as [npm packages](https://docs.npmjs.com/getting-started/what-is-npm); You add it to your project with the command line.
+### Prerequisites
+
+Like many other JavaScript libraries, React is distributed through [npm packages](https://docs.npmjs.com/getting-started/what-is-npm); You add it to your project with the command line.
 
 To start a React project we need:
 
 * A command-line such as the Terminal in macOS
 * [Node.js](https://nodejs.org/en/) and npm (if you installed Node, it comes with the `npm` command-line tool)
-* [Yarn](https://yarnpkg.com) (Optionally)
-
-__Note:__ The instructions below include commands run with `yarn`, which is an alternative to the `npm` command-line tool that's a bit nicer to work with in my opinion. [The Yarn documentation](https://yarnpkg.com/lang/en/docs/migrating-from-npm/#toc-cli-commands-comparison) shows the `npm` equivalents to the various `yarn` commands, if you plan on using it instead.
-
-## Setting up
 
 ### Create, and then initialize, your project
 
@@ -38,36 +35,40 @@ cd my-project
 Before we can install React, we need a `package.json` file that lists all the dependencies in our project. We create it with:
 
 ```bash
-yarn init --yes
+npm init --yes
 ```
 
-__Note__: The `--yes` flag instructs Yarn to skip all the questions and just initialize a run-of-the-mill `package.json` that looks like this:
+The `--yes` flag instructs npm to skip all the questions and just initialize a run-of-the-mill `package.json` that looks like this:
 
 ```json
-{
+
   "name": "my-project",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
-  "license": "MIT"
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
 ```
-
-(You can also just copy the JSON file above and create the file manually.)
 
 ### Install React and ReactDOM
 
 We install the `react` and `react-dom` packages as dependencies to our project:
 
 ```bash
-yarn add react react-dom
+npm install react react-dom
 ```
 
 ### Install the Parcel bundler
 
-We install the Parcel bundler as a _development_ depenency to our project — our app only depends on Parcel while we're building it. 
+We install the Parcel bundler as a _development_ depenency to our project — our app only depends on Parcel while we're building it<a href='#fn2'><sup>2</sup></a>. 
 
 ```bash
-yarn add --dev parcel-bundler
+npm install --save-dev parcel-bundler
 ```
 
 ### Create a project structure
@@ -135,50 +136,60 @@ __package.json__
 {
   "name": "my-project",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
-  "license": "MIT",
-  "dependencies": {
-  	"react": "^16.4.0",
-  	"react-dom": "^16.4.0"
-  },
-  "devDependencies": {
-    "parcel-bundler": "^1.8.1"
-  },
   "scripts": {
     "start": "parcel src/index.html",
     "build": "parcel build src/index.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
   }
 }
 ```
 
-You run these scripts via `yarn` like so:
+Let's run the scripts! To start the development server:
 
 ```bash
-yarn start
-
-# You should see something like this in your console:
-# ---------------------------------------------------
-# yarn run v1.7.0
-# $ parcel src/index.html
-# Server running at http://localhost:1234 
-# ✨  Built in 3.23s.
+npm run-script start
 ```
 
-Opening [http://localhost:1234](http://localhost:1234) in your browser lets you access your app. When you make changes to your source files, the app automatically reloads with the changes.
+The command outputs:
 
 ```bash
-yarn build
+> my-project@1.0.0 start /Users/danburzo/projects/my-project
+> parcel src/index.html
 
-# You should see something like this in your console:
-# ---------------------------------------------------
-# yarn run v1.7.0
-# $ parcel build src/index.html
-# ✨  Built in 2.76s.
-# dist/src.5e4eefaf.js     102.63 KB    8.12s
-# dist/index.html              197 B      9ms
-# dist/src.c0271552.css         43 B     12ms
-# dist/src.3e396d5e.map          0 B    8.12s
-# ✨  Done in 3.33s.
+Server running at http://localhost:1234 
+✨  Built in 1.20s.
+```
+
+Opening [http://localhost:1234](http://localhost:1234) in your browser lets you access your app. When you make changes to your source files, the app automatically reloads with the changes. To close the server, press <kbd>Ctrl + C</kbd> in the Terminal window.
+
+To build an optimized bundle suitable for putting it in front of users:
+
+```bash
+npm run-script build
+```
+
+The command outputs:
+
+```bash
+> my-project@1.0.0 build /Users/danburzo/projects/my-project
+> parcel build src/index.html
+
+✨  Built in 1.80s.
+
+dist/src.67e05423.js        1.13 KB    110ms
+dist/src.67e05423.js.map      189 B      3ms
+dist/index.html               166 B    1.63s
 ```
 
 This builds your whole app in the `dist/` folder, the content of which you can then take and put up on a server.
@@ -275,4 +286,6 @@ And if you're curious on how to publish the content of the `dist/` folder to Git
 
 ---
 
-<sup>1</sup> [Technically you can](https://reactjs.org/docs/getting-started.html#online-playgrounds), for small experiments on your machine. You'll probably want to avoid publishing them as-is on the web, though.
+<sup id='fn1'>1</sup> [Technically you can](https://reactjs.org/docs/getting-started.html#online-playgrounds), for small experiments on your machine. You'll probably want to avoid publishing them as-is on the web, though.
+
+<sup id='fn2'>2</sup> When bundling JavaScript packages, all dependencies are technically _development dependencies_, because they're only ever needed as you build the project. However, it's useful to make a distinction between things that end up in the bundle and those who don't.

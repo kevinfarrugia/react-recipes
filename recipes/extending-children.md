@@ -32,3 +32,7 @@ child =>
 ```
 
 ...in which we put back any of the child props we might have overwritten.
+
+## Caveats
+
+`React.Children` methods (`map`, `forEach`, etc.) expect renderable children: primitive values (string, number, boolean, null, undefined) or React elements. Objects in the `children` prop will throw an error, and functions are skipped over (making render props and `React.Children.map` incompatible).

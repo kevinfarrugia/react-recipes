@@ -93,7 +93,7 @@ After each render, React will call a fresh instance of `mouseMove`, adding the e
 
 We know that one rule of Hooks is you need to call all of them on each render, so no `if` statements or loops. So to implement an effect hook that gets called only in certain situations, we can make it depend on... something. For example, if you want an effect to run whenever the component becomes active, and stop the moment the compoent goes idle, you can:
 
-```jsx
+```js
 import { useState, useEffect } from 'react';
 
 const Component = (props) => {
